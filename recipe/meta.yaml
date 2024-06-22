@@ -34,7 +34,7 @@ requirements:
     - {{ compiler('cxx') }}
     - {{ stdlib('c') }}
     - cmake
-    - ninja
+    - ninja  # [not win]
     - tsl_robin_map
 
 test:
