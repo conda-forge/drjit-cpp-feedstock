@@ -13,6 +13,7 @@ source:
       - disable-broken-tests.patch
       - disable-trig-test-on-apple.patch
       - test-avx512-support.patch
+      - install-drjit-core-headers.patch
   - url: https://github.com/mitsuba-renderer/drjit-core/archive/a5073390f83230e42a4823966aa7df76797e11f1.zip
     sha256: 88ae053ac614cd15d0791c3e67392da2f4305385947dec4ca3b9e7ec66ccb218
     folder: ext/drjit-core
@@ -26,7 +27,7 @@ source:
     folder: ext/drjit-core/ext/nanothread/ext/cmake-defaults
 
 build:
-  number: 1
+  number: 2
 
 requirements:
   build:
