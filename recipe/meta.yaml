@@ -27,7 +27,7 @@ source:
     folder: ext/drjit-core/ext/nanothread/ext/cmake-defaults
 
 build:
-  number: 2
+  number: 3
 
 requirements:
   build:
