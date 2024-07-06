@@ -7,6 +7,12 @@ if [[ "${target_platform}" == osx-* ]]; then
   CXXFLAGS="${CXXFLAGS} -D_LIBCPP_DISABLE_AVAILABILITY"
 fi
 
+if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" ]]; then
+  DRJIT_ENABLE_TESTS=ON
+else
+  DRJIT_ENABLE_TESTS=OFF
+fi
+
 cmake $SRC_DIR \
   ${CMAKE_ARGS} \
   -G Ninja \
@@ -18,7 +24,7 @@ cmake $SRC_DIR \
   -DDRJIT_ENABLE_JIT=OFF \
   -DDRJIT_ENABLE_AUTODIFF=OFF \
   -DDRJIT_ENABLE_PYTHON=OFF \
-  -DDRJIT_ENABLE_TESTS=ON \
+  -DDRJIT_ENABLE_TESTS=$DRJIT_ENABLE_TESTS \
   -DDRJIT_USE_SYSTEM_ROBIN_MAP=ON
 
 cmake --build build --parallel
