@@ -36,7 +36,7 @@ index ad2015f3..3fc74afb 100644
      target_link_libraries(${NAME}_avx2 drjit)
  
 -    if (NOT MSVC)
-+    if (AVX512_SUPPORTED AND NOT APPLE AND NOT MSVC)
++    if (False)
        add_executable(${NAME}_avx512 ${ARGN} ${DRJIT_HEADERS})
        target_compile_options(${NAME}_avx512 PRIVATE ${DRJIT_AVX512_FLAGS})
        set_target_properties(${NAME}_avx512 PROPERTIES FOLDER ${NAME})
