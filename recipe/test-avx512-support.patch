@@ -21,6 +21,9 @@ index ad2015f3..e3b9a41e 100644
 +      __m512 f = _mm512_set1_ps(1.0f);
 +      __m512 g = _mm512_set1_ps(2.0f);
 +      __m512 h = _mm512_add_ps(f, g);
++      __m512d a = _mm512_set1_pd(1.0);
++      __m512d b = _mm512_set1_pd(2.0);
++      __m512d c = _mm512_add_pd(a, b);
 +      return 0;
 +  }
 +  " AVX512_SUPPORTED)
