@@ -1,5 +1,5 @@
 {% set name = "drjit-cpp" %}
-{% set version = "0.4.6" %}
+{% set version = "1.0.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   - url: https://github.com/mitsuba-renderer/drjit/archive/v{{ version }}.tar.gz
-    sha256: 52230a008ac1846c0725a7a97d00e66111d9f7eeccc26cb36ad4df88b4d05e7c
+    sha256: bf3913be3c34c525793e3686a159fe698715e079efd3234156aa0abb668a8b87
     patches:
       - include-tuple.patch
       - disable-broken-tests.patch
@@ -27,7 +27,7 @@ source:
     folder: ext/drjit-core/ext/nanothread/ext/cmake-defaults
 
 build:
-  number: 4
+  number: 0
   run_exports:
     - {{ pin_subpackage('drjit-cpp', max_pin='x.x') }}
 
