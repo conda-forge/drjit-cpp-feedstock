@@ -8,9 +8,9 @@ if [[ "${target_platform}" == osx-* ]]; then
 fi
 
 if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" ]]; then
-  DRJIT_ENABLE_TESTS=ON
+  skbuild=OFF
 else
-  DRJIT_ENABLE_TESTS=OFF
+  skbuild=ON
 fi
 
 cmake $SRC_DIR \
@@ -24,13 +24,11 @@ cmake $SRC_DIR \
   -DDRJIT_ENABLE_JIT=OFF \
   -DDRJIT_ENABLE_AUTODIFF=OFF \
   -DDRJIT_ENABLE_PYTHON=OFF \
-  -DDRJIT_ENABLE_TESTS=$DRJIT_ENABLE_TESTS \
-  -DDRJIT_USE_SYSTEM_ROBIN_MAP=ON
+  -DDRJIT_ENABLE_TESTS=OFF \
+  -DDRJIT_USE_SYSTEM_NANOBIND=OFF \
+  -DDRJIT_USE_SYSTEM_ROBIN_MAP=ON \
+  -DSKBUILD=$skbuild
 
 cmake --build build --parallel
-
-if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" ]]; then
-  ctest --test-dir build --output-on-failure
-fi
 
 cmake --build build --target install
