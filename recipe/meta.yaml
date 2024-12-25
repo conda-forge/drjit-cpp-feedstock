@@ -1,5 +1,5 @@
 {% set name = "drjit-cpp" %}
-{% set version = "1.0.0" %}
+{% set version = "1.0.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   - url: https://github.com/mitsuba-renderer/drjit/archive/v{{ version }}.tar.gz
-    sha256: bf3913be3c34c525793e3686a159fe698715e079efd3234156aa0abb668a8b87
+    sha256: 916fb7d941ed4dc5973a8ea639a107d2696ee29e990f12338d399aeade7d5490
     patches:
       - use-system-libraries.patch
   - url: https://github.com/mitsuba-renderer/drjit-core/archive/31b0774bdf592f4d08a5fa3e9f81f82337d88405.zip
