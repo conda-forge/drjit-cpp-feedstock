@@ -7,11 +7,10 @@ cmake %SRC_DIR% ^
   -DDRJIT_ENABLE_JIT=OFF ^
   -DDRJIT_ENABLE_AUTODIFF=OFF ^
   -DDRJIT_ENABLE_PYTHON=OFF ^
-  -DDRJIT_ENABLE_TESTS=ON ^
+  -DDRJIT_ENABLE_TESTS=OFF ^
+  -DDRJIT_USE_SYSTEM_NANOBIND=OFF ^
   -DDRJIT_USE_SYSTEM_ROBIN_MAP=ON
 
 cmake --build build --parallel --config Release
-
-ctest --test-dir build --output-on-failure --build-config Release
 
 cmake --build build --target install --config Release

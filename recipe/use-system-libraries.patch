@@ -1,0 +1,55 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 281efa11..99ebb0cc 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -22,6 +22,9 @@ option(DRJIT_ENABLE_TESTS     "Build Dr.Jit test suite? (Warning, this takes *ve
+ option(DRJIT_STABLE_ABI       "Build Python extension using the CPython stable ABI? (Only relevant when using scikit-build)" OFF)
+ mark_as_advanced(DRJIT_STABLE_ABI)
+ 
++option(DRJIT_USE_SYSTEM_NANOBIND "Use system-installed nanobind" OFF)
++option(DRJIT_USE_SYSTEM_ROBIN_MAP "Use system-installed robin-map" OFF)
++
+ # ----------------------------------------------------------
+ #  Check if submodules have been checked out, or fail early
+ # ----------------------------------------------------------
+@@ -182,6 +185,7 @@ endif()
+ 
+ if (DRJIT_MASTER_PROJECT)
+   install(DIRECTORY include/drjit DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
++  install(DIRECTORY ext/drjit-core/include/drjit-core DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+ 
+   install(TARGETS drjit-core EXPORT drjitTargets DESTINATION drjit)
+   install(TARGETS drjit-extra EXPORT drjitTargets DESTINATION drjit)
+@@ -236,7 +240,6 @@ if (DRJIT_MASTER_PROJECT)
+   endif()
+ 
+   if (DRJIT_ENABLE_JIT)
+-    install(DIRECTORY ext/drjit-core/include/drjit-core DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+     install(DIRECTORY ext/drjit-core/ext/nanothread/include/nanothread DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+   endif()
+ 
+diff --git a/src/extra/CMakeLists.txt b/src/extra/CMakeLists.txt
+index a5bd9ff9..5821fd8d 100644
+--- a/src/extra/CMakeLists.txt
++++ b/src/extra/CMakeLists.txt
+@@ -22,7 +22,16 @@ endif()
+ target_compile_definitions(drjit-extra PRIVATE -DDRJIT_EXTRA_BUILD)
+ target_link_libraries(drjit-extra PRIVATE drjit drjit-core)
+ 
+-target_include_directories(drjit-extra PRIVATE
+-  ../../ext/drjit-core/ext/robin_map/include
+-  ../../ext/nanobind/include
+-)
++if (DRJIT_USE_SYSTEM_NANOBIND)
++  find_package(nanobind REQUIRED CONFIG)
++  target_link_libraries(drjit-extra PRIVATE nanobind)
++else()
++  target_include_directories(drjit-extra PRIVATE ../../ext/nanobind/include)
++endif()
++
++if (DRJIT_USE_SYSTEM_ROBIN_MAP)
++  find_package(tsl-robin-map REQUIRED CONFIG)
++  target_link_libraries(drjit-extra PRIVATE tsl::robin_map)
++else()
++  target_include_directories(drjit-extra PRIVATE ../../ext/drjit-core/ext/robin_map/include)
++endif()
