@@ -16,9 +16,6 @@ source:
     folder: ext/drjit-core
     patches:
       - use-system-robin-map.patch
-  - url: https://github.com/wjakob/nanobind/archive/784efa2a0358a4dc5432c74f5685ee026e20f2b6.zip
-    sha256: 74b6d1561b231688b6e9bb9fb31df669a0330b00fdccf2cf9cd0c707bca62754
-    folder: ext/nanobind
   - url: https://github.com/mitsuba-renderer/nanothread/archive/6c4dd4d425619d6a4a5dd7b7a255116411cddebb.zip
     sha256: 4160bc8acbad3250ccaa6c5ced25d9bec5e1bf1de9eea3432ac4b84aec099dcd
     folder: ext/drjit-core/ext/nanothread
