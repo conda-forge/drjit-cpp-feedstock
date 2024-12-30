@@ -1,0 +1,19 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 281efa11..85c73de5 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -183,9 +183,11 @@ endif()
+ if (DRJIT_MASTER_PROJECT)
+   install(DIRECTORY include/drjit DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+
+-  install(TARGETS drjit-core EXPORT drjitTargets DESTINATION drjit)
+-  install(TARGETS drjit-extra EXPORT drjitTargets DESTINATION drjit)
+-  install(TARGETS nanothread EXPORT drjitTargets DESTINATION drjit)
++  if (DRJIT_ENABLE_JIT)
++    install(TARGETS drjit-core EXPORT drjitTargets DESTINATION drjit)
++    install(TARGETS drjit-extra EXPORT drjitTargets DESTINATION drjit)
++    install(TARGETS nanothread EXPORT drjitTargets DESTINATION drjit)
++  endif()
+
+   if (DRJIT_ENABLE_PYTHON)
+     install(TARGETS drjit-python DESTINATION drjit)
