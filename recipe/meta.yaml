@@ -31,9 +31,6 @@ build:
   number: 0
   run_exports:
     - {{ pin_subpackage('drjit-cpp', max_pin='x.x') }}
-  skip:
-    skip: true  # [aarch64]
-    skip: true  # [ppc64le]
 
 requirements:
   build:
