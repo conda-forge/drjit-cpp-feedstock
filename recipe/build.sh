@@ -7,12 +7,6 @@ if [[ "${target_platform}" == osx-* ]]; then
   CXXFLAGS="${CXXFLAGS} -D_LIBCPP_DISABLE_AVAILABILITY"
 fi
 
-if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" ]]; then
-  skbuild=OFF
-else
-  skbuild=ON
-fi
-
 cmake $SRC_DIR \
   ${CMAKE_ARGS} \
   -G Ninja \
@@ -28,7 +22,7 @@ cmake $SRC_DIR \
   -DDRJIT_ENABLE_TESTS=OFF \
   -DDRJIT_USE_SYSTEM_NANOBIND=OFF \
   -DDRJIT_USE_SYSTEM_ROBIN_MAP=ON \
-  -DSKBUILD=$skbuild
+  -DSKBUILD=OFF
 
 cmake --build build --parallel
 
