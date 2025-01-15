@@ -7,6 +7,10 @@ llvm_version:
   - 20
   - 21
 
+build_mode:
+  - cpp
+  - python
+
 c_stdlib_version:  # [linux]
   - '2.17'         # [linux]
   - '2.17'         # [linux]

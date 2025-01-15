@@ -45,43 +45,97 @@ build:
   number: 3
   skip: true  # [cuda_compiler_version == "11.8"]
   skip: true  # [cuda_compiler_version != "None" and (ppc64le or aarch64)]
-  skip: true  # [cuda_compiler_version != "None" and win]
-  string: cpu_h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}  # [cuda_compiler_version == "None"]
-  string: cuda{{ cuda_compiler_version | replace('.', '') }}_h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}  # [cuda_compiler_version != "None"]
-  run_exports:
-    - {{ pin_subpackage('drjit-cpp', max_pin='x.x') }}
 
-requirements:
-  build:
-    - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
-    - {{ compiler('cuda') }}  # [cuda_compiler_version != "None"]
-    - {{ stdlib('c') }}
-    - cmake
-    - ninja  # [not win]
-    - tsl_robin_map
-  host:
-    - cuda-version {{ cuda_compiler_version }}  # [cuda_compiler_version != "None"]
-    - cuda-toolkit                              # [cuda_compiler_version != "None"]
-    - llvmdev {{ llvm_version }}
-  run:
-    - cuda-cudart  # [cuda_compiler_version != "None"]
+outputs:
+  - name: drjit-cpp
+    script: build_cpp.sh  # [unix]
+    script: bld_cpp.bat   # [win]
+    build:
+      string: cpu_h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}  # [cuda_compiler_version == "None"]
+      string: cuda{{ cuda_compiler_version | replace('.', '') }}_h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}  # [cuda_compiler_version != "None"]
+      skip: true  # [build_mode == "python"]
+      run_exports:
+        - {{ pin_subpackage('drjit-cpp', max_pin='x.x') }}
+    requirements:
+      build:
+        - {{ compiler('c') }}
+        - {{ compiler('cxx') }}
+        - {{ compiler('cuda') }}  # [cuda_compiler_version != "None"]
+        - {{ stdlib('c') }}
+        - cmake
+        - ninja  # [unix]
+      host:
+        - cuda-version {{ cuda_compiler_version }}  # [cuda_compiler_version != "None"]
+        - cuda-toolkit                              # [cuda_compiler_version != "None"]
+        - llvmdev {{ llvm_version }}
+      run:
+        - cuda-cudart  # [cuda_compiler_version != "None"]
+    test:
+      script: run_test_cpp.sh   # [unix]
+      script: run_test_cpp.bat  # [win]
+      commands:
+        - test -f include/drjit-core/macros.h                  # [unix]
+        - test -f $PREFIX/include/drjit/fwd.h                  # [unix]
+        - test -f $PREFIX/share/cmake/drjit/drjitConfig.cmake  # [unix]
+        - if not exist %PREFIX%\\Library\\include\\drjit-core\\macros.h exit 1           # [win]
+        - if not exist %PREFIX%\\Library\\include\\drjit\\fwd.h exit 1                   # [win]
+        - if not exist %PREFIX%\\Library\\share\\cmake\\drjit\\drjitConfig.cmake exit 1  # [win]
+      requires:
+        - {{ compiler("c") }}
+        - {{ compiler("cxx") }}
+        - cmake
+        - ninja  # [unix]
+      files:
+        - tests/
+      downstreams:
+        - momentum
 
-test:
-  commands:
-    - test -f $PREFIX/include/drjit/fwd.h  # [not win]
-    - test -f $PREFIX/share/cmake/drjit/drjitConfig.cmake  # [not win]
-    - if not exist %PREFIX%\\Library\\include\\drjit\\fwd.h exit 1  # [win]
-    - if not exist %PREFIX%\\Library\\share\\cmake\\drjit\\drjitConfig.cmake exit 1  # [win]
-  requires:
-    - {{ compiler("c") }}
-    - {{ compiler("cxx") }}
-    - cmake
-    - ninja  # [unix]
-  files:
-    - tests/
-  downstreams:
-    - momentum
+  - name: drjit
+    script: build_py.sh  # [unix]
+    script: bld_py.bat   # [win]
+    build:
+      skip: true  # [build_mode == "cpp"]
+      skip: true  # [linux and not x86_64]
+      skip: true  # [osx and not x86_64]
+      skip: true  # [win]
+      skip: true  # [py<310]
+    requirements:
+      build:
+        - {{ compiler('c') }}
+        - {{ compiler('cxx') }}
+        - {{ compiler('cuda') }}  # [cuda_compiler_version != "None"]
+        - {{ stdlib('c') }}
+        - cmake
+        - make
+        - ninja  # [unix]
+        - cross-python_{{ target_platform }}  # [build_platform != target_platform]
+        - python                              # [build_platform != target_platform]
+      host:
+        - cuda-version {{ cuda_compiler_version }}  # [cuda_compiler_version != "None"]
+        - cuda-toolkit                              # [cuda_compiler_version != "None"]
+        - llvmdev {{ llvm_version }}
+        # Python deps
+        - hatch-fancy-pypi-readme
+        - nanobind >=2.6.0
+        - pip
+        - python
+        - scikit-build-core
+        - typing_extensions
+      run:
+        - cuda-cudart  # [cuda_compiler_version != "None"]
+        - libcxx       # [osx]
+        - libgcc       # [linux]
+        - libstdcxx    # [linux]
+        - python
+        - typing_extensions
+    test:
+      imports:
+        - drjit
+      commands:
+        - pip check
+      requires:
+        - pip
+        - python
 
 about:
   home: https://github.com/mitsuba-renderer/drjit
