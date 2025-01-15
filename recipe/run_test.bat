@@ -6,5 +6,5 @@ cmake tests ^
   -DBUILD_SHARED_LIBS=ON
 if errorlevel 1 exit 1
 
-cmake --build build --parallel --config Release
+cmake --build tests/build --parallel --config Release
 if errorlevel 1 exit 1

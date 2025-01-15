@@ -45,8 +45,6 @@ test:
     - test -f $PREFIX/share/cmake/drjit/drjitConfig.cmake  # [not win]
     - if not exist %PREFIX%\\Library\\include\\drjit\\fwd.h exit 1  # [win]
     - if not exist %PREFIX%\\Library\\share\\cmake\\drjit\\drjitConfig.cmake exit 1  # [win]
-  downstreams:
-    - momentum
   requires:
     - {{ compiler("c") }}
     - {{ compiler("cxx") }}
@@ -54,6 +52,8 @@ test:
     - ninja  # [unix]
   files:
     - tests/
+  downstreams:
+    - momentum
 
 about:
   home: https://github.com/mitsuba-renderer/drjit
