@@ -11,10 +11,8 @@ cmake $SRC_DIR \
   ${CMAKE_ARGS} \
   -G Ninja \
   -B build \
-  -DCMAKE_INSTALL_PREFIX=$PREFIX \
-  -DCMAKE_PREFIX_PATH=$PREFIX \
+  -DBUILD_SHARED_LIBS=ON \
   -DCMAKE_BUILD_TYPE=Release \
-  -DCMAKE_INSTALL_LIBDIR=lib \
   -DDRJIT_ENABLE_AUTODIFF=OFF \
   -DDRJIT_ENABLE_CUDA=OFF \
   -DDRJIT_ENABLE_LLVM=OFF \
@@ -30,4 +28,4 @@ if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" ]]; then
   ctest --test-dir build --output-on-failure
 fi
 
-cmake --install build
+cmake --install build --strip
