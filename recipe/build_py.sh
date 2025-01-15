@@ -7,4 +7,4 @@ if [[ "${target_platform}" == osx-* ]]; then
   CXXFLAGS="${CXXFLAGS} -D_LIBCPP_DISABLE_AVAILABILITY"
 fi
 
-python -m pip install . -vv -- -- -DRJIT_USE_SYSTEM_ROBIN_MAP=ON
+python -m pip install . -vv -- -DRJIT_USE_SYSTEM_ROBIN_MAP=ON
