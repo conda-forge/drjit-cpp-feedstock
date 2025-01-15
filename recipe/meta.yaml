@@ -78,6 +78,7 @@ outputs:
         - {{ compiler('cxx') }}
         - {{ stdlib('c') }}
         - cmake
+        - make
         - ninja  # [not win]
         - tsl_robin_map
         - cross-python_{{ target_platform }}  # [build_platform != target_platform]
