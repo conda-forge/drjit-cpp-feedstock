@@ -41,7 +41,9 @@ requirements:
 
 test:
   commands:
+    - test -f $PREFIX/include/drjit/fwd.h  # [not win]
     - test -f $PREFIX/share/cmake/drjit/drjitConfig.cmake  # [not win]
+    - if not exist %PREFIX%\\Library\\include\\drjit\\fwd.h exit 1  # [win]
     - if not exist %PREFIX%\\Library\\share\\cmake\\drjit\\drjitConfig.cmake exit 1  # [win]
   downstreams:
     - momentum
