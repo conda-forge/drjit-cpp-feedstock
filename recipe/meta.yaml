@@ -25,7 +25,7 @@ source:
     patches:
       - patches/disable-march-flags.patch  # [build_platform != target_platform]
   - url: https://github.com/wjakob/nanobind/archive/784efa2a0358a4dc5432c74f5685ee026e20f2b6.zip
-    sha256: 545213e126f66bdb0839d6924b5989a96a283eef43f3e6c7d19d121c3ff4d595
+    sha256: 74b6d1561b231688b6e9bb9fb31df669a0330b00fdccf2cf9cd0c707bca62754
     folder: ext/nanobind
 
 build:
