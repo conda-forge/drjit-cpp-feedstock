@@ -84,9 +84,12 @@ outputs:
         - python                              # [build_platform != target_platform]
       host:
         # Python deps
+        - hatch-fancy-pypi-readme
+        - nanobind 2.2.0
         - pip
         - python
         - scikit-build-core
+        - typing_extensions
     test:
       imports:
         - drjit
