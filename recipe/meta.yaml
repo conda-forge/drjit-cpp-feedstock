@@ -9,13 +9,13 @@ source:
   - url: https://github.com/mitsuba-renderer/drjit/archive/v{{ version }}.tar.gz
     sha256: d9287061df8300538a3f550a7368fa55ec0c610f9bb44ffdb3499c0bf5de096f
     patches:
-      - use-system-libraries.patch
-      - skip-installing-jit-targets.patch
+      - patches/use-system-libraries.patch
+      - patches/skip-installing-jit-targets.patch
   - url: https://github.com/mitsuba-renderer/drjit-core/archive/2354093d6bffffbe8a1ce546f54edf6dd007e464.zip
     sha256: 814ca6d8d102a6fa52903271181a24ef44de58fb912d11a33e906df5dc8a043e
     folder: ext/drjit-core
     patches:
-      - use-system-robin-map.patch
+      - patches/use-system-robin-map.patch
   - url: https://github.com/mitsuba-renderer/nanothread/archive/6c4dd4d425619d6a4a5dd7b7a255116411cddebb.zip
     sha256: 4160bc8acbad3250ccaa6c5ced25d9bec5e1bf1de9eea3432ac4b84aec099dcd
     folder: ext/drjit-core/ext/nanothread
@@ -23,7 +23,7 @@ source:
     sha256: 545213e126f66bdb0839d6924b5989a96a283eef43f3e6c7d19d121c3ff4d595
     folder: ext/drjit-core/ext/nanothread/ext/cmake-defaults
     patches:
-      - disable-march-flags.patch  # [build_platform != target_platform]
+      - patches/disable-march-flags.patch  # [build_platform != target_platform]
 
 build:
   number: 1
@@ -45,6 +45,13 @@ test:
     - if not exist %PREFIX%\\Library\\share\\cmake\\drjit\\drjitConfig.cmake exit 1  # [win]
   downstreams:
     - momentum
+  requires:
+    - {{ compiler("c") }}
+    - {{ compiler("cxx") }}
+    - cmake
+    - ninja  # [unix]
+  files:
+    - tests/
 
 about:
   home: https://github.com/mitsuba-renderer/drjit
