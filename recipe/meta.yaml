@@ -11,8 +11,8 @@ source:
     patches:
       - use-system-libraries.patch
       - skip-installing-jit-targets.patch
-  - url: https://github.com/mitsuba-renderer/drjit-core/archive/31b0774bdf592f4d08a5fa3e9f81f82337d88405.zip
-    sha256: 93dd7ca4520d860917b78c1189d61feea5eb3c0a81f95aca475a5030d314e2fe
+  - url: https://github.com/mitsuba-renderer/drjit-core/archive/2354093d6bffffbe8a1ce546f54edf6dd007e464.zip
+    sha256: 814ca6d8d102a6fa52903271181a24ef44de58fb912d11a33e906df5dc8a043e
     folder: ext/drjit-core
     patches:
       - use-system-robin-map.patch
@@ -26,7 +26,7 @@ source:
       - disable-march-flags.patch  # [build_platform != target_platform]
 
 build:
-  number: 0
+  number: 1
   run_exports:
     - {{ pin_subpackage('drjit-cpp', max_pin='x.x') }}
 
