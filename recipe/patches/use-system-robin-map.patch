@@ -6,7 +6,7 @@ index 2da41b2..f06c88a 100644
  #  Optional features available to users
  # ----------------------------------------------------------
  
-+option(DRJIT_USE_SYSTEM_ROBIN_MAP "Use system-installed robin-map" OFF)
++option(DRJIT_USE_SYSTEM_ROBIN_MAP "Use system-installed robin-map" ON)
  option(DRJIT_DYNAMIC_LLVM "Resolve LLVM dynamically at run time?" ON)
  option(DRJIT_CORE_ENABLE_TESTS "Build Dr.Jit-Core test suite?" OFF)
  
