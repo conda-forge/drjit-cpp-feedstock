@@ -24,36 +24,76 @@ source:
     folder: ext/drjit-core/ext/nanothread/ext/cmake-defaults
     patches:
       - patches/disable-march-flags.patch  # [build_platform != target_platform]
+  - url: https://github.com/wjakob/nanobind/archive/784efa2a0358a4dc5432c74f5685ee026e20f2b6.zip
+    sha256: 74b6d1561b231688b6e9bb9fb31df669a0330b00fdccf2cf9cd0c707bca62754
+    folder: ext/nanobind
 
 build:
-  number: 0
+  number: 1
   run_exports:
     - {{ pin_subpackage('drjit-cpp', max_pin='x.x') }}
 
-requirements:
-  build:
-    - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
-    - {{ stdlib('c') }}
-    - cmake
-    - ninja  # [not win]
-    - tsl_robin_map
-
-test:
-  commands:
-    - test -f $PREFIX/include/drjit/fwd.h  # [not win]
-    - test -f $PREFIX/share/cmake/drjit/drjitConfig.cmake  # [not win]
-    - if not exist %PREFIX%\\Library\\include\\drjit\\fwd.h exit 1  # [win]
-    - if not exist %PREFIX%\\Library\\share\\cmake\\drjit\\drjitConfig.cmake exit 1  # [win]
-  requires:
-    - {{ compiler("c") }}
-    - {{ compiler("cxx") }}
-    - cmake
-    - ninja  # [unix]
-  files:
-    - tests/
-  downstreams:
-    - momentum
+outputs:
+  - name: drjit-cpp
+    script: build_cpp.sh  # [unix]
+    script: bld_cpp.bat   # [win]
+    build:
+      run_exports:
+        - {{ pin_subpackage('drjit-cpp', max_pin='x.x') }}
+    requirements:
+      build:
+        - {{ compiler('c') }}
+        - {{ compiler('cxx') }}
+        - {{ stdlib('c') }}
+        - cmake
+        - ninja  # [not win]
+        - tsl_robin_map
+    test:
+      script: build_cpp.sh  # [unix]
+      script: bld_cpp.bat   # [win]
+      commands:
+        - test -f $PREFIX/include/drjit/fwd.h  # [not win]
+        - test -f $PREFIX/share/cmake/drjit/drjitConfig.cmake  # [not win]
+        - if not exist %PREFIX%\\Library\\include\\drjit\\fwd.h exit 1  # [win]
+        - if not exist %PREFIX%\\Library\\share\\cmake\\drjit\\drjitConfig.cmake exit 1  # [win]
+      requires:
+        - {{ compiler("c") }}
+        - {{ compiler("cxx") }}
+        - cmake
+        - ninja  # [unix]
+      files:
+        - tests/
+      downstreams:
+        - momentum
+  - name: drjit
+    script: build_py.sh  # [unix]
+    script: bld_py.bat   # [win]
+    build:
+      skip: true  # [osx]
+      skip: true  # [win]
+      skip: true  # [linux and not x86_64]
+    requirements:
+      build:
+        - {{ compiler('c') }}
+        - {{ compiler('cxx') }}
+        - {{ stdlib('c') }}
+        - cmake
+        - make
+        - ninja  # [not win]
+        - tsl_robin_map
+        - cross-python_{{ target_platform }}  # [build_platform != target_platform]
+        - python                              # [build_platform != target_platform]
+      host:
+        # Python deps
+        - hatch-fancy-pypi-readme
+        - nanobind 2.2.0
+        - pip
+        - python
+        - scikit-build-core
+        - typing_extensions
+    test:
+      imports:
+        - drjit
 
 about:
   home: https://github.com/mitsuba-renderer/drjit

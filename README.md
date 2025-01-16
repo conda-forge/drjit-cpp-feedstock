@@ -35,10 +35,31 @@ Current build status
         <table>
           <thead><tr><th>Variant</th><th>Status</th></tr></thead>
           <tbody><tr>
-              <td>linux_64</td>
+              <td>linux_64_python3.10.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=22668&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_python3.10.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_64_python3.11.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=22668&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_python3.11.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_64_python3.12.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=22668&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_python3.12.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_64_python3.9.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=22668&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_python3.9.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -89,6 +110,7 @@ Current release info
 
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-drjit-green.svg)](https://anaconda.org/conda-forge/drjit) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/drjit.svg)](https://anaconda.org/conda-forge/drjit) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/drjit.svg)](https://anaconda.org/conda-forge/drjit) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/drjit.svg)](https://anaconda.org/conda-forge/drjit) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-drjit--cpp-green.svg)](https://anaconda.org/conda-forge/drjit-cpp) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/drjit-cpp.svg)](https://anaconda.org/conda-forge/drjit-cpp) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/drjit-cpp.svg)](https://anaconda.org/conda-forge/drjit-cpp) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/drjit-cpp.svg)](https://anaconda.org/conda-forge/drjit-cpp) |
 
 Installing drjit-cpp
@@ -101,41 +123,41 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `drjit-cpp` can be installed with `conda`:
+Once the `conda-forge` channel has been enabled, `drjit, drjit-cpp` can be installed with `conda`:
 
 ```
-conda install drjit-cpp
-```
-
-or with `mamba`:
-
-```
-mamba install drjit-cpp
-```
-
-It is possible to list all of the versions of `drjit-cpp` available on your platform with `conda`:
-
-```
-conda search drjit-cpp --channel conda-forge
+conda install drjit drjit-cpp
 ```
 
 or with `mamba`:
 
 ```
-mamba search drjit-cpp --channel conda-forge
+mamba install drjit drjit-cpp
+```
+
+It is possible to list all of the versions of `drjit` available on your platform with `conda`:
+
+```
+conda search drjit --channel conda-forge
+```
+
+or with `mamba`:
+
+```
+mamba search drjit --channel conda-forge
 ```
 
 Alternatively, `mamba repoquery` may provide more information:
 
 ```
 # Search all versions available on your platform:
-mamba repoquery search drjit-cpp --channel conda-forge
+mamba repoquery search drjit --channel conda-forge
 
-# List packages depending on `drjit-cpp`:
-mamba repoquery whoneeds drjit-cpp --channel conda-forge
+# List packages depending on `drjit`:
+mamba repoquery whoneeds drjit --channel conda-forge
 
-# List dependencies of `drjit-cpp`:
-mamba repoquery depends drjit-cpp --channel conda-forge
+# List dependencies of `drjit`:
+mamba repoquery depends drjit --channel conda-forge
 ```
 
 
