@@ -1,5 +1,5 @@
 {% set name = "drjit-cpp" %}
-{% set version = "1.0.4" %}
+{% set version = "1.0.5" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   - url: https://github.com/mitsuba-renderer/drjit/archive/v{{ version }}.tar.gz
-    sha256: ca80fd2236dec0f94d2d05e1f002a24e59730ea40f4ba952675e68b2860fa106
+    sha256: 03dfe742647ad864bb3426eef7c4704206d6ceaa2b9a403ae63e4e65fa873b77
     patches:
       - patches/use-system-libraries.patch
       - patches/skip-installing-jit-targets.patch
