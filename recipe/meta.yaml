@@ -26,7 +26,7 @@ source:
       - patches/disable-march-flags.patch  # [build_platform != target_platform]
 
 build:
-  number: 0
+  number: 1
   run_exports:
     - {{ pin_subpackage('drjit-cpp', max_pin='x.x') }}
 
@@ -38,6 +38,8 @@ requirements:
     - cmake
     - ninja  # [not win]
     - tsl_robin_map
+  host:
+    - llvmdev {{ llvm_version }}
 
 test:
   commands:
