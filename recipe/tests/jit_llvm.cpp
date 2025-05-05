@@ -1,6 +1,7 @@
 #include <drjit/dynamic.h>
 #include <drjit/jit.h>
 #include <drjit/random.h>
+#include <iostream>
 
 int main() {
   using FloatC = drjit::LLVMArray<float>;
