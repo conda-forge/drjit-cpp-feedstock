@@ -6,13 +6,16 @@ package:
   version: {{ version }}
 
 source:
+  # drjit
   - url: https://github.com/mitsuba-renderer/drjit/archive/v{{ version }}.tar.gz
     sha256: 03dfe742647ad864bb3426eef7c4704206d6ceaa2b9a403ae63e4e65fa873b77
     patches:
       - patches/use-system-libraries.patch
       - patches/skip-installing-jit-targets.patch
-  - url: https://github.com/mitsuba-renderer/drjit-core/archive/2354093d6bffffbe8a1ce546f54edf6dd007e464.zip
-    sha256: 814ca6d8d102a6fa52903271181a24ef44de58fb912d11a33e906df5dc8a043e
+
+  # drjit-core
+  - url: https://github.com/mitsuba-renderer/drjit-core/archive/c2c23f889b328c2b15017097b12cec838057fe63.zip
+    sha256: ec2b67925d374a07b809ea4f7b8d89bb430020b106f0c901cbc086ca066d8b4c
     folder: ext/drjit-core
     patches:
       - patches/use-system-robin-map.patch
@@ -24,6 +27,17 @@ source:
     folder: ext/drjit-core/ext/nanothread/ext/cmake-defaults
     patches:
       - patches/disable-march-flags.patch  # [build_platform != target_platform]
+  - url: https://github.com/Tessil/robin-map/archive/188c45569cc2a5dd768077c193830b51d33a5020.zip
+    sha256: 084d7d72f2e669842cc9db1a6a31c15376500a90a3e525f63f569fca963a01b4
+    folder: ext/drjit-core/ext/robin_map
+
+  # nanobind
+  - url: https://github.com/wjakob/nanobind/archive/082eab33a58d246ed408ecae59be77f694387a68.zip
+    sha256: c62fa48dc6df78d42562abfa55ca8835fde4855b014b77c3c6457356430fb282
+    folder: ext/nanobind
+  - url: https://github.com/Tessil/robin-map/archive/188c45569cc2a5dd768077c193830b51d33a5020.zip
+    sha256: 084d7d72f2e669842cc9db1a6a31c15376500a90a3e525f63f569fca963a01b4
+    folder: ext/nanobind/ext/robin_map
 
 build:
   number: 1
