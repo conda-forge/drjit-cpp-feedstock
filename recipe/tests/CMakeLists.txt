@@ -8,5 +8,8 @@ project(adaptivecpp-example)
 
 find_package(drjit CONFIG REQUIRED)
 
-add_executable(${PROJECT_NAME} main.cpp)
-target_link_libraries(${PROJECT_NAME} PRIVATE drjit)
+add_executable(half half.cpp)
+target_link_libraries(half PRIVATE drjit)
+
+add_executable(jit_llvm jit_llvm.cpp)
+target_link_libraries(jit_llvm PRIVATE drjit)
