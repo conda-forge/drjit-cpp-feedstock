@@ -10,8 +10,8 @@ source:
   - url: https://github.com/mitsuba-renderer/drjit/archive/v{{ version }}.tar.gz
     sha256: 03dfe742647ad864bb3426eef7c4704206d6ceaa2b9a403ae63e4e65fa873b77
     patches:
-      - patches/use-system-libraries.patch
-      - patches/skip-installing-jit-targets.patch
+      - patches/0001-Use-system-libraries.patch
+      - patches/0002-Fix-install-destination-paths.patch
 
   # drjit-core
   - url: https://github.com/mitsuba-renderer/drjit-core/archive/c2c23f889b328c2b15017097b12cec838057fe63.zip
