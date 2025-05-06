@@ -7,6 +7,12 @@ if [[ "${target_platform}" == osx-* ]]; then
   CXXFLAGS="${CXXFLAGS} -D_LIBCPP_DISABLE_AVAILABILITY"
 fi
 
+if [[ "${target_platform}" == *aarch64 || "${target_platform}" == *ppc64le ]]; then
+  ENABLE_LLVM=OFF
+else
+  ENABLE_LLVM=ON
+fi
+
 cmake $SRC_DIR \
   ${CMAKE_ARGS} \
   -G Ninja \
@@ -15,7 +21,7 @@ cmake $SRC_DIR \
   -DCMAKE_BUILD_TYPE=Release \
   -DDRJIT_ENABLE_AUTODIFF=OFF \
   -DDRJIT_ENABLE_CUDA=OFF \
-  -DDRJIT_ENABLE_LLVM=OFF \
+  -DDRJIT_ENABLE_LLVM=$ENABLE_LLVM \
   -DDRJIT_ENABLE_PYTHON=OFF \
   -DDRJIT_ENABLE_TESTS=OFF \
   -DDRJIT_USE_SYSTEM_NANOBIND=OFF \
