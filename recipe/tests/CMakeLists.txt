@@ -12,4 +12,4 @@ add_executable(half half.cpp)
 target_link_libraries(half PRIVATE drjit)
 
 add_executable(jit_llvm jit_llvm.cpp)
-target_link_libraries(jit_llvm PRIVATE drjit)
+target_link_libraries(jit_llvm PRIVATE drjit-core drjit)
