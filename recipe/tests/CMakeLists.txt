@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 
 option(ENABLE_LLVM "Enable LLVM backend" OFF)
+option(ENABLE_CUDA "Enable CUDA backend" OFF)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -16,4 +17,9 @@ target_link_libraries(half PRIVATE drjit)
 if(ENABLE_LLVM)
   add_executable(jit_llvm jit_llvm.cpp)
   target_link_libraries(jit_llvm PRIVATE drjit-core drjit)
+endif()
+
+if(ENABLE_CUDA)
+  add_executable(jit_cuda jit_cuda.cpp)
+  target_link_libraries(jit_cuda PRIVATE drjit-core drjit)
 endif()
