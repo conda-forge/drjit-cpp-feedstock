@@ -10,15 +10,17 @@ source:
   - url: https://github.com/mitsuba-renderer/drjit/archive/v{{ version }}.tar.gz
     sha256: 03dfe742647ad864bb3426eef7c4704206d6ceaa2b9a403ae63e4e65fa873b77
     patches:
-      - patches/0001-Use-system-libraries.patch
-      - patches/0002-Fix-install-destination-paths.patch
+      - patches/drjit/0001-Use-system-libraries.patch
+      - patches/drjit/0002-Fix-install-destination-paths.patch
+      - patches/drjit/0003-Make-directory-before-creating-files.patch
+      - patches/drjit/0004-Fix-scatter-for-raw-pointer-target.patch
 
   # drjit-core
   - url: https://github.com/mitsuba-renderer/drjit-core/archive/c2c23f889b328c2b15017097b12cec838057fe63.zip
     sha256: ec2b67925d374a07b809ea4f7b8d89bb430020b106f0c901cbc086ca066d8b4c
     folder: ext/drjit-core
     patches:
-      - patches/use-system-robin-map.patch
+      - patches/drjit-core/use-system-robin-map.patch
   - url: https://github.com/mitsuba-renderer/nanothread/archive/6c4dd4d425619d6a4a5dd7b7a255116411cddebb.zip
     sha256: 4160bc8acbad3250ccaa6c5ced25d9bec5e1bf1de9eea3432ac4b84aec099dcd
     folder: ext/drjit-core/ext/nanothread
@@ -26,7 +28,7 @@ source:
     sha256: 545213e126f66bdb0839d6924b5989a96a283eef43f3e6c7d19d121c3ff4d595
     folder: ext/drjit-core/ext/nanothread/ext/cmake-defaults
     patches:
-      - patches/disable-march-flags.patch  # [build_platform != target_platform]
+      - patches/drjit-core/disable-march-flags.patch  # [build_platform != target_platform]
   - url: https://github.com/Tessil/robin-map/archive/188c45569cc2a5dd768077c193830b51d33a5020.zip
     sha256: 084d7d72f2e669842cc9db1a6a31c15376500a90a3e525f63f569fca963a01b4
     folder: ext/drjit-core/ext/robin_map
@@ -40,7 +42,7 @@ source:
     folder: ext/nanobind/ext/robin_map
 
 build:
-  number: 2
+  number: 3
   skip: true  # [cuda_compiler_version == "11.8"]
   skip: true  # [cuda_compiler_version != "None" and (ppc64le or aarch64)]
   string: cpu_h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}  # [cuda_compiler_version == "None"]
