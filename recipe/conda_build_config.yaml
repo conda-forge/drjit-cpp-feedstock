@@ -5,3 +5,7 @@ llvm_version:
   - 17
   - 18
   - 19
+
+build_mode:
+  - cpp
+  - python

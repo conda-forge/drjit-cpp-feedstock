@@ -8,29 +8,41 @@ jobs:
     vmImage: macOS-13
   strategy:
     matrix:
-      osx_64_llvm_version16:
-        CONFIG: osx_64_llvm_version16
+      osx_64_build_modecppllvm_version16:
+        CONFIG: osx_64_build_modecppllvm_version16
         UPLOAD_PACKAGES: 'True'
-      osx_64_llvm_version17:
-        CONFIG: osx_64_llvm_version17
+      osx_64_build_modecppllvm_version17:
+        CONFIG: osx_64_build_modecppllvm_version17
         UPLOAD_PACKAGES: 'True'
-      osx_64_llvm_version18:
-        CONFIG: osx_64_llvm_version18
+      osx_64_build_modecppllvm_version18:
+        CONFIG: osx_64_build_modecppllvm_version18
         UPLOAD_PACKAGES: 'True'
-      osx_64_llvm_version19:
-        CONFIG: osx_64_llvm_version19
+      osx_64_build_modecppllvm_version19:
+        CONFIG: osx_64_build_modecppllvm_version19
         UPLOAD_PACKAGES: 'True'
-      osx_arm64_llvm_version16:
-        CONFIG: osx_arm64_llvm_version16
+      osx_64_build_modepythonllvm_version16:
+        CONFIG: osx_64_build_modepythonllvm_version16
         UPLOAD_PACKAGES: 'True'
-      osx_arm64_llvm_version17:
-        CONFIG: osx_arm64_llvm_version17
+      osx_64_build_modepythonllvm_version17:
+        CONFIG: osx_64_build_modepythonllvm_version17
         UPLOAD_PACKAGES: 'True'
-      osx_arm64_llvm_version18:
-        CONFIG: osx_arm64_llvm_version18
+      osx_64_build_modepythonllvm_version18:
+        CONFIG: osx_64_build_modepythonllvm_version18
         UPLOAD_PACKAGES: 'True'
-      osx_arm64_llvm_version19:
-        CONFIG: osx_arm64_llvm_version19
+      osx_64_build_modepythonllvm_version19:
+        CONFIG: osx_64_build_modepythonllvm_version19
+        UPLOAD_PACKAGES: 'True'
+      osx_arm64_build_modecppllvm_version16:
+        CONFIG: osx_arm64_build_modecppllvm_version16
+        UPLOAD_PACKAGES: 'True'
+      osx_arm64_build_modecppllvm_version17:
+        CONFIG: osx_arm64_build_modecppllvm_version17
+        UPLOAD_PACKAGES: 'True'
+      osx_arm64_build_modecppllvm_version18:
+        CONFIG: osx_arm64_build_modecppllvm_version18
+        UPLOAD_PACKAGES: 'True'
+      osx_arm64_build_modecppllvm_version19:
+        CONFIG: osx_arm64_build_modecppllvm_version19
         UPLOAD_PACKAGES: 'True'
   timeoutInMinutes: 360
   variables: {}
