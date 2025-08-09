@@ -19,16 +19,16 @@ source:
   - url: https://github.com/mitsuba-renderer/drjit-core/archive/9c7117e356897f814ff3d9df20d5bd383a3f73db.zip
     sha256: 72c5a32a136af669711e553bbe2cb5beb2d73b2be903295a7c9fc905f77ab44c
     folder: ext/drjit-core
-    # patches:
-    #   - patches/drjit-core/use-system-robin-map.patch
+    patches:
+      - patches/drjit-core/use-system-robin-map.patch
   - url: https://github.com/mitsuba-renderer/nanothread/archive/7ce0e33a24a6695438f3896636016aac6c93127a.zip
     sha256: ce3dedbf19416be0ef9839020d4236d68629adad03d524660ef15eeac016c7a2
     folder: ext/drjit-core/ext/nanothread
   - url: https://github.com/mitsuba-renderer/cmake-defaults/archive/df60a87cff5bff303412f7bec9bb246b02e57df3.zip
     sha256: 303896dcca0a54fa959d4c2315cfd35f160d3c35a38e840cb0394b48032a2bd3
     folder: ext/drjit-core/ext/nanothread/ext/cmake-defaults
-    # patches:
-    #   - patches/drjit-core/disable-march-flags.patch  # [build_platform != target_platform]
+    patches:
+      - patches/drjit-core/disable-march-flags.patch  # [build_platform != target_platform]
   - url: https://github.com/Tessil/robin-map/archive/188c45569cc2a5dd768077c193830b51d33a5020.zip
     sha256: 084d7d72f2e669842cc9db1a6a31c15376500a90a3e525f63f569fca963a01b4
     folder: ext/drjit-core/ext/robin_map
