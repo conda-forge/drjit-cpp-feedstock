@@ -1,6 +1,6 @@
-From 5153bfe327abbd8a81a0044cafd57e083d13133b Mon Sep 17 00:00:00 2001
+From dbc0395ec9bc09ffbc37df835533685939b15808 Mon Sep 17 00:00:00 2001
 From: Jeongseok Lee <jeongseok@meta.com>
-Date: Thu, 8 May 2025 16:04:08 -0700
+Date: Sat, 30 Aug 2025 16:50:30 -0700
 Subject: [PATCH 4/4] Fix scatter for raw pointer target
 
 ---
@@ -8,10 +8,10 @@ Subject: [PATCH 4/4] Fix scatter for raw pointer target
  1 file changed, 25 insertions(+), 3 deletions(-)
 
 diff --git a/include/drjit/array_router.h b/include/drjit/array_router.h
-index 6307d451..0587d94f 100644
+index ca5b2f6e..8616036c 100644
 --- a/include/drjit/array_router.h
 +++ b/include/drjit/array_router.h
-@@ -1063,8 +1063,25 @@ Target gather(Source &&source, const Index &index, const Mask &mask_ = true,
+@@ -1069,8 +1069,25 @@ Target gather(Source &&source, const Index &index, const Mask &mask_ = true,
      (void) mode;
  }
  
@@ -38,7 +38,7 @@ index 6307d451..0587d94f 100644
               const Mask &mask_ = true, ReduceMode mode = ReduceMode::Auto) {
      DRJIT_MARK_USED(mode);
      // Broadcast mask to match shape of Index
-@@ -1095,8 +1112,13 @@ void scatter(Target &target, const Value &value, const Index &index,
+@@ -1101,8 +1118,13 @@ void scatter(Target &target, const Value &value, const Index &index,
          if constexpr (depth_v<Value> == depth_v<Index>) {
              value.scatter_(target, uint32_array_t<Value>(index), mask, mode);
          } else {
@@ -55,5 +55,5 @@ index 6307d451..0587d94f 100644
      } else if constexpr (is_drjit_struct_v<Value>) {
          static_assert(is_drjit_struct_v<Target>,
 -- 
-2.49.0.windows.1
+2.44.0.windows.1
 
