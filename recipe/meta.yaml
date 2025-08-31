@@ -122,11 +122,13 @@ outputs:
         - scikit-build-core
         - typing_extensions
       run:
+        - {{ pin_compatible('python') }}
         - cuda-cudart  # [cuda_compiler_version != "None"]
         - libcxx       # [osx]
         - libgcc       # [linux]
         - libstdcxx    # [linux]
         - python
+        - python_abi * *_cp{{ CONDA_PY }}
         - typing_extensions
     test:
       imports:
