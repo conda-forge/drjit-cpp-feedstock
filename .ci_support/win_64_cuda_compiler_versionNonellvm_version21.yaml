@@ -11,6 +11,6 @@ cuda_compiler_version:
 cxx_compiler:
 - vs2022
 llvm_version:
-- '16'
+- '21'
 target_platform:
 - win-64
