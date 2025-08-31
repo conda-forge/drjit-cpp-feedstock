@@ -8,36 +8,52 @@ jobs:
     vmImage: macOS-13
   strategy:
     matrix:
-      osx_64_llvm_version17:
-        CONFIG: osx_64_llvm_version17
+      osx_64_build_modecppllvm_version17:
+        CONFIG: osx_64_build_modecppllvm_version17
         UPLOAD_PACKAGES: 'True'
-      osx_64_llvm_version18:
-        CONFIG: osx_64_llvm_version18
+      osx_64_build_modecppllvm_version18:
+        CONFIG: osx_64_build_modecppllvm_version18
         UPLOAD_PACKAGES: 'True'
-      osx_64_llvm_version19:
-        CONFIG: osx_64_llvm_version19
+      osx_64_build_modecppllvm_version19:
+        CONFIG: osx_64_build_modecppllvm_version19
         UPLOAD_PACKAGES: 'True'
-      osx_64_llvm_version20:
-        CONFIG: osx_64_llvm_version20
+      osx_64_build_modecppllvm_version20:
+        CONFIG: osx_64_build_modecppllvm_version20
         UPLOAD_PACKAGES: 'True'
-      osx_64_llvm_version21:
-        CONFIG: osx_64_llvm_version21
+      osx_64_build_modecppllvm_version21:
+        CONFIG: osx_64_build_modecppllvm_version21
         UPLOAD_PACKAGES: 'True'
-      osx_arm64_llvm_version17:
-        CONFIG: osx_arm64_llvm_version17
+      osx_64_build_modepythonllvm_version17:
+        CONFIG: osx_64_build_modepythonllvm_version17
         UPLOAD_PACKAGES: 'True'
-      osx_arm64_llvm_version18:
-        CONFIG: osx_arm64_llvm_version18
+      osx_64_build_modepythonllvm_version18:
+        CONFIG: osx_64_build_modepythonllvm_version18
         UPLOAD_PACKAGES: 'True'
-      osx_arm64_llvm_version19:
-        CONFIG: osx_arm64_llvm_version19
+      osx_64_build_modepythonllvm_version19:
+        CONFIG: osx_64_build_modepythonllvm_version19
         UPLOAD_PACKAGES: 'True'
-      osx_arm64_llvm_version20:
-        CONFIG: osx_arm64_llvm_version20
+      osx_64_build_modepythonllvm_version20:
+        CONFIG: osx_64_build_modepythonllvm_version20
         UPLOAD_PACKAGES: 'True'
-      osx_arm64_llvm_version21:
-        CONFIG: osx_arm64_llvm_version21
+      osx_64_build_modepythonllvm_version21:
+        CONFIG: osx_64_build_modepythonllvm_version21
         UPLOAD_PACKAGES: 'True'
+      osx_arm64_build_modecppllvm_version17:
+        CONFIG: osx_arm64_build_modecppllvm_version17
+        UPLOAD_PACKAGES: 'True'
+      osx_arm64_build_modecppllvm_version18:
+        CONFIG: osx_arm64_build_modecppllvm_version18
+        UPLOAD_PACKAGES: 'True'
+      osx_arm64_build_modecppllvm_version19:
+        CONFIG: osx_arm64_build_modecppllvm_version19
+        UPLOAD_PACKAGES: 'True'
+      osx_arm64_build_modecppllvm_version20:
+        CONFIG: osx_arm64_build_modecppllvm_version20
+        UPLOAD_PACKAGES: 'True'
+      osx_arm64_build_modecppllvm_version21:
+        CONFIG: osx_arm64_build_modecppllvm_version21
+        UPLOAD_PACKAGES: 'True'
+    maxParallel: 12
   timeoutInMinutes: 360
   variables: {}
 
