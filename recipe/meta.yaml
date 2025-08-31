@@ -45,6 +45,7 @@ build:
   number: 3
   skip: true  # [cuda_compiler_version == "11.8"]
   skip: true  # [cuda_compiler_version != "None" and (ppc64le or aarch64)]
+  skip: true  # [cuda_compiler_version != "None" and win]
 
 outputs:
   - name: drjit-cpp
