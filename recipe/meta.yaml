@@ -14,6 +14,7 @@ source:
       - patches/drjit/0002-Fix-install-destination-paths.patch
       - patches/drjit/0003-Make-directory-before-creating-files.patch
       - patches/drjit/0004-Fix-scatter-for-raw-pointer-target.patch
+      - patches/drjit/0005-Fix-CMake-targets-to-be-relocatable.patch
 
   # drjit-core
   - url: https://github.com/mitsuba-renderer/drjit-core/archive/9c7117e356897f814ff3d9df20d5bd383a3f73db.zip
@@ -42,7 +43,7 @@ source:
     folder: ext/nanobind/ext/robin_map
 
 build:
-  number: 3
+  number: 6
   skip: true  # [cuda_compiler_version == "11.8"]
   skip: true  # [cuda_compiler_version != "None" and (ppc64le or aarch64)]
   skip: true  # [cuda_compiler_version != "None" and win]
@@ -75,12 +76,14 @@ outputs:
       script: run_test_cpp.sh   # [unix]
       script: run_test_cpp.bat  # [win]
       commands:
-        - test -f include/drjit-core/macros.h                  # [unix]
-        - test -f $PREFIX/include/drjit/fwd.h                  # [unix]
-        - test -f $PREFIX/share/cmake/drjit/drjitConfig.cmake  # [unix]
-        - if not exist %PREFIX%\\Library\\include\\drjit-core\\macros.h exit 1           # [win]
+        # Basic file existence checks - essential for conda-build to detect tests
+        - test -f $PREFIX/include/drjit/fwd.h                          # [unix]
+        - test -f $PREFIX/include/drjit-core/macros.h                  # [unix]
+        - test -f $PREFIX/share/cmake/drjit/drjitConfig.cmake          # [unix]
         - if not exist %PREFIX%\\Library\\include\\drjit\\fwd.h exit 1                   # [win]
+        - if not exist %PREFIX%\\Library\\include\\drjit-core\\macros.h exit 1           # [win]
         - if not exist %PREFIX%\\Library\\share\\cmake\\drjit\\drjitConfig.cmake exit 1  # [win]
+        # The script provides comprehensive CMake build testing and relocatable targets test
       requires:
         - {{ compiler("c") }}
         - {{ compiler("cxx") }}
