@@ -28,7 +28,7 @@ source:
     sha256: 303896dcca0a54fa959d4c2315cfd35f160d3c35a38e840cb0394b48032a2bd3
     folder: ext/drjit-core/ext/nanothread/ext/cmake-defaults
     patches:
-      - patches/drjit-core/disable-march-flags.patch  # [build_platform != target_platform]
+      - patches/drjit-core/disable-march-flags.patch
   - url: https://github.com/Tessil/robin-map/archive/188c45569cc2a5dd768077c193830b51d33a5020.zip
     sha256: 084d7d72f2e669842cc9db1a6a31c15376500a90a3e525f63f569fca963a01b4
     folder: ext/drjit-core/ext/robin_map
@@ -42,7 +42,7 @@ source:
     folder: ext/nanobind/ext/robin_map
 
 build:
-  number: 3
+  number: 4
   skip: true  # [cuda_compiler_version == "11.8"]
   skip: true  # [cuda_compiler_version != "None" and (ppc64le or aarch64)]
   skip: true  # [cuda_compiler_version != "None" and win]
