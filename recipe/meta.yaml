@@ -1,5 +1,5 @@
 {% set name = "drjit-cpp" %}
-{% set version = "1.1.0" %}
+{% set version = "1.2.0" %}
 
 package:
   name: {{ name|lower }}
@@ -8,7 +8,7 @@ package:
 source:
   # drjit
   - url: https://github.com/mitsuba-renderer/drjit/archive/v{{ version }}.tar.gz
-    sha256: 75c249293df33b172fdb36f4cbcf22cc1f70977f21bab15193b62af59c159d59
+    sha256: 8f7ae4fd6ffc826c3430c2cfc4243bd610fe86537b22a7608cf5481d7286b86d
     patches:
       - patches/drjit/0001-Use-system-libraries.patch
       - patches/drjit/0002-Fix-install-destination-paths.patch
@@ -42,7 +42,7 @@ source:
     folder: ext/nanobind/ext/robin_map
 
 build:
-  number: 5
+  number: 0
   skip: true  # [cuda_compiler_version == "11.8"]
   skip: true  # [cuda_compiler_version != "None" and (ppc64le or aarch64)]
   skip: true  # [cuda_compiler_version != "None" and win]
@@ -50,7 +50,7 @@ build:
 outputs:
   - name: drjit-cpp
     script: build_cpp.sh  # [unix]
-    script: bld_cpp.bat   # [win]
+    script: bld_cpp.bat  # [win]
     build:
       string: cpu_h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}  # [cuda_compiler_version == "None"]
       string: cuda{{ cuda_compiler_version | replace('.', '') }}_h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}  # [cuda_compiler_version != "None"]
@@ -72,7 +72,7 @@ outputs:
       run:
         - cuda-cudart  # [cuda_compiler_version != "None"]
     test:
-      script: run_test_cpp.sh   # [unix]
+      script: run_test_cpp.sh  # [unix]
       script: run_test_cpp.bat  # [win]
       commands:
         - test -f include/drjit-core/macros.h                  # [unix]
@@ -93,7 +93,7 @@ outputs:
 
   - name: drjit
     script: build_py.sh  # [unix]
-    script: bld_py.bat   # [win]
+    script: bld_py.bat  # [win]
     build:
       skip: true  # [build_mode == "cpp"]
       skip: true  # [linux and not x86_64]
