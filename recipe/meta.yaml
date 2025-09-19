@@ -1,5 +1,5 @@
 {% set name = "drjit-cpp" %}
-{% set version = "1.1.0" %}
+{% set version = "1.2.0" %}
 
 package:
   name: {{ name|lower }}
@@ -8,7 +8,7 @@ package:
 source:
   # drjit
   - url: https://github.com/mitsuba-renderer/drjit/archive/v{{ version }}.tar.gz
-    sha256: 75c249293df33b172fdb36f4cbcf22cc1f70977f21bab15193b62af59c159d59
+    sha256: 8f7ae4fd6ffc826c3430c2cfc4243bd610fe86537b22a7608cf5481d7286b86d
     patches:
       - patches/drjit/0001-Use-system-libraries.patch
       - patches/drjit/0002-Fix-install-destination-paths.patch
@@ -16,13 +16,13 @@ source:
       - patches/drjit/0004-Fix-scatter-for-raw-pointer-target.patch
 
   # drjit-core
-  - url: https://github.com/mitsuba-renderer/drjit-core/archive/9c7117e356897f814ff3d9df20d5bd383a3f73db.zip
-    sha256: 72c5a32a136af669711e553bbe2cb5beb2d73b2be903295a7c9fc905f77ab44c
+  - url: https://github.com/mitsuba-renderer/drjit-core/archive/5cf6d3730ebc931863c89071e16979153e802d09.zip
+    sha256: 3a98e8cb4bcc9423743e5bd70adbf1e570f1be0a9dc892fbc052127d2f0417e4
     folder: ext/drjit-core
     patches:
       - patches/drjit-core/use-system-robin-map.patch
-  - url: https://github.com/mitsuba-renderer/nanothread/archive/7ce0e33a24a6695438f3896636016aac6c93127a.zip
-    sha256: ce3dedbf19416be0ef9839020d4236d68629adad03d524660ef15eeac016c7a2
+  - url: https://github.com/mitsuba-renderer/nanothread/archive/dd8d5f23a13c38d4d2a72f276f862c82b4ad35cc.zip
+    sha256: 5645170c37be593241b43c54d9be411c63b3838f52ae8bb60085cea4267d4ff7
     folder: ext/drjit-core/ext/nanothread
   - url: https://github.com/mitsuba-renderer/cmake-defaults/archive/df60a87cff5bff303412f7bec9bb246b02e57df3.zip
     sha256: 303896dcca0a54fa959d4c2315cfd35f160d3c35a38e840cb0394b48032a2bd3
@@ -34,23 +34,22 @@ source:
     folder: ext/drjit-core/ext/robin_map
 
   # nanobind
-  - url: https://github.com/wjakob/nanobind/archive/0e7aa61a75052034453cd2b906a79fe222792697.zip
-    sha256: c19b987bee20c2626cca1653d435dfc0ed97b12aa4bb317522bab3a425caad35
+  - url: https://github.com/wjakob/nanobind/archive/116e098cfa96effca2a54e32e0ce5b93abe25393.zip
+    sha256: c96d0d055b0aa6e3a18adfd04aa7e87b249d8d6633db44554c82510bd5d873f7
     folder: ext/nanobind
   - url: https://github.com/Tessil/robin-map/archive/4ec1bf19c6a96125ea22062f38c2cf5b958e448e.zip
     sha256: 78c97483a8993866074f06b25fd288cdb7b8ebd6c61c2f0c43b0e324fd56ce10
     folder: ext/nanobind/ext/robin_map
 
 build:
-  number: 5
-  skip: true  # [cuda_compiler_version == "11.8"]
+  number: 0
   skip: true  # [cuda_compiler_version != "None" and (ppc64le or aarch64)]
   skip: true  # [cuda_compiler_version != "None" and win]
 
 outputs:
   - name: drjit-cpp
     script: build_cpp.sh  # [unix]
-    script: bld_cpp.bat   # [win]
+    script: bld_cpp.bat  # [win]
     build:
       string: cpu_h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}  # [cuda_compiler_version == "None"]
       string: cuda{{ cuda_compiler_version | replace('.', '') }}_h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}  # [cuda_compiler_version != "None"]
@@ -72,7 +71,7 @@ outputs:
       run:
         - cuda-cudart  # [cuda_compiler_version != "None"]
     test:
-      script: run_test_cpp.sh   # [unix]
+      script: run_test_cpp.sh  # [unix]
       script: run_test_cpp.bat  # [win]
       commands:
         - test -f include/drjit-core/macros.h                  # [unix]
@@ -93,7 +92,7 @@ outputs:
 
   - name: drjit
     script: build_py.sh  # [unix]
-    script: bld_py.bat   # [win]
+    script: bld_py.bat  # [win]
     build:
       skip: true  # [build_mode == "cpp"]
       skip: true  # [linux and not x86_64]

@@ -1,6 +1,6 @@
-From dbc0395ec9bc09ffbc37df835533685939b15808 Mon Sep 17 00:00:00 2001
+From 4c650147722ac6695df2a262be96707dc8dc4474 Mon Sep 17 00:00:00 2001
 From: Jeongseok Lee <jeongseok@meta.com>
-Date: Sat, 30 Aug 2025 16:50:30 -0700
+Date: Fri, 19 Sep 2025 02:29:44 -0700
 Subject: [PATCH 4/4] Fix scatter for raw pointer target
 
 ---
@@ -8,7 +8,7 @@ Subject: [PATCH 4/4] Fix scatter for raw pointer target
  1 file changed, 25 insertions(+), 3 deletions(-)
 
 diff --git a/include/drjit/array_router.h b/include/drjit/array_router.h
-index ca5b2f6e..8616036c 100644
+index 3540b1b6..ad8197cb 100644
 --- a/include/drjit/array_router.h
 +++ b/include/drjit/array_router.h
 @@ -1069,8 +1069,25 @@ Target gather(Source &&source, const Index &index, const Mask &mask_ = true,
@@ -43,10 +43,10 @@ index ca5b2f6e..8616036c 100644
              value.scatter_(target, uint32_array_t<Value>(index), mask, mode);
          } else {
 -            Target::template scatter_packet_<Value::Size>(
--                target, value, uint32_array_t<Target>(index), mask, mode);
+-                target, value, uint32_array_t<value_t<Value>>(index), mask, mode);
 +            if constexpr (is_array_v<Target>) {
 +                Target::template scatter_packet_<Value::Size>(
-+                    target, value, uint32_array_t<Target>(index), mask, mode);
++                    target, value, uint32_array_t<value_t<Value>>(index), mask, mode);
 +            } else {
 +                using TargetIndex = replace_scalar_t<Value, scalar_t<Index>>;
 +                scatter(target, value, detail::broadcast_index<TargetIndex>(index), mask);
@@ -55,5 +55,5 @@ index ca5b2f6e..8616036c 100644
      } else if constexpr (is_drjit_struct_v<Value>) {
          static_assert(is_drjit_struct_v<Target>,
 -- 
-2.44.0.windows.1
+2.51.0
 

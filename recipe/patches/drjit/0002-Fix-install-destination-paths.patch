@@ -1,6 +1,6 @@
-From a13b1070a5dedbd622e17f576780999dfd13556a Mon Sep 17 00:00:00 2001
+From 77f2f596e1b4a3dcdc31ab49e1defbf7255d5eff Mon Sep 17 00:00:00 2001
 From: Jeongseok Lee <jeongseok@meta.com>
-Date: Sat, 30 Aug 2025 16:45:41 -0700
+Date: Fri, 19 Sep 2025 02:29:07 -0700
 Subject: [PATCH 2/4] Fix install destination paths
 
 ---
@@ -51,5 +51,5 @@ index 90177568..a0f0986b 100644
    if (DRJIT_ENABLE_PYTHON)
      install(TARGETS drjit-python DESTINATION drjit)
 -- 
-2.44.0.windows.1
+2.51.0
 
