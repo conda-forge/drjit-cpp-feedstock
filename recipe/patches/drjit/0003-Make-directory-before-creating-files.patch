@@ -1,6 +1,6 @@
-From 96b724167c14e0feb72faf4e6e06f85d19ae22de Mon Sep 17 00:00:00 2001
+From c0845cd8e7541bd15347459fa8d97eaf55b0f49c Mon Sep 17 00:00:00 2001
 From: Jeongseok Lee <jeongseok@meta.com>
-Date: Sat, 30 Aug 2025 16:47:37 -0700
+Date: Fri, 19 Sep 2025 02:29:22 -0700
 Subject: [PATCH 3/4] Make directory before creating files
 
 ---
@@ -8,10 +8,10 @@ Subject: [PATCH 3/4] Make directory before creating files
  1 file changed, 1 insertion(+)
 
 diff --git a/src/python/CMakeLists.txt b/src/python/CMakeLists.txt
-index e50f3105..cdb0d0a3 100644
+index 52a13082..eb7240e4 100644
 --- a/src/python/CMakeLists.txt
 +++ b/src/python/CMakeLists.txt
-@@ -295,6 +295,7 @@ if (NOT (DRJIT_SANITIZE_ASAN OR DRJIT_SANITIZE_UBSAN))
+@@ -255,6 +255,7 @@ if (NOT (DRJIT_SANITIZE_ASAN OR DRJIT_SANITIZE_UBSAN))
        ${DRJIT_PYTHON_DST_DIR}/auto/__init__.py
        ${DRJIT_PYTHON_DST_DIR}/auto/ad.py
  
@@ -20,5 +20,5 @@ index e50f3105..cdb0d0a3 100644
        ${DRJIT_PYTHON_DST_DIR}/auto/py.typed
        ${DRJIT_PYTHON_DST_DIR}/auto/__init__.py
 -- 
-2.44.0.windows.1
+2.51.0
 

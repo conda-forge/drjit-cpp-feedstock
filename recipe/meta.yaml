@@ -13,7 +13,7 @@ source:
       - patches/drjit/0001-Use-system-libraries.patch
       - patches/drjit/0002-Fix-install-destination-paths.patch
       - patches/drjit/0003-Make-directory-before-creating-files.patch
-      # - patches/drjit/0004-Fix-scatter-for-raw-pointer-target.patch
+      - patches/drjit/0004-Fix-scatter-for-raw-pointer-target.patch
 
   # drjit-core
   - url: https://github.com/mitsuba-renderer/drjit-core/archive/5cf6d3730ebc931863c89071e16979153e802d09.zip
