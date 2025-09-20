@@ -71,6 +71,7 @@ outputs:
         - llvmdev {{ llvm_version }}
       run:
         - cuda-cudart  # [cuda_compiler_version != "None"]
+        - libllvm{{ llvm_version }}
     test:
       script: run_test_cpp.sh  # [unix]
       script: run_test_cpp.bat  # [win]
@@ -127,6 +128,7 @@ outputs:
         - cuda-cudart  # [cuda_compiler_version != "None"]
         - libcxx       # [osx]
         - libgcc       # [linux]
+        - libllvm{{ llvm_version }}
         - libstdcxx    # [linux]
         - python
         - python_abi * *_cp{{ CONDA_PY }}
