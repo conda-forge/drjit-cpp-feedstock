@@ -14,6 +14,7 @@ source:
       - patches/drjit/0002-Fix-install-destination-paths.patch
       - patches/drjit/0003-Make-directory-before-creating-files.patch
       - patches/drjit/0004-Fix-scatter-for-raw-pointer-target.patch
+      - patches/drjit/0005-Import-Optional-in-__init__.py-for-Python-3.14-compa.patch  # [py>=313]
 
   # drjit-core
   - url: https://github.com/mitsuba-renderer/drjit-core/archive/5cf6d3730ebc931863c89071e16979153e802d09.zip
@@ -42,7 +43,7 @@ source:
     folder: ext/nanobind/ext/robin_map
 
 build:
-  number: 0
+  number: 1
   skip: true  # [cuda_compiler_version != "None" and (ppc64le or aarch64)]
   skip: true  # [cuda_compiler_version != "None" and win]
 
@@ -70,6 +71,7 @@ outputs:
         - llvmdev {{ llvm_version }}
       run:
         - cuda-cudart  # [cuda_compiler_version != "None"]
+        - libllvm{{ llvm_version }}
     test:
       script: run_test_cpp.sh  # [unix]
       script: run_test_cpp.bat  # [win]
@@ -126,6 +128,7 @@ outputs:
         - cuda-cudart  # [cuda_compiler_version != "None"]
         - libcxx       # [osx]
         - libgcc       # [linux]
+        - libllvm{{ llvm_version }}
         - libstdcxx    # [linux]
         - python
         - python_abi * *_cp{{ CONDA_PY }}

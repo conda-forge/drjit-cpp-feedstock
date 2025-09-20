@@ -1,0 +1,53 @@
++# --- Python 3.14 annotation compatibility shim --------------------------------
++# Python 3.14 evaluates annotations when tooling (e.g., inspect.signature)
++# asks for them. Some drjit wrappers/decorators may evaluate in non-module
++# globals, which can make names like Optional / F / Callable invisible at
++# runtime. Make these names resolvable everywhere and tell stubgen not to
++# hard-evaluate annotations.
++from typing import Optional, Callable, Any, TypeVar  # used in annotations
++import sys
++if sys.version_info >= (3, 14):
++    import typing as _typing
++    import builtins as _builtins
++    import os as _os
++
++    # Seed common typing names into builtins so evaluation in non-module
++    # contexts can still resolve them. Use setattr to keep linters happy.
++    for _name in ("Optional", "Callable", "Any"):
++        if not hasattr(_builtins, _name):
++            setattr(_builtins, _name, getattr(_typing, _name))
++
++    # Define/seed the TypeVars used by decorator annotations.
++    try:
++        F  # type: ignore[name-defined]
++    except NameError:
++        F = TypeVar("F", bound=Callable[..., Any])
++    if not hasattr(_builtins, "F"):
++        setattr(_builtins, "F", F)
++
++    # If ParamSpec is used elsewhere, seed a default P as well.
++    if hasattr(_typing, "ParamSpec") and not hasattr(_builtins, "P"):
++        setattr(_builtins, "P", _typing.ParamSpec("P"))
++
++    # When running under nanobind.stubgen, ask inspect to return forward refs
++    # instead of evaluating annotations to concrete objects (avoids NameError).
++    # Detect either by module name or argv path; allow an escape hatch env var.
++    _is_stubgen = (
++        "nanobind.stubgen" in sys.modules
++        or any(("nanobind" in str(a) and "stubgen" in str(a)) for a in sys.argv)
++        or _os.environ.get("DRJIT_STUBGEN") == "1"
++    )
++    if _is_stubgen:
++        import inspect as _inspect
++        try:
++            from annotationlib import Format as _Fmt  # Python 3.14+
++        except Exception:
++            _Fmt = None
++        _orig_signature = _inspect.signature
++        def _signature(obj, *args, **kwargs):
++            if _Fmt is not None:
++                kwargs.setdefault("annotation_format", _Fmt.FORWARDREF)
++            return _orig_signature(obj, *args, **kwargs)
++        _inspect.signature = _signature  # type: ignore[assignment]
++# -------------------------------------------------------------------------------
+ 
