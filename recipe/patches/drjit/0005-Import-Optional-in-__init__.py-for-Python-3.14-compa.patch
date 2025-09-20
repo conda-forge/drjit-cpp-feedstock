@@ -1,56 +1,53 @@
-From e3c73f69f98fb96bbcfefc32ebb5f91ceba52314 Mon Sep 17 00:00:00 2001
-From: Jeongseok Lee <jeongseok@meta.com>
-Date: Sat, 20 Sep 2025 06:10:10 -0700
-Subject: [PATCH 5/5] Import Optional in __init__.py for Python 3.14
- compatibility
-
----
- drjit/__init__.py | 33 +++++++++++++++++++++++++++++++++
- 1 file changed, 33 insertions(+)
-
-diff --git a/drjit/__init__.py b/drjit/__init__.py
-index 8bb6dc1e..ecb11256 100644
---- a/drjit/__init__.py
-+++ b/drjit/__init__.py
-@@ -1,5 +1,38 @@
- from . import detail
- 
-+# Python 3.14 evaluates annotations at access time; names must be resolvable.
-+from typing import Optional, Callable, Any, TypeVar
-+
-+# --- Begin: 3.14 annotation compatibility shim ---
++# --- Python 3.14 annotation compatibility shim --------------------------------
++# Python 3.14 evaluates annotations when tooling (e.g., inspect.signature)
++# asks for them. Some drjit wrappers/decorators may evaluate in non-module
++# globals, which can make names like Optional / F / Callable invisible at
++# runtime. Make these names resolvable everywhere and tell stubgen not to
++# hard-evaluate annotations.
++from typing import Optional, Callable, Any, TypeVar  # used in annotations
 +import sys
-+try:
-+    import builtins as _builtins
++if sys.version_info >= (3, 14):
 +    import typing as _typing
++    import builtins as _builtins
++    import os as _os
 +
-+    if sys.version_info >= (3, 14):
-+        # Make common typing names visible even when annotations are evaluated
-+        # in a non-module globals dict (as happens with annotationlib/__annotate__).
-+        for _name in ("Optional", "Callable", "Any"):
-+            if not hasattr(_builtins, _name):
-+                setattr(_builtins, _name, getattr(_typing, _name))
++    # Seed common typing names into builtins so evaluation in non-module
++    # contexts can still resolve them. Use setattr to keep linters happy.
++    for _name in ("Optional", "Callable", "Any"):
++        if not hasattr(_builtins, _name):
++            setattr(_builtins, _name, getattr(_typing, _name))
 +
-+        # Define the TypeVar(s) actually used in annotations.
-+        # Many decorators use F to mean "same callable type".
++    # Define/seed the TypeVars used by decorator annotations.
++    try:
++        F  # type: ignore[name-defined]
++    except NameError:
++        F = TypeVar("F", bound=Callable[..., Any])
++    if not hasattr(_builtins, "F"):
++        setattr(_builtins, "F", F)
++
++    # If ParamSpec is used elsewhere, seed a default P as well.
++    if hasattr(_typing, "ParamSpec") and not hasattr(_builtins, "P"):
++        setattr(_builtins, "P", _typing.ParamSpec("P"))
++
++    # When running under nanobind.stubgen, ask inspect to return forward refs
++    # instead of evaluating annotations to concrete objects (avoids NameError).
++    # Detect either by module name or argv path; allow an escape hatch env var.
++    _is_stubgen = (
++        "nanobind.stubgen" in sys.modules
++        or any(("nanobind" in str(a) and "stubgen" in str(a)) for a in sys.argv)
++        or _os.environ.get("DRJIT_STUBGEN") == "1"
++    )
++    if _is_stubgen:
++        import inspect as _inspect
 +        try:
-+            F  # noqa: F821
-+        except NameError:
-+            F = TypeVar("F", bound=Callable[..., Any])  # module-level
-+        if not hasattr(_builtins, "F"):
-+            setattr(_builtins, "F", F)  # seed for non-module eval contexts
-+
-+        # If you also use ParamSpec in annotations, seed P as well.
-+        if hasattr(_typing, "ParamSpec") and not hasattr(_builtins, "P"):
-+            setattr(_builtins, "P", _typing.ParamSpec("P"))
-+except Exception:
-+    # Best-effort only; if anything here fails, we fall back gracefully.
-+    pass
-+# --- End: 3.14 annotation compatibility shim ---    
-+
- with detail.scoped_rtld_deepbind():
-     try:
-         from . import _drjit_ext as _drjit_ext
--- 
-2.51.0
-
++            from annotationlib import Format as _Fmt  # Python 3.14+
++        except Exception:
++            _Fmt = None
++        _orig_signature = _inspect.signature
++        def _signature(obj, *args, **kwargs):
++            if _Fmt is not None:
++                kwargs.setdefault("annotation_format", _Fmt.FORWARDREF)
++            return _orig_signature(obj, *args, **kwargs)
++        _inspect.signature = _signature  # type: ignore[assignment]
++# -------------------------------------------------------------------------------
+ 
