@@ -1,0 +1,26 @@
+From 995839465bb90ae50fcfb2e3ba270d68a929f0b8 Mon Sep 17 00:00:00 2001
+From: Jeongseok Lee <jeongseok@meta.com>
+Date: Sat, 20 Sep 2025 06:10:10 -0700
+Subject: [PATCH 5/5] Import Optional in __init__.py for Python 3.14
+ compatibility
+
+---
+ drjit/__init__.py | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/drjit/__init__.py b/drjit/__init__.py
+index 8bb6dc1e..36e154cb 100644
+--- a/drjit/__init__.py
++++ b/drjit/__init__.py
+@@ -1,5 +1,8 @@
+ from . import detail
+ 
++# Python 3.14 evaluates annotations at access time; ensure names are in globals.
++from typing import Optional  # used in signatures (e.g., rtol: Optional[float])
++
+ with detail.scoped_rtld_deepbind():
+     try:
+         from . import _drjit_ext as _drjit_ext
+-- 
+2.51.0
+
