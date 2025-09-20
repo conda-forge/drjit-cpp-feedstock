@@ -51,8 +51,8 @@ outputs:
     script: build_cpp.sh  # [unix]
     script: bld_cpp.bat  # [win]
     build:
-      string: cpu_h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}  # [cuda_compiler_version == "None"]
-      string: cuda{{ cuda_compiler_version | replace('.', '') }}_h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}  # [cuda_compiler_version != "None"]
+      string: cpu_llvm{{ llvm_version }}_h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}  # [cuda_compiler_version == "None"]
+      string: cuda{{ cuda_compiler_version | replace('.', '') }}_llvm{{ llvm_version }}_h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}  # [cuda_compiler_version != "None"]
       skip: true  # [build_mode == "python"]
       run_exports:
         - {{ pin_subpackage('drjit-cpp', max_pin='x.x') }}
@@ -100,6 +100,7 @@ outputs:
       skip: true  # [osx and not x86_64]
       skip: true  # [win]
       skip: true  # [py<310]
+      skip: true  # [py>=314]
     requirements:
       build:
         - {{ compiler('c') }}
