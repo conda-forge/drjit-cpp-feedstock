@@ -1,22 +1,31 @@
-From 995839465bb90ae50fcfb2e3ba270d68a929f0b8 Mon Sep 17 00:00:00 2001
+From 16c08b00c053232804ac767979e523c1ed807c9a Mon Sep 17 00:00:00 2001
 From: Jeongseok Lee <jeongseok@meta.com>
 Date: Sat, 20 Sep 2025 06:10:10 -0700
 Subject: [PATCH 5/5] Import Optional in __init__.py for Python 3.14
  compatibility
 
 ---
- drjit/__init__.py | 3 +++
- 1 file changed, 3 insertions(+)
+ drjit/__init__.py | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
 
 diff --git a/drjit/__init__.py b/drjit/__init__.py
-index 8bb6dc1e..36e154cb 100644
+index 8bb6dc1e..fb2fcc51 100644
 --- a/drjit/__init__.py
 +++ b/drjit/__init__.py
-@@ -1,5 +1,8 @@
+@@ -1,5 +1,17 @@
  from . import detail
  
-+# Python 3.14 evaluates annotations at access time; ensure names are in globals.
 +from typing import Optional  # used in signatures (e.g., rtol: Optional[float])
++import typing as _typing
++try:
++    # Some rewritten/wrapped functions may have a non-module globals() during
++    # annotation evaluation. As a safety-net, make Optional visible via builtins.
++    import builtins as _builtins
++    if not hasattr(_builtins, "Optional"):
++        _builtins.Optional = _typing.Optional
++except Exception:
++    # Best-effort only; if this fails nothing gets worse.
++    pass
 +
  with detail.scoped_rtld_deepbind():
      try:
