@@ -42,7 +42,7 @@ source:
     folder: ext/nanobind/ext/robin_map
 
 build:
-  number: 0
+  number: 1
   skip: true  # [cuda_compiler_version != "None" and (ppc64le or aarch64)]
   skip: true  # [cuda_compiler_version != "None" and win]
 
@@ -70,6 +70,7 @@ outputs:
         - llvmdev {{ llvm_version }}
       run:
         - cuda-cudart  # [cuda_compiler_version != "None"]
+        - libllvm{{ llvm_version }}
     test:
       script: run_test_cpp.sh  # [unix]
       script: run_test_cpp.bat  # [win]
@@ -127,6 +128,7 @@ outputs:
         - libcxx       # [osx]
         - libgcc       # [linux]
         - libstdcxx    # [linux]
+        - libllvm{{ llvm_version }}
         - python
         - python_abi * *_cp{{ CONDA_PY }}
         - typing_extensions
