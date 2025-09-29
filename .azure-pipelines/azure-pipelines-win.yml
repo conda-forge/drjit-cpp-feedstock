@@ -8,9 +8,6 @@ jobs:
     vmImage: windows-2022
   strategy:
     matrix:
-      win_64_build_modecppcuda_compiler_versionNonellvm_version17:
-        CONFIG: win_64_build_modecppcuda_compiler_versionNonellvm_version17
-        UPLOAD_PACKAGES: 'True'
       win_64_build_modecppcuda_compiler_versionNonellvm_version18:
         CONFIG: win_64_build_modecppcuda_compiler_versionNonellvm_version18
         UPLOAD_PACKAGES: 'True'
