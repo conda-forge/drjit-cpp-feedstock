@@ -8,9 +8,6 @@ jobs:
     vmImage: macOS-15
   strategy:
     matrix:
-      osx_64_build_modecppllvm_version17:
-        CONFIG: osx_64_build_modecppllvm_version17
-        UPLOAD_PACKAGES: 'True'
       osx_64_build_modecppllvm_version18:
         CONFIG: osx_64_build_modecppllvm_version18
         UPLOAD_PACKAGES: 'True'
@@ -23,9 +20,6 @@ jobs:
       osx_64_build_modecppllvm_version21:
         CONFIG: osx_64_build_modecppllvm_version21
         UPLOAD_PACKAGES: 'True'
-      osx_64_build_modepythonllvm_version17:
-        CONFIG: osx_64_build_modepythonllvm_version17
-        UPLOAD_PACKAGES: 'True'
       osx_64_build_modepythonllvm_version18:
         CONFIG: osx_64_build_modepythonllvm_version18
         UPLOAD_PACKAGES: 'True'
@@ -37,9 +31,6 @@ jobs:
         UPLOAD_PACKAGES: 'True'
       osx_64_build_modepythonllvm_version21:
         CONFIG: osx_64_build_modepythonllvm_version21
-        UPLOAD_PACKAGES: 'True'
-      osx_arm64_build_modecppllvm_version17:
-        CONFIG: osx_arm64_build_modecppllvm_version17
         UPLOAD_PACKAGES: 'True'
       osx_arm64_build_modecppllvm_version18:
         CONFIG: osx_arm64_build_modecppllvm_version18
