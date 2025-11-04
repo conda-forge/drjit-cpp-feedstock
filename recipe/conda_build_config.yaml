@@ -22,6 +22,10 @@ cuda_compiler_version_min:     # [linux or win]
   - None                       # [linux or win]
   - '12.9'                     # [linux or win]
 
+cudnn:                         # [linux or win]
+  - None                       # [linux or win]
+  - '9'                        # [linux or win]
+
 c_compiler_version:            # [linux]
   - '14'                       # [linux]
   - '14'                       # [linux]
