@@ -34,8 +34,8 @@ source:
     folder: ext/drjit-core/ext/robin_map
 
   # nanobind
-  - url: https://github.com/wjakob/nanobind/archive/116e098cfa96effca2a54e32e0ce5b93abe25393.zip
-    sha256: c96d0d055b0aa6e3a18adfd04aa7e87b249d8d6633db44554c82510bd5d873f7
+  - url: https://github.com/wjakob/nanobind/archive/babec16ecdc8d49239d1b9e2991db85e2b5deac6.zip
+    sha256: 5a923ff7e018801cb36c288d7cc6028903e2df9371aa54ea80b27c594af367e5
     folder: ext/nanobind
   - url: https://github.com/Tessil/robin-map/archive/4ec1bf19c6a96125ea22062f38c2cf5b958e448e.zip
     sha256: 78c97483a8993866074f06b25fd288cdb7b8ebd6c61c2f0c43b0e324fd56ce10
