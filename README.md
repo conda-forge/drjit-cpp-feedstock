@@ -35,227 +35,227 @@ Current build status
         <table>
           <thead><tr><th>Variant</th><th>Status</th></tr></thead>
           <tbody><tr>
-              <td>linux_64_build_modecppc_compiler_version13c_stdlib_version2.17cuda_compiler_version12.6cxx_compiler_version13llvm_version18</td>
+              <td>linux_64_build_modecppc_stdlib_version2.17cuda_compiler_version12.9llvm_version18</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=22668&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_build_modecppc_compiler_version13c_stdlib_version2.17cuda_compiler_version12.6cxx_compiler_version13llvm_version18" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_build_modecppc_stdlib_version2.17cuda_compiler_version12.9llvm_version18" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_build_modecppc_compiler_version13c_stdlib_version2.17cuda_compiler_version12.6cxx_compiler_version13llvm_version19</td>
+              <td>linux_64_build_modecppc_stdlib_version2.17cuda_compiler_version12.9llvm_version19</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=22668&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_build_modecppc_compiler_version13c_stdlib_version2.17cuda_compiler_version12.6cxx_compiler_version13llvm_version19" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_build_modecppc_stdlib_version2.17cuda_compiler_version12.9llvm_version19" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_build_modecppc_compiler_version13c_stdlib_version2.17cuda_compiler_version12.6cxx_compiler_version13llvm_version20</td>
+              <td>linux_64_build_modecppc_stdlib_version2.17cuda_compiler_version12.9llvm_version20</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=22668&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_build_modecppc_compiler_version13c_stdlib_version2.17cuda_compiler_version12.6cxx_compiler_version13llvm_version20" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_build_modecppc_stdlib_version2.17cuda_compiler_version12.9llvm_version20" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_build_modecppc_compiler_version13c_stdlib_version2.17cuda_compiler_version12.6cxx_compiler_version13llvm_version21</td>
+              <td>linux_64_build_modecppc_stdlib_version2.17cuda_compiler_version12.9llvm_version21</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=22668&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_build_modecppc_compiler_version13c_stdlib_version2.17cuda_compiler_version12.6cxx_compiler_version13llvm_version21" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_build_modecppc_stdlib_version2.17cuda_compiler_version12.9llvm_version21" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_build_modecppc_compiler_version14c_stdlib_version2.17cuda_compiler_versionNonecxx_compiler_version14llvm_version18</td>
+              <td>linux_64_build_modecppc_stdlib_version2.17cuda_compiler_versionNonellvm_version18</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=22668&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_build_modecppc_compiler_version14c_stdlib_version2.17cuda_compiler_versionNonecxx_compiler_version14llvm_version18" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_build_modecppc_stdlib_version2.17cuda_compiler_versionNonellvm_version18" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_build_modecppc_compiler_version14c_stdlib_version2.17cuda_compiler_versionNonecxx_compiler_version14llvm_version19</td>
+              <td>linux_64_build_modecppc_stdlib_version2.17cuda_compiler_versionNonellvm_version19</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=22668&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_build_modecppc_compiler_version14c_stdlib_version2.17cuda_compiler_versionNonecxx_compiler_version14llvm_version19" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_build_modecppc_stdlib_version2.17cuda_compiler_versionNonellvm_version19" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_build_modecppc_compiler_version14c_stdlib_version2.17cuda_compiler_versionNonecxx_compiler_version14llvm_version20</td>
+              <td>linux_64_build_modecppc_stdlib_version2.17cuda_compiler_versionNonellvm_version20</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=22668&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_build_modecppc_compiler_version14c_stdlib_version2.17cuda_compiler_versionNonecxx_compiler_version14llvm_version20" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_build_modecppc_stdlib_version2.17cuda_compiler_versionNonellvm_version20" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_build_modecppc_compiler_version14c_stdlib_version2.17cuda_compiler_versionNonecxx_compiler_version14llvm_version21</td>
+              <td>linux_64_build_modecppc_stdlib_version2.17cuda_compiler_versionNonellvm_version21</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=22668&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_build_modecppc_compiler_version14c_stdlib_version2.17cuda_compiler_versionNonecxx_compiler_version14llvm_version21" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_build_modecppc_stdlib_version2.17cuda_compiler_versionNonellvm_version21" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_build_modecppc_compiler_version14c_stdlib_version2.28cuda_compiler_version13.0cxx_compiler_version14llvm_version18</td>
+              <td>linux_64_build_modecppc_stdlib_version2.28cuda_compiler_version13.0llvm_version18</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=22668&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_build_modecppc_compiler_version14c_stdlib_version2.28cuda_compiler_version13.0cxx_compiler_version14llvm_version18" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_build_modecppc_stdlib_version2.28cuda_compiler_version13.0llvm_version18" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_build_modecppc_compiler_version14c_stdlib_version2.28cuda_compiler_version13.0cxx_compiler_version14llvm_version19</td>
+              <td>linux_64_build_modecppc_stdlib_version2.28cuda_compiler_version13.0llvm_version19</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=22668&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_build_modecppc_compiler_version14c_stdlib_version2.28cuda_compiler_version13.0cxx_compiler_version14llvm_version19" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_build_modecppc_stdlib_version2.28cuda_compiler_version13.0llvm_version19" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_build_modecppc_compiler_version14c_stdlib_version2.28cuda_compiler_version13.0cxx_compiler_version14llvm_version20</td>
+              <td>linux_64_build_modecppc_stdlib_version2.28cuda_compiler_version13.0llvm_version20</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=22668&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_build_modecppc_compiler_version14c_stdlib_version2.28cuda_compiler_version13.0cxx_compiler_version14llvm_version20" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_build_modecppc_stdlib_version2.28cuda_compiler_version13.0llvm_version20" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_build_modecppc_compiler_version14c_stdlib_version2.28cuda_compiler_version13.0cxx_compiler_version14llvm_version21</td>
+              <td>linux_64_build_modecppc_stdlib_version2.28cuda_compiler_version13.0llvm_version21</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=22668&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_build_modecppc_compiler_version14c_stdlib_version2.28cuda_compiler_version13.0cxx_compiler_version14llvm_version21" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_build_modecppc_stdlib_version2.28cuda_compiler_version13.0llvm_version21" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_build_modepythonc_compiler_version13c_stdlib_version2.17cuda_compiler_version12.6cxx_compiler_version13llvm_version18</td>
+              <td>linux_64_build_modepythonc_stdlib_version2.17cuda_compiler_version12.9llvm_version18</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=22668&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_build_modepythonc_compiler_version13c_stdlib_version2.17cuda_compiler_version12.6cxx_compiler_version13llvm_version18" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_build_modepythonc_stdlib_version2.17cuda_compiler_version12.9llvm_version18" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_build_modepythonc_compiler_version13c_stdlib_version2.17cuda_compiler_version12.6cxx_compiler_version13llvm_version19</td>
+              <td>linux_64_build_modepythonc_stdlib_version2.17cuda_compiler_version12.9llvm_version19</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=22668&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_build_modepythonc_compiler_version13c_stdlib_version2.17cuda_compiler_version12.6cxx_compiler_version13llvm_version19" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_build_modepythonc_stdlib_version2.17cuda_compiler_version12.9llvm_version19" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_build_modepythonc_compiler_version13c_stdlib_version2.17cuda_compiler_version12.6cxx_compiler_version13llvm_version20</td>
+              <td>linux_64_build_modepythonc_stdlib_version2.17cuda_compiler_version12.9llvm_version20</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=22668&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_build_modepythonc_compiler_version13c_stdlib_version2.17cuda_compiler_version12.6cxx_compiler_version13llvm_version20" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_build_modepythonc_stdlib_version2.17cuda_compiler_version12.9llvm_version20" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_build_modepythonc_compiler_version13c_stdlib_version2.17cuda_compiler_version12.6cxx_compiler_version13llvm_version21</td>
+              <td>linux_64_build_modepythonc_stdlib_version2.17cuda_compiler_version12.9llvm_version21</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=22668&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_build_modepythonc_compiler_version13c_stdlib_version2.17cuda_compiler_version12.6cxx_compiler_version13llvm_version21" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_build_modepythonc_stdlib_version2.17cuda_compiler_version12.9llvm_version21" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_build_modepythonc_compiler_version14c_stdlib_version2.17cuda_compiler_versionNonecxx_compiler_version14llvm_version18</td>
+              <td>linux_64_build_modepythonc_stdlib_version2.17cuda_compiler_versionNonellvm_version18</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=22668&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_build_modepythonc_compiler_version14c_stdlib_version2.17cuda_compiler_versionNonecxx_compiler_version14llvm_version18" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_build_modepythonc_stdlib_version2.17cuda_compiler_versionNonellvm_version18" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_build_modepythonc_compiler_version14c_stdlib_version2.17cuda_compiler_versionNonecxx_compiler_version14llvm_version19</td>
+              <td>linux_64_build_modepythonc_stdlib_version2.17cuda_compiler_versionNonellvm_version19</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=22668&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_build_modepythonc_compiler_version14c_stdlib_version2.17cuda_compiler_versionNonecxx_compiler_version14llvm_version19" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_build_modepythonc_stdlib_version2.17cuda_compiler_versionNonellvm_version19" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_build_modepythonc_compiler_version14c_stdlib_version2.17cuda_compiler_versionNonecxx_compiler_version14llvm_version20</td>
+              <td>linux_64_build_modepythonc_stdlib_version2.17cuda_compiler_versionNonellvm_version20</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=22668&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_build_modepythonc_compiler_version14c_stdlib_version2.17cuda_compiler_versionNonecxx_compiler_version14llvm_version20" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_build_modepythonc_stdlib_version2.17cuda_compiler_versionNonellvm_version20" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_build_modepythonc_compiler_version14c_stdlib_version2.17cuda_compiler_versionNonecxx_compiler_version14llvm_version21</td>
+              <td>linux_64_build_modepythonc_stdlib_version2.17cuda_compiler_versionNonellvm_version21</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=22668&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_build_modepythonc_compiler_version14c_stdlib_version2.17cuda_compiler_versionNonecxx_compiler_version14llvm_version21" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_build_modepythonc_stdlib_version2.17cuda_compiler_versionNonellvm_version21" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_build_modepythonc_compiler_version14c_stdlib_version2.28cuda_compiler_version13.0cxx_compiler_version14llvm_version18</td>
+              <td>linux_64_build_modepythonc_stdlib_version2.28cuda_compiler_version13.0llvm_version18</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=22668&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_build_modepythonc_compiler_version14c_stdlib_version2.28cuda_compiler_version13.0cxx_compiler_version14llvm_version18" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_build_modepythonc_stdlib_version2.28cuda_compiler_version13.0llvm_version18" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_build_modepythonc_compiler_version14c_stdlib_version2.28cuda_compiler_version13.0cxx_compiler_version14llvm_version19</td>
+              <td>linux_64_build_modepythonc_stdlib_version2.28cuda_compiler_version13.0llvm_version19</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=22668&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_build_modepythonc_compiler_version14c_stdlib_version2.28cuda_compiler_version13.0cxx_compiler_version14llvm_version19" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_build_modepythonc_stdlib_version2.28cuda_compiler_version13.0llvm_version19" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_build_modepythonc_compiler_version14c_stdlib_version2.28cuda_compiler_version13.0cxx_compiler_version14llvm_version20</td>
+              <td>linux_64_build_modepythonc_stdlib_version2.28cuda_compiler_version13.0llvm_version20</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=22668&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_build_modepythonc_compiler_version14c_stdlib_version2.28cuda_compiler_version13.0cxx_compiler_version14llvm_version20" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_build_modepythonc_stdlib_version2.28cuda_compiler_version13.0llvm_version20" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_build_modepythonc_compiler_version14c_stdlib_version2.28cuda_compiler_version13.0cxx_compiler_version14llvm_version21</td>
+              <td>linux_64_build_modepythonc_stdlib_version2.28cuda_compiler_version13.0llvm_version21</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=22668&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_build_modepythonc_compiler_version14c_stdlib_version2.28cuda_compiler_version13.0cxx_compiler_version14llvm_version21" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_build_modepythonc_stdlib_version2.28cuda_compiler_version13.0llvm_version21" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_build_modecppc_compiler_version14c_stdlib_version2.17cuda_compiler_versionNonecxx_compiler_version14llvm_version18</td>
+              <td>linux_aarch64_build_modecppc_stdlib_version2.17cuda_compiler_versionNonellvm_version18</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=22668&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_build_modecppc_compiler_version14c_stdlib_version2.17cuda_compiler_versionNonecxx_compiler_version14llvm_version18" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_build_modecppc_stdlib_version2.17cuda_compiler_versionNonellvm_version18" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_build_modecppc_compiler_version14c_stdlib_version2.17cuda_compiler_versionNonecxx_compiler_version14llvm_version19</td>
+              <td>linux_aarch64_build_modecppc_stdlib_version2.17cuda_compiler_versionNonellvm_version19</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=22668&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_build_modecppc_compiler_version14c_stdlib_version2.17cuda_compiler_versionNonecxx_compiler_version14llvm_version19" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_build_modecppc_stdlib_version2.17cuda_compiler_versionNonellvm_version19" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_build_modecppc_compiler_version14c_stdlib_version2.17cuda_compiler_versionNonecxx_compiler_version14llvm_version20</td>
+              <td>linux_aarch64_build_modecppc_stdlib_version2.17cuda_compiler_versionNonellvm_version20</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=22668&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_build_modecppc_compiler_version14c_stdlib_version2.17cuda_compiler_versionNonecxx_compiler_version14llvm_version20" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_build_modecppc_stdlib_version2.17cuda_compiler_versionNonellvm_version20" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_build_modecppc_compiler_version14c_stdlib_version2.17cuda_compiler_versionNonecxx_compiler_version14llvm_version21</td>
+              <td>linux_aarch64_build_modecppc_stdlib_version2.17cuda_compiler_versionNonellvm_version21</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=22668&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_build_modecppc_compiler_version14c_stdlib_version2.17cuda_compiler_versionNonecxx_compiler_version14llvm_version21" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_build_modecppc_stdlib_version2.17cuda_compiler_versionNonellvm_version21" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_build_modecppllvm_version18</td>
+              <td>linux_ppc64le_build_modecppcuda_compiler_versionNonellvm_version18</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=22668&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_build_modecppllvm_version18" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_build_modecppcuda_compiler_versionNonellvm_version18" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_build_modecppllvm_version19</td>
+              <td>linux_ppc64le_build_modecppcuda_compiler_versionNonellvm_version19</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=22668&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_build_modecppllvm_version19" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_build_modecppcuda_compiler_versionNonellvm_version19" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_build_modecppllvm_version20</td>
+              <td>linux_ppc64le_build_modecppcuda_compiler_versionNonellvm_version20</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=22668&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_build_modecppllvm_version20" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_build_modecppcuda_compiler_versionNonellvm_version20" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_build_modecppllvm_version21</td>
+              <td>linux_ppc64le_build_modecppcuda_compiler_versionNonellvm_version21</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=22668&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_build_modecppllvm_version21" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_build_modecppcuda_compiler_versionNonellvm_version21" alt="variant">
                 </a>
               </td>
             </tr><tr>
