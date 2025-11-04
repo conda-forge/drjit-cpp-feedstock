@@ -24,22 +24,6 @@ jobs:
       : CONFIG: linux_64_build_modecppc_compiler_version13c_stdlib_version2.17cuda_compiler_version12.6cxx_compiler_version13llvm_version21
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-      ? linux_64_build_modecppc_compiler_version14c_stdlib_version2.17cuda_compiler_version12.9cxx_compiler_version14llvm_version18
-      : CONFIG: linux_64_build_modecppc_compiler_version14c_stdlib_version2.17cuda_compiler_version12.9cxx_compiler_version14llvm_version18
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-      ? linux_64_build_modecppc_compiler_version14c_stdlib_version2.17cuda_compiler_version12.9cxx_compiler_version14llvm_version19
-      : CONFIG: linux_64_build_modecppc_compiler_version14c_stdlib_version2.17cuda_compiler_version12.9cxx_compiler_version14llvm_version19
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-      ? linux_64_build_modecppc_compiler_version14c_stdlib_version2.17cuda_compiler_version12.9cxx_compiler_version14llvm_version20
-      : CONFIG: linux_64_build_modecppc_compiler_version14c_stdlib_version2.17cuda_compiler_version12.9cxx_compiler_version14llvm_version20
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-      ? linux_64_build_modecppc_compiler_version14c_stdlib_version2.17cuda_compiler_version12.9cxx_compiler_version14llvm_version21
-      : CONFIG: linux_64_build_modecppc_compiler_version14c_stdlib_version2.17cuda_compiler_version12.9cxx_compiler_version14llvm_version21
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
       ? linux_64_build_modecppc_compiler_version14c_stdlib_version2.17cuda_compiler_versionNonecxx_compiler_version14llvm_version18
       : CONFIG: linux_64_build_modecppc_compiler_version14c_stdlib_version2.17cuda_compiler_versionNonecxx_compiler_version14llvm_version18
         UPLOAD_PACKAGES: 'True'
@@ -86,22 +70,6 @@ jobs:
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
       ? linux_64_build_modepythonc_compiler_version13c_stdlib_version2.17cuda_compiler_version12.6cxx_compiler_version13llvm_version21
       : CONFIG: linux_64_build_modepythonc_compiler_version13c_stdlib_version2.17cuda_compiler_version12.6cxx_compiler_version13llvm_version21
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-      ? linux_64_build_modepythonc_compiler_version14c_stdlib_version2.17cuda_compiler_version12.9cxx_compiler_version14llvm_version18
-      : CONFIG: linux_64_build_modepythonc_compiler_version14c_stdlib_version2.17cuda_compiler_version12.9cxx_compiler_version14llvm_version18
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-      ? linux_64_build_modepythonc_compiler_version14c_stdlib_version2.17cuda_compiler_version12.9cxx_compiler_version14llvm_version19
-      : CONFIG: linux_64_build_modepythonc_compiler_version14c_stdlib_version2.17cuda_compiler_version12.9cxx_compiler_version14llvm_version19
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-      ? linux_64_build_modepythonc_compiler_version14c_stdlib_version2.17cuda_compiler_version12.9cxx_compiler_version14llvm_version20
-      : CONFIG: linux_64_build_modepythonc_compiler_version14c_stdlib_version2.17cuda_compiler_version12.9cxx_compiler_version14llvm_version20
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-      ? linux_64_build_modepythonc_compiler_version14c_stdlib_version2.17cuda_compiler_version12.9cxx_compiler_version14llvm_version21
-      : CONFIG: linux_64_build_modepythonc_compiler_version14c_stdlib_version2.17cuda_compiler_version12.9cxx_compiler_version14llvm_version21
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
       ? linux_64_build_modepythonc_compiler_version14c_stdlib_version2.17cuda_compiler_versionNonecxx_compiler_version14llvm_version18
@@ -152,23 +120,22 @@ jobs:
       : CONFIG: linux_aarch64_build_modecppc_compiler_version14c_stdlib_version2.17cuda_compiler_versionNonecxx_compiler_version14llvm_version21
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-      linux_ppc64le_build_modecppc_compiler_version14cuda_compiler_versionNonecxx_compiler_version14llvm_version18:
-        CONFIG: linux_ppc64le_build_modecppc_compiler_version14cuda_compiler_versionNonecxx_compiler_version14llvm_version18
+      linux_ppc64le_build_modecppllvm_version18:
+        CONFIG: linux_ppc64le_build_modecppllvm_version18
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-      linux_ppc64le_build_modecppc_compiler_version14cuda_compiler_versionNonecxx_compiler_version14llvm_version19:
-        CONFIG: linux_ppc64le_build_modecppc_compiler_version14cuda_compiler_versionNonecxx_compiler_version14llvm_version19
+      linux_ppc64le_build_modecppllvm_version19:
+        CONFIG: linux_ppc64le_build_modecppllvm_version19
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-      linux_ppc64le_build_modecppc_compiler_version14cuda_compiler_versionNonecxx_compiler_version14llvm_version20:
-        CONFIG: linux_ppc64le_build_modecppc_compiler_version14cuda_compiler_versionNonecxx_compiler_version14llvm_version20
+      linux_ppc64le_build_modecppllvm_version20:
+        CONFIG: linux_ppc64le_build_modecppllvm_version20
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-      linux_ppc64le_build_modecppc_compiler_version14cuda_compiler_versionNonecxx_compiler_version14llvm_version21:
-        CONFIG: linux_ppc64le_build_modecppc_compiler_version14cuda_compiler_versionNonecxx_compiler_version14llvm_version21
+      linux_ppc64le_build_modecppllvm_version21:
+        CONFIG: linux_ppc64le_build_modecppllvm_version21
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-    maxParallel: 36
   timeoutInMinutes: 360
   variables: {}
 
