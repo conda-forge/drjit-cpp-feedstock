@@ -1,0 +1,23 @@
+From: Jeongseok Lee <jeongseok@meta.com>
+Subject: [PATCH] Add option to disable stubs
+
+---
+ src/python/CMakeLists.txt | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/src/python/CMakeLists.txt b/src/python/CMakeLists.txt
+index 1234567..89abcdef 100644
+--- a/src/python/CMakeLists.txt
++++ b/src/python/CMakeLists.txt
+@@ -189,7 +189,9 @@ set(STUB_ARGS
+ # The sanitizers require preloading shared libraries into Python, and that
+ # doesn't play well with stub generation. Disable stubs if sanitizers are
+ # enabled.
+
+-if (NOT (DRJIT_SANITIZE_ASAN OR DRJIT_SANITIZE_UBSAN))
++option(DRJIT_ENABLE_STUBS "Generate Python stubs" ON)
++
++if (DRJIT_ENABLE_STUBS AND NOT (DRJIT_SANITIZE_ASAN OR DRJIT_SANITIZE_UBSAN))
+   # Expected set of outputs and marker files for all stubs
+
+   set(DRJIT_STUBS
