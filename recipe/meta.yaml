@@ -42,7 +42,7 @@ source:
     folder: ext/nanobind/ext/robin_map
 
 build:
-  number: 2
+  number: 3
   skip: true  # [cuda_compiler_version != "None" and (ppc64le or aarch64)]
   skip: true  # [cuda_compiler_version != "None" and win]
 
@@ -97,7 +97,6 @@ outputs:
     build:
       skip: true  # [build_mode == "cpp"]
       skip: true  # [linux and not x86_64]
-      skip: true  # [osx and not x86_64]
       skip: true  # [win]
       skip: true  # [py<310]
       skip: true  # [py>=314]
