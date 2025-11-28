@@ -21,18 +21,25 @@ index ce5c00d..1576df8 100644
  option(DRJIT_STABLE_ABI       "Build Python extension using the CPython stable ABI? (Only relevant when using scikit-build)" OFF)
  mark_as_advanced(DRJIT_STABLE_ABI)
 
-@@ -214,45 +216,67 @@ if (DRJIT_MASTER_PROJECT)
-       ${CMAKE_CURRENT_BINARY_DIR}/drjit/ast.pyi
+@@ -208,45 +210,67 @@ if (DRJIT_MASTER_PROJECT)
+     install(TARGETS drjit-python DESTINATION drjit)
+     install(FILES
+       ${CMAKE_CURRENT_BINARY_DIR}/drjit/config.py
+-      ${CMAKE_CURRENT_BINARY_DIR}/drjit/__init__.pyi
+       ${CMAKE_CURRENT_BINARY_DIR}/drjit/__init__.py
+-      ${CMAKE_CURRENT_BINARY_DIR}/drjit/interop.pyi
+       ${CMAKE_CURRENT_BINARY_DIR}/drjit/interop.py
+-      ${CMAKE_CURRENT_BINARY_DIR}/drjit/ast.pyi
        ${CMAKE_CURRENT_BINARY_DIR}/drjit/ast.py
        ${CMAKE_CURRENT_BINARY_DIR}/drjit/dda.py
--      ${CMAKE_CURRENT_BINARY_DIR}/drjit/nn.py
+       ${CMAKE_CURRENT_BINARY_DIR}/drjit/nn.py
 -      ${CMAKE_CURRENT_BINARY_DIR}/drjit/detail.pyi
--      ${CMAKE_CURRENT_BINARY_DIR}/drjit/detail.py
--      ${CMAKE_CURRENT_BINARY_DIR}/drjit/opt.py
--      ${CMAKE_CURRENT_BINARY_DIR}/drjit/random.py
+       ${CMAKE_CURRENT_BINARY_DIR}/drjit/detail.py
+       ${CMAKE_CURRENT_BINARY_DIR}/drjit/opt.py
+       ${CMAKE_CURRENT_BINARY_DIR}/drjit/random.py
 -      ${CMAKE_CURRENT_BINARY_DIR}/drjit/py.typed
--      DESTINATION drjit
--    )
+       DESTINATION drjit
+     )
 +    if (DRJIT_ENABLE_STUBS)
 +      install(FILES
 +        ${CMAKE_CURRENT_BINARY_DIR}/drjit/__init__.pyi
@@ -117,8 +124,6 @@ index 52a1308..55169bc 100644
 
 -if (NOT (DRJIT_SANITIZE_ASAN OR DRJIT_SANITIZE_UBSAN))
 +if (DRJIT_ENABLE_STUBS AND NOT (DRJIT_SANITIZE_ASAN OR DRJIT_SANITIZE_UBSAN))
-   # Expected set of outputs and marker files for all stubs
+    # Expected set of outputs and marker files for all stubs
 
-   set(DRJIT_STUBS
---
-2.51.1
+    set(DRJIT_STUBS
