@@ -87,19 +87,21 @@ index ce5c00d..b4469b6 100644
 +        )
 +      endif()
      endif()
-     install(FILES
+-    install(FILES
 -      ${CMAKE_CURRENT_BINARY_DIR}/drjit/auto/py.typed
 -      ${CMAKE_CURRENT_BINARY_DIR}/drjit/auto/__init__.pyi
-       ${CMAKE_CURRENT_BINARY_DIR}/drjit/auto/__init__.py
+-      ${CMAKE_CURRENT_BINARY_DIR}/drjit/auto/__init__.py
 -      ${CMAKE_CURRENT_BINARY_DIR}/drjit/auto/ad.pyi
-       ${CMAKE_CURRENT_BINARY_DIR}/drjit/auto/ad.py
-       DESTINATION drjit/auto
-     )
+-      ${CMAKE_CURRENT_BINARY_DIR}/drjit/auto/ad.py
+-      DESTINATION drjit/auto
+-    )
 +    if (DRJIT_ENABLE_STUBS)
 +      install(FILES
 +        ${CMAKE_CURRENT_BINARY_DIR}/drjit/auto/py.typed
 +        ${CMAKE_CURRENT_BINARY_DIR}/drjit/auto/__init__.pyi
++        ${CMAKE_CURRENT_BINARY_DIR}/drjit/auto/__init__.py
 +        ${CMAKE_CURRENT_BINARY_DIR}/drjit/auto/ad.pyi
++        ${CMAKE_CURRENT_BINARY_DIR}/drjit/auto/ad.py
 +        DESTINATION drjit/auto
 +      )
 +    endif()
@@ -118,8 +120,8 @@ index 52a1308..b43bd1a 100644
 +option(DRJIT_ENABLE_STUBS "Generate Python stubs" ON)
 +
 +if (DRJIT_ENABLE_STUBS AND NOT (DRJIT_SANITIZE_ASAN OR DRJIT_SANITIZE_UBSAN))
-   # Expected set of outputs and marker files for all stubs
+    # Expected set of outputs and marker files for all stubs
 
-   set(DRJIT_STUBS
+    set(DRJIT_STUBS
 --
 2.51.1
