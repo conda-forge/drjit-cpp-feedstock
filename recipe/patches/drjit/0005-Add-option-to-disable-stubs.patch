@@ -1,37 +1,38 @@
-From 248932935442824a12acbd7084a108e9aae71452 Mon Sep 17 00:00:00 2001
+From 3a3b6546202627bd0149ae31900c8da049577a3b Mon Sep 17 00:00:00 2001
 From: Jeongseok Lee <jeongseok@meta.com>
-Date: Fri, 28 Nov 2025 08:28:54 -0800
+Date: Fri, 28 Nov 2025 09:40:32 -0800
 Subject: [PATCH] Add option to disable stubs
 
 ---
- CMakeLists.txt            | 56 ++++++++++++++++++++++++++++-----------
- src/python/CMakeLists.txt |  4 ++-
- 2 files changed, 44 insertions(+), 16 deletions(-)
+ CMakeLists.txt            | 60 +++++++++++++++++++++++++++------------
+ src/python/CMakeLists.txt |  2 +-
+ 2 files changed, 43 insertions(+), 19 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index ce5c00d..b4469b6 100644
+index ce5c00d..1576df8 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -207,52 +207,78 @@ if (DRJIT_MASTER_PROJECT)
-     install(TARGETS drjit-python DESTINATION drjit)
-     install(FILES
-       ${CMAKE_CURRENT_BINARY_DIR}/drjit/config.py
--      ${CMAKE_CURRENT_BINARY_DIR}/drjit/__init__.pyi
-       ${CMAKE_CURRENT_BINARY_DIR}/drjit/__init__.py
--      ${CMAKE_CURRENT_BINARY_DIR}/drjit/interop.pyi
-       ${CMAKE_CURRENT_BINARY_DIR}/drjit/interop.py
--      ${CMAKE_CURRENT_BINARY_DIR}/drjit/ast.pyi
+@@ -26,6 +26,8 @@ option(DRJIT_ENABLE_PYTHON        "Build Python extension library?" ON)
+ option(DRJIT_ENABLE_TESTS         "Build Dr.Jit test suite? (Warning, this takes *very* long to compile)" OFF)
+ option(DRJIT_ENABLE_LEAK_WARNINGS "Emit DrJit and nanobind leak warnings? By default, leak warnings are disabled automatically when building PyPi wheels." ${DRJIT_ENABLE_LEAK_WARNINGS_DEFAULT})
+
++option(DRJIT_ENABLE_STUBS "Generate Python stubs" ON)
++
+ option(DRJIT_STABLE_ABI       "Build Python extension using the CPython stable ABI? (Only relevant when using scikit-build)" OFF)
+ mark_as_advanced(DRJIT_STABLE_ABI)
+
+@@ -214,45 +216,67 @@ if (DRJIT_MASTER_PROJECT)
+       ${CMAKE_CURRENT_BINARY_DIR}/drjit/ast.pyi
        ${CMAKE_CURRENT_BINARY_DIR}/drjit/ast.py
        ${CMAKE_CURRENT_BINARY_DIR}/drjit/dda.py
-       ${CMAKE_CURRENT_BINARY_DIR}/drjit/nn.py
+-      ${CMAKE_CURRENT_BINARY_DIR}/drjit/nn.py
 -      ${CMAKE_CURRENT_BINARY_DIR}/drjit/detail.pyi
-       ${CMAKE_CURRENT_BINARY_DIR}/drjit/detail.py
-       ${CMAKE_CURRENT_BINARY_DIR}/drjit/opt.py
-       ${CMAKE_CURRENT_BINARY_DIR}/drjit/random.py
+-      ${CMAKE_CURRENT_BINARY_DIR}/drjit/detail.py
+-      ${CMAKE_CURRENT_BINARY_DIR}/drjit/opt.py
+-      ${CMAKE_CURRENT_BINARY_DIR}/drjit/random.py
 -      ${CMAKE_CURRENT_BINARY_DIR}/drjit/py.typed
-       DESTINATION drjit
-     )
-+
+-      DESTINATION drjit
+-    )
 +    if (DRJIT_ENABLE_STUBS)
 +      install(FILES
 +        ${CMAKE_CURRENT_BINARY_DIR}/drjit/__init__.pyi
@@ -87,21 +88,19 @@ index ce5c00d..b4469b6 100644
 +        )
 +      endif()
      endif()
--    install(FILES
+     install(FILES
 -      ${CMAKE_CURRENT_BINARY_DIR}/drjit/auto/py.typed
 -      ${CMAKE_CURRENT_BINARY_DIR}/drjit/auto/__init__.pyi
--      ${CMAKE_CURRENT_BINARY_DIR}/drjit/auto/__init__.py
+       ${CMAKE_CURRENT_BINARY_DIR}/drjit/auto/__init__.py
 -      ${CMAKE_CURRENT_BINARY_DIR}/drjit/auto/ad.pyi
--      ${CMAKE_CURRENT_BINARY_DIR}/drjit/auto/ad.py
--      DESTINATION drjit/auto
--    )
+       ${CMAKE_CURRENT_BINARY_DIR}/drjit/auto/ad.py
+       DESTINATION drjit/auto
+     )
 +    if (DRJIT_ENABLE_STUBS)
 +      install(FILES
 +        ${CMAKE_CURRENT_BINARY_DIR}/drjit/auto/py.typed
 +        ${CMAKE_CURRENT_BINARY_DIR}/drjit/auto/__init__.pyi
-+        ${CMAKE_CURRENT_BINARY_DIR}/drjit/auto/__init__.py
 +        ${CMAKE_CURRENT_BINARY_DIR}/drjit/auto/ad.pyi
-+        ${CMAKE_CURRENT_BINARY_DIR}/drjit/auto/ad.py
 +        DESTINATION drjit/auto
 +      )
 +    endif()
@@ -109,19 +108,17 @@ index ce5c00d..b4469b6 100644
 
    if (DRJIT_ENABLE_JIT)
 diff --git a/src/python/CMakeLists.txt b/src/python/CMakeLists.txt
-index 52a1308..b43bd1a 100644
+index 52a1308..55169bc 100644
 --- a/src/python/CMakeLists.txt
 +++ b/src/python/CMakeLists.txt
-@@ -189,7 +189,9 @@ set(STUB_ARGS
+@@ -189,7 +189,7 @@ set(STUB_ARGS
  # doesn't play well with stub generation. Disable stubs if sanitizers are
  # enabled.
 
 -if (NOT (DRJIT_SANITIZE_ASAN OR DRJIT_SANITIZE_UBSAN))
-+option(DRJIT_ENABLE_STUBS "Generate Python stubs" ON)
-+
 +if (DRJIT_ENABLE_STUBS AND NOT (DRJIT_SANITIZE_ASAN OR DRJIT_SANITIZE_UBSAN))
-    # Expected set of outputs and marker files for all stubs
+   # Expected set of outputs and marker files for all stubs
 
-    set(DRJIT_STUBS
+   set(DRJIT_STUBS
 --
 2.51.1
