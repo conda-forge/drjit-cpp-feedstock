@@ -109,5 +109,3 @@ index 12345678..9abcdef0 100644
 +endif()
 
  target_compile_definitions(drjit-python PRIVATE -DDRJIT_PYTHON_BUILD)
---
-2.51.0
