@@ -1,27 +1,15 @@
-From 3a3b6546202627bd0149ae31900c8da049577a3b Mon Sep 17 00:00:00 2001
-From: Jeongseok Lee <jeongseok@meta.com>
-Date: Fri, 28 Nov 2025 09:40:32 -0800
-Subject: [PATCH] Add option to disable stubs
-
----
- CMakeLists.txt            | 60 +++++++++++++++++++++++++++------------
- src/python/CMakeLists.txt |  2 +-
- 2 files changed, 43 insertions(+), 19 deletions(-)
-
-diff --git a/CMakeLists.txt b/CMakeLists.txt
-index ce5c00d..1576df8 100644
---- a/CMakeLists.txt
-+++ b/CMakeLists.txt
-@@ -26,6 +26,8 @@ option(DRJIT_ENABLE_PYTHON        "Build Python extension library?" ON)
+--- CMakeLists.txt.orig	2025-11-28 11:13:20.026254684 -0800
++++ CMakeLists.txt.new	2025-11-28 16:53:20.651000425 -0800
+@@ -26,6 +26,8 @@
  option(DRJIT_ENABLE_TESTS         "Build Dr.Jit test suite? (Warning, this takes *very* long to compile)" OFF)
  option(DRJIT_ENABLE_LEAK_WARNINGS "Emit DrJit and nanobind leak warnings? By default, leak warnings are disabled automatically when building PyPi wheels." ${DRJIT_ENABLE_LEAK_WARNINGS_DEFAULT})
-
+ 
 +option(DRJIT_ENABLE_STUBS "Generate Python stubs" OFF)
 +
  option(DRJIT_STABLE_ABI       "Build Python extension using the CPython stable ABI? (Only relevant when using scikit-build)" OFF)
  mark_as_advanced(DRJIT_STABLE_ABI)
-
-@@ -208,45 +210,67 @@ if (DRJIT_MASTER_PROJECT)
+ 
+@@ -207,52 +209,77 @@
      install(TARGETS drjit-python DESTINATION drjit)
      install(FILES
        ${CMAKE_CURRENT_BINARY_DIR}/drjit/config.py
@@ -112,18 +100,5 @@ index ce5c00d..1576df8 100644
 +      )
 +    endif()
    endif()
-
+ 
    if (DRJIT_ENABLE_JIT)
-diff --git a/src/python/CMakeLists.txt b/src/python/CMakeLists.txt
-index 52a1308..55169bc 100644
---- a/src/python/CMakeLists.txt
-+++ b/src/python/CMakeLists.txt
-@@ -189,7 +189,7 @@ set(STUB_ARGS
- # doesn't play well with stub generation. Disable stubs if sanitizers are
- # enabled.
-
--if (NOT (DRJIT_SANITIZE_ASAN OR DRJIT_SANITIZE_UBSAN))
-+if (DRJIT_ENABLE_STUBS AND NOT (DRJIT_SANITIZE_ASAN OR DRJIT_SANITIZE_UBSAN))
-    # Expected set of outputs and marker files for all stubs
-
-    set(DRJIT_STUBS
