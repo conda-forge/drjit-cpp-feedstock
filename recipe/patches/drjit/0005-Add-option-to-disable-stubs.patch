@@ -102,3 +102,18 @@
    endif()
 
    if (DRJIT_ENABLE_JIT)
+--- a/src/python/CMakeLists.txt
++++ b/src/python/CMakeLists.txt
+@@ -180,6 +180,7 @@ endif()
+
+ # ------------------- Stub generation -------------------
+
++if (DRJIT_ENABLE_STUBS)
+ set(STUB_ARGS
+   PYTHON_PATH ${DRJIT_PYTHON_DST_DIR}/..
+   PATTERN_FILE ${DRJIT_PYTHON_SRC_DIR}/stubs.pat
+@@ -271,3 +272,4 @@ if (NOT (DRJIT_SANITIZE_ASAN OR DRJIT_SANITIZE_UBSAN))
+     ${DRJIT_PYTHON_DST_DIR}/auto/py.typed
+   )
+ endif()
++endif()
