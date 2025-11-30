@@ -343,6 +343,34 @@ Current build status
                 </a>
               </td>
             </tr><tr>
+              <td>osx_arm64_build_modepythonllvm_version18</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=22668&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_build_modepythonllvm_version18" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx_arm64_build_modepythonllvm_version19</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=22668&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_build_modepythonllvm_version19" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx_arm64_build_modepythonllvm_version20</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=22668&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_build_modepythonllvm_version20" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx_arm64_build_modepythonllvm_version21</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=22668&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_build_modepythonllvm_version21" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
               <td>win_64_build_modecppcuda_compiler_versionNonellvm_version18</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=22668&branchName=main">

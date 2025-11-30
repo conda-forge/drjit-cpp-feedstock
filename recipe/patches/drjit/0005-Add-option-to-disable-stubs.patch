@@ -1,0 +1,119 @@
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -26,6 +26,8 @@
+ option(DRJIT_ENABLE_TESTS         "Build Dr.Jit test suite? (Warning, this takes *very* long to compile)" OFF)
+ option(DRJIT_ENABLE_LEAK_WARNINGS "Emit DrJit and nanobind leak warnings? By default, leak warnings are disabled automatically when building PyPi wheels." ${DRJIT_ENABLE_LEAK_WARNINGS_DEFAULT})
+
++option(DRJIT_ENABLE_STUBS "Generate Python stubs" OFF)
++
+ option(DRJIT_STABLE_ABI       "Build Python extension using the CPython stable ABI? (Only relevant when using scikit-build)" OFF)
+ mark_as_advanced(DRJIT_STABLE_ABI)
+
+@@ -207,52 +209,77 @@
+     install(TARGETS drjit-python DESTINATION drjit)
+     install(FILES
+       ${CMAKE_CURRENT_BINARY_DIR}/drjit/config.py
+-      ${CMAKE_CURRENT_BINARY_DIR}/drjit/__init__.pyi
+       ${CMAKE_CURRENT_BINARY_DIR}/drjit/__init__.py
+-      ${CMAKE_CURRENT_BINARY_DIR}/drjit/interop.pyi
+       ${CMAKE_CURRENT_BINARY_DIR}/drjit/interop.py
+-      ${CMAKE_CURRENT_BINARY_DIR}/drjit/ast.pyi
+       ${CMAKE_CURRENT_BINARY_DIR}/drjit/ast.py
+       ${CMAKE_CURRENT_BINARY_DIR}/drjit/dda.py
+       ${CMAKE_CURRENT_BINARY_DIR}/drjit/nn.py
+-      ${CMAKE_CURRENT_BINARY_DIR}/drjit/detail.pyi
+       ${CMAKE_CURRENT_BINARY_DIR}/drjit/detail.py
+       ${CMAKE_CURRENT_BINARY_DIR}/drjit/opt.py
+       ${CMAKE_CURRENT_BINARY_DIR}/drjit/random.py
+-      ${CMAKE_CURRENT_BINARY_DIR}/drjit/py.typed
+       DESTINATION drjit
+     )
++    if (DRJIT_ENABLE_STUBS)
++      install(FILES
++        ${CMAKE_CURRENT_BINARY_DIR}/drjit/__init__.pyi
++        ${CMAKE_CURRENT_BINARY_DIR}/drjit/interop.pyi
++        ${CMAKE_CURRENT_BINARY_DIR}/drjit/ast.pyi
++        ${CMAKE_CURRENT_BINARY_DIR}/drjit/detail.pyi
++        ${CMAKE_CURRENT_BINARY_DIR}/drjit/py.typed
++        DESTINATION drjit
++      )
++    endif()
+     install(FILES
+-      ${CMAKE_CURRENT_BINARY_DIR}/drjit/scalar/__init__.pyi
+       ${CMAKE_CURRENT_BINARY_DIR}/drjit/scalar/__init__.py
+       DESTINATION drjit/scalar
+     )
++    if (DRJIT_ENABLE_STUBS)
++      install(FILES
++        ${CMAKE_CURRENT_BINARY_DIR}/drjit/scalar/__init__.pyi
++        DESTINATION drjit/scalar
++      )
++    endif()
+     install(FILES
+-      ${CMAKE_CURRENT_BINARY_DIR}/drjit/llvm/py.typed
+-      ${CMAKE_CURRENT_BINARY_DIR}/drjit/llvm/__init__.pyi
+       ${CMAKE_CURRENT_BINARY_DIR}/drjit/llvm/__init__.py
+-      ${CMAKE_CURRENT_BINARY_DIR}/drjit/llvm/ad.pyi
+       ${CMAKE_CURRENT_BINARY_DIR}/drjit/llvm/ad.py
+       DESTINATION drjit/llvm
+     )
++    if (DRJIT_ENABLE_STUBS)
++      install(FILES
++        ${CMAKE_CURRENT_BINARY_DIR}/drjit/llvm/py.typed
++        ${CMAKE_CURRENT_BINARY_DIR}/drjit/llvm/__init__.pyi
++        ${CMAKE_CURRENT_BINARY_DIR}/drjit/llvm/ad.pyi
++        DESTINATION drjit/llvm
++      )
++    endif()
+     if (DRJIT_ENABLE_CUDA)
+       install(FILES
+-        ${CMAKE_CURRENT_BINARY_DIR}/drjit/cuda/py.typed
+-        ${CMAKE_CURRENT_BINARY_DIR}/drjit/cuda/__init__.pyi
+         ${CMAKE_CURRENT_BINARY_DIR}/drjit/cuda/__init__.py
+-        ${CMAKE_CURRENT_BINARY_DIR}/drjit/cuda/ad.pyi
+         ${CMAKE_CURRENT_BINARY_DIR}/drjit/cuda/ad.py
+         DESTINATION drjit/cuda
+       )
++      if (DRJIT_ENABLE_STUBS)
++        install(FILES
++          ${CMAKE_CURRENT_BINARY_DIR}/drjit/cuda/py.typed
++          ${CMAKE_CURRENT_BINARY_DIR}/drjit/cuda/__init__.pyi
++          ${CMAKE_CURRENT_BINARY_DIR}/drjit/cuda/ad.pyi
++          DESTINATION drjit/cuda
++        )
++      endif()
+     endif()
+     install(FILES
+-      ${CMAKE_CURRENT_BINARY_DIR}/drjit/auto/py.typed
+-      ${CMAKE_CURRENT_BINARY_DIR}/drjit/auto/__init__.pyi
+       ${CMAKE_CURRENT_BINARY_DIR}/drjit/auto/__init__.py
+-      ${CMAKE_CURRENT_BINARY_DIR}/drjit/auto/ad.pyi
+       ${CMAKE_CURRENT_BINARY_DIR}/drjit/auto/ad.py
+       DESTINATION drjit/auto
+     )
++    if (DRJIT_ENABLE_STUBS)
++      install(FILES
++        ${CMAKE_CURRENT_BINARY_DIR}/drjit/auto/py.typed
++        ${CMAKE_CURRENT_BINARY_DIR}/drjit/auto/__init__.pyi
++        ${CMAKE_CURRENT_BINARY_DIR}/drjit/auto/ad.pyi
++        DESTINATION drjit/auto
++      )
++    endif()
+   endif()
+
+   if (DRJIT_ENABLE_JIT)
+--- a/src/python/CMakeLists.txt
++++ b/src/python/CMakeLists.txt
+@@ -180,6 +180,7 @@ endif()
+
+ # ------------------- Stub generation -------------------
+
++if (DRJIT_ENABLE_STUBS)
+ set(STUB_ARGS
+   PYTHON_PATH ${DRJIT_PYTHON_DST_DIR}/..
+   PATTERN_FILE ${DRJIT_PYTHON_SRC_DIR}/stubs.pat
+@@ -271,3 +272,4 @@ if (NOT (DRJIT_SANITIZE_ASAN OR DRJIT_SANITIZE_UBSAN))
+     ${DRJIT_PYTHON_DST_DIR}/auto/py.typed
+   )
+ endif()
++endif()
