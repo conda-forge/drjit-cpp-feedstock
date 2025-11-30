@@ -1,0 +1,368 @@
+From e899847e41157abca3e00c2c5afb184bb7197d27 Mon Sep 17 00:00:00 2001
+From: Jeongseok Lee <jeongseok@meta.com>
+Date: Fri, 19 Sep 2025 02:28:47 -0700
+Subject: [PATCH 1/4] Use system libraries
+
+---
+ CMakeLists.txt           | 11 +++++++----
+ src/extra/CMakeLists.txt | 18 +++++++++++++-----
+ src/python/CMakeLists.txt | 15 +++++++++++++--
+ 3 files changed, 33 insertions(+), 11 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index ce5c00db..90177568 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -29,6 +29,9 @@ option(DRJIT_ENABLE_LEAK_WARNINGS "Emit DrJit and nanobind leak warnings? By def
+ option(DRJIT_STABLE_ABI       "Build Python extension using the CPython stable ABI? (Only relevant when using scikit-build)" OFF)
+ mark_as_advanced(DRJIT_STABLE_ABI)
+
++option(DRJIT_USE_SYSTEM_NANOBIND "Use system-installed nanobind" OFF)
++option(DRJIT_USE_SYSTEM_ROBIN_MAP "Use system-installed robin-map" OFF)
++
+ # ----------------------------------------------------------
+ #  Check if submodules have been checked out, or fail early
+ # ----------------------------------------------------------
+@@ -198,10 +201,11 @@ endif()
+
+ if (DRJIT_MASTER_PROJECT)
+   install(DIRECTORY include/drjit DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
++  install(DIRECTORY ext/drjit-core/include/drjit-core DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+
+-  install(TARGETS drjit-core EXPORT drjitTargets DESTINATION drjit)
+-  install(TARGETS drjit-extra EXPORT drjitTargets DESTINATION drjit)
+-  install(TARGETS nanothread EXPORT drjitTargets DESTINATION drjit)
++  if (DRJIT_ENABLE_JIT)
++    install(TARGETS drjit-core drjit-extra nanothread EXPORT drjitTargets DESTINATION drjit)
++  endif()
+
+   if (DRJIT_ENABLE_PYTHON)
+     install(TARGETS drjit-python DESTINATION drjit)
+@@ -256,7 +260,6 @@ if (DRJIT_MASTER_PROJECT)
+   endif()
+
+   if (DRJIT_ENABLE_JIT)
+-    install(DIRECTORY ext/drjit-core/include/drjit-core DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+     install(DIRECTORY ext/drjit-core/ext/nanothread/include/nanothread DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+   endif()
+
+diff --git a/src/extra/CMakeLists.txt b/src/extra/CMakeLists.txt
+index 455f4c74..d5a5de98 100644
+--- a/src/extra/CMakeLists.txt
++++ b/src/extra/CMakeLists.txt
+@@ -24,10 +24,19 @@ endif()
+ target_compile_definitions(drjit-extra PRIVATE -DDRJIT_EXTRA_BUILD)
+ target_link_libraries(drjit-extra PRIVATE drjit drjit-core nanothread)
+
+-target_include_directories(drjit-extra PRIVATE
+-  ../../ext/drjit-core/ext/robin_map/include
+-  ../../ext/nanobind/include
+-)
++if (DRJIT_USE_SYSTEM_NANOBIND)
++  find_package(nanobind REQUIRED CONFIG)
++  target_link_libraries(drjit-extra PRIVATE nanobind)
++else()
++  target_include_directories(drjit-extra PRIVATE ../../ext/nanobind/include)
++endif()
++
++if (DRJIT_USE_SYSTEM_ROBIN_MAP)
++  find_package(tsl-robin-map REQUIRED CONFIG)
++  target_link_libraries(drjit-extra PRIVATE tsl::robin_map)
++else()
++  target_include_directories(drjit-extra PRIVATE ../../ext/drjit-core/ext/robin_map/include)
++endif()
+
+ if (DRJIT_ENABLE_LLVM)
+   target_compile_definitions(drjit-extra PRIVATE -DDRJIT_ENABLE_LLVM)
+@@ -36,4 +45,3 @@ endif()
+ if (DRJIT_ENABLE_CUDA)
+   target_compile_definitions(drjit-extra PRIVATE -DDRJIT_ENABLE_CUDA)
+ endif()
+-
+diff --git a/src/python/CMakeLists.txt b/src/python/CMakeLists.txt
+index 12345678..9abcdef0 100644
+--- a/src/python/CMakeLists.txt
++++ b/src/python/CMakeLists.txt
+@@ -46,6 +46,10 @@ add_custom_target(drjit-copy-python-src ALL DEPENDS ${PY_FILES_OUT})
+
+ # ---------------- Build the main module ----------------
+
++if (DRJIT_USE_SYSTEM_NANOBIND)
++  find_package(nanobind REQUIRED CONFIG)
++endif()
++
+ nanobind_add_module(
+   drjit-python
+
+@@ -126,9 +130,12 @@ set_target_properties(drjit-python
+   PROPERTIES
+   OUTPUT_NAME _drjit_ext ${DRJIT_OUTPUT_DIRECTORY})
+
+-target_include_directories(drjit-python
+-  PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../ext/nanobind/ext/robin_map/include
+-)
++if (DRJIT_USE_SYSTEM_ROBIN_MAP)
++  find_package(tsl-robin-map REQUIRED CONFIG)
++  target_link_libraries(drjit-python PRIVATE tsl::robin_map)
++else()
++  target_include_directories(drjit-python PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../ext/nanobind/ext/robin_map/include)
++endif()
+
+ target_compile_definitions(drjit-python PRIVATE -DDRJIT_PYTHON_BUILD)
+From 77f2f596e1b4a3dcdc31ab49e1defbf7255d5eff Mon Sep 17 00:00:00 2001
+From: Jeongseok Lee <jeongseok@meta.com>
+Date: Fri, 19 Sep 2025 02:29:07 -0700
+Subject: [PATCH 2/4] Fix install destination paths
+
+---
+ CMakeLists.txt | 32 +++++++++++++++++++++++++++++---
+ 1 file changed, 29 insertions(+), 3 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 90177568..a0f0986b 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -203,9 +203,35 @@ if (DRJIT_MASTER_PROJECT)
+   install(DIRECTORY include/drjit DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+   install(DIRECTORY ext/drjit-core/include/drjit-core DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+ 
+-  install(TARGETS drjit-core EXPORT drjitTargets DESTINATION drjit)
+-  install(TARGETS drjit-extra EXPORT drjitTargets DESTINATION drjit)
+-  install(TARGETS nanothread EXPORT drjitTargets DESTINATION drjit)
++  if (DRJIT_ENABLE_JIT)
++    if (DRJIT_ENABLE_PYTHON)
++      install(TARGETS drjit-core EXPORT drjitTargets DESTINATION drjit)
++      install(TARGETS drjit-extra EXPORT drjitTargets DESTINATION drjit)
++      install(TARGETS nanothread EXPORT drjitTargets DESTINATION drjit)
++    else()
++      install(
++        TARGETS drjit-core
++        EXPORT drjitTargets
++        RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}"
++        ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}"
++        LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}"
++      )
++      install(
++        TARGETS drjit-extra
++        EXPORT drjitTargets
++        RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}"
++        ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}"
++        LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}"
++      )
++      install(
++        TARGETS nanothread
++        EXPORT drjitTargets
++        RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}"
++        ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}"
++        LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}"
++      )
++    endif()
++  endif()
+ 
+   if (DRJIT_ENABLE_PYTHON)
+     install(TARGETS drjit-python DESTINATION drjit)
+-- 
+2.51.0
+
+From c0845cd8e7541bd15347459fa8d97eaf55b0f49c Mon Sep 17 00:00:00 2001
+From: Jeongseok Lee <jeongseok@meta.com>
+Date: Fri, 19 Sep 2025 02:29:22 -0700
+Subject: [PATCH 3/4] Make directory before creating files
+
+---
+ src/python/CMakeLists.txt | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/python/CMakeLists.txt b/src/python/CMakeLists.txt
+index 52a13082..eb7240e4 100644
+--- a/src/python/CMakeLists.txt
++++ b/src/python/CMakeLists.txt
+@@ -255,6 +255,7 @@ if (NOT (DRJIT_SANITIZE_ASAN OR DRJIT_SANITIZE_UBSAN))
+       ${DRJIT_PYTHON_DST_DIR}/auto/__init__.py
+       ${DRJIT_PYTHON_DST_DIR}/auto/ad.py
+ 
++    COMMAND ${CMAKE_COMMAND} -E make_directory ${DRJIT_PYTHON_DST_DIR}/auto
+     COMMAND cmake -E touch
+       ${DRJIT_PYTHON_DST_DIR}/auto/py.typed
+       ${DRJIT_PYTHON_DST_DIR}/auto/__init__.py
+-- 
+2.51.0
+
+From 4c650147722ac6695df2a262be96707dc8dc4474 Mon Sep 17 00:00:00 2001
+From: Jeongseok Lee <jeongseok@meta.com>
+Date: Fri, 19 Sep 2025 02:29:44 -0700
+Subject: [PATCH 4/4] Fix scatter for raw pointer target
+
+---
+ include/drjit/array_router.h | 28 +++++++++++++++++++++++++---
+ 1 file changed, 25 insertions(+), 3 deletions(-)
+
+diff --git a/include/drjit/array_router.h b/include/drjit/array_router.h
+index 3540b1b6..ad8197cb 100644
+--- a/include/drjit/array_router.h
++++ b/include/drjit/array_router.h
+@@ -1069,8 +1069,25 @@ Target gather(Source &&source, const Index &index, const Mask &mask_ = true,
+     (void) mode;
+ }
+ 
++namespace detail {
++    template <typename Target, typename Index> Target broadcast_index(const Index &index) {
++        using Scalar = scalar_t<Index>;
++        static_assert(Target::Size != Dynamic);
++
++        Index scaled = index * Scalar(Target::Size);
++        Target result;
++        for (size_t i = 0; i < Target::Size; ++i) {
++            if constexpr (depth_v<Target> == depth_v<Index> + 1)
++                result.entry(i) = scaled + Scalar(i);
++            else
++                result.entry(i) = broadcast_index<value_t<Target>>(scaled + Scalar(i));
++        }
++        return result;
++    }
++}
++
+ template <typename Target, typename Value, typename Index, typename Mask = mask_t<Index>>
+-void scatter(Target &target, const Value &value, const Index &index,
++void scatter(Target &&target, const Value &value, const Index &index,
+              const Mask &mask_ = true, ReduceMode mode = ReduceMode::Auto) {
+     DRJIT_MARK_USED(mode);
+     // Broadcast mask to match shape of Index
+@@ -1101,8 +1118,13 @@ void scatter(Target &target, const Value &value, const Index &index,
+         if constexpr (depth_v<Value> == depth_v<Index>) {
+             value.scatter_(target, uint32_array_t<Value>(index), mask, mode);
+         } else {
+-            Target::template scatter_packet_<Value::Size>(
+-                target, value, uint32_array_t<value_t<Value>>(index), mask, mode);
++            if constexpr (is_array_v<Target>) {
++                Target::template scatter_packet_<Value::Size>(
++                    target, value, uint32_array_t<value_t<Value>>(index), mask, mode);
++            } else {
++                using TargetIndex = replace_scalar_t<Value, scalar_t<Index>>;
++                scatter(target, value, detail::broadcast_index<TargetIndex>(index), mask);
++            }
+         }
+     } else if constexpr (is_drjit_struct_v<Value>) {
+         static_assert(is_drjit_struct_v<Target>,
+-- 
+2.51.0
+
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -26,6 +26,8 @@
+ option(DRJIT_ENABLE_TESTS         "Build Dr.Jit test suite? (Warning, this takes *very* long to compile)" OFF)
+ option(DRJIT_ENABLE_LEAK_WARNINGS "Emit DrJit and nanobind leak warnings? By default, leak warnings are disabled automatically when building PyPi wheels." ${DRJIT_ENABLE_LEAK_WARNINGS_DEFAULT})
+
++option(DRJIT_ENABLE_STUBS "Generate Python stubs" OFF)
++
+ option(DRJIT_STABLE_ABI       "Build Python extension using the CPython stable ABI? (Only relevant when using scikit-build)" OFF)
+ mark_as_advanced(DRJIT_STABLE_ABI)
+
+@@ -207,52 +209,77 @@
+     install(TARGETS drjit-python DESTINATION drjit)
+     install(FILES
+       ${CMAKE_CURRENT_BINARY_DIR}/drjit/config.py
+-      ${CMAKE_CURRENT_BINARY_DIR}/drjit/__init__.pyi
+       ${CMAKE_CURRENT_BINARY_DIR}/drjit/__init__.py
+-      ${CMAKE_CURRENT_BINARY_DIR}/drjit/interop.pyi
+       ${CMAKE_CURRENT_BINARY_DIR}/drjit/interop.py
+-      ${CMAKE_CURRENT_BINARY_DIR}/drjit/ast.pyi
+       ${CMAKE_CURRENT_BINARY_DIR}/drjit/ast.py
+       ${CMAKE_CURRENT_BINARY_DIR}/drjit/dda.py
+       ${CMAKE_CURRENT_BINARY_DIR}/drjit/nn.py
+-      ${CMAKE_CURRENT_BINARY_DIR}/drjit/detail.pyi
+       ${CMAKE_CURRENT_BINARY_DIR}/drjit/detail.py
+       ${CMAKE_CURRENT_BINARY_DIR}/drjit/opt.py
+       ${CMAKE_CURRENT_BINARY_DIR}/drjit/random.py
+-      ${CMAKE_CURRENT_BINARY_DIR}/drjit/py.typed
+       DESTINATION drjit
+     )
++    if (DRJIT_ENABLE_STUBS)
++      install(FILES
++        ${CMAKE_CURRENT_BINARY_DIR}/drjit/__init__.pyi
++        ${CMAKE_CURRENT_BINARY_DIR}/drjit/interop.pyi
++        ${CMAKE_CURRENT_BINARY_DIR}/drjit/ast.pyi
++        ${CMAKE_CURRENT_BINARY_DIR}/drjit/detail.pyi
++        ${CMAKE_CURRENT_BINARY_DIR}/drjit/py.typed
++        DESTINATION drjit
++      )
++    endif()
+     install(FILES
+-      ${CMAKE_CURRENT_BINARY_DIR}/drjit/scalar/__init__.pyi
+       ${CMAKE_CURRENT_BINARY_DIR}/drjit/scalar/__init__.py
+       DESTINATION drjit/scalar
+     )
++    if (DRJIT_ENABLE_STUBS)
++      install(FILES
++        ${CMAKE_CURRENT_BINARY_DIR}/drjit/scalar/__init__.pyi
++        DESTINATION drjit/scalar
++      )
++    endif()
+     install(FILES
+-      ${CMAKE_CURRENT_BINARY_DIR}/drjit/llvm/py.typed
+-      ${CMAKE_CURRENT_BINARY_DIR}/drjit/llvm/__init__.pyi
+       ${CMAKE_CURRENT_BINARY_DIR}/drjit/llvm/__init__.py
+-      ${CMAKE_CURRENT_BINARY_DIR}/drjit/llvm/ad.pyi
+       ${CMAKE_CURRENT_BINARY_DIR}/drjit/llvm/ad.py
+       DESTINATION drjit/llvm
+     )
++    if (DRJIT_ENABLE_STUBS)
++      install(FILES
++        ${CMAKE_CURRENT_BINARY_DIR}/drjit/llvm/py.typed
++        ${CMAKE_CURRENT_BINARY_DIR}/drjit/llvm/__init__.pyi
++        ${CMAKE_CURRENT_BINARY_DIR}/drjit/llvm/ad.pyi
++        DESTINATION drjit/llvm
++      )
++    endif()
+     if (DRJIT_ENABLE_CUDA)
+       install(FILES
+-        ${CMAKE_CURRENT_BINARY_DIR}/drjit/cuda/py.typed
+-        ${CMAKE_CURRENT_BINARY_DIR}/drjit/cuda/__init__.pyi
+         ${CMAKE_CURRENT_BINARY_DIR}/drjit/cuda/__init__.py
+-        ${CMAKE_CURRENT_BINARY_DIR}/drjit/cuda/ad.pyi
+         ${CMAKE_CURRENT_BINARY_DIR}/drjit/cuda/ad.py
+         DESTINATION drjit/cuda
+       )
++      if (DRJIT_ENABLE_STUBS)
++        install(FILES
++          ${CMAKE_CURRENT_BINARY_DIR}/drjit/cuda/py.typed
++          ${CMAKE_CURRENT_BINARY_DIR}/drjit/cuda/__init__.pyi
++          ${CMAKE_CURRENT_BINARY_DIR}/drjit/cuda/ad.pyi
++          DESTINATION drjit/cuda
++        )
++      endif()
+     endif()
+     install(FILES
+-      ${CMAKE_CURRENT_BINARY_DIR}/drjit/auto/py.typed
+-      ${CMAKE_CURRENT_BINARY_DIR}/drjit/auto/__init__.pyi
+       ${CMAKE_CURRENT_BINARY_DIR}/drjit/auto/__init__.py
+-      ${CMAKE_CURRENT_BINARY_DIR}/drjit/auto/ad.pyi
+       ${CMAKE_CURRENT_BINARY_DIR}/drjit/auto/ad.py
+       DESTINATION drjit/auto
+     )
++    if (DRJIT_ENABLE_STUBS)
++      install(FILES
++        ${CMAKE_CURRENT_BINARY_DIR}/drjit/auto/py.typed
++        ${CMAKE_CURRENT_BINARY_DIR}/drjit/auto/__init__.pyi
++        ${CMAKE_CURRENT_BINARY_DIR}/drjit/auto/ad.pyi
++        DESTINATION drjit/auto
++      )
++    endif()
+   endif()
+
+   if (DRJIT_ENABLE_JIT)
+--- a/src/python/CMakeLists.txt
++++ b/src/python/CMakeLists.txt
+@@ -180,6 +180,7 @@ endif()
+
+ # ------------------- Stub generation -------------------
+
++if (DRJIT_ENABLE_STUBS)
+ set(STUB_ARGS
+   PYTHON_PATH ${DRJIT_PYTHON_DST_DIR}/..
+   PATTERN_FILE ${DRJIT_PYTHON_SRC_DIR}/stubs.pat
+@@ -271,3 +272,4 @@ if (NOT (DRJIT_SANITIZE_ASAN OR DRJIT_SANITIZE_UBSAN))
+     ${DRJIT_PYTHON_DST_DIR}/auto/py.typed
+   )
+ endif()
++endif()
