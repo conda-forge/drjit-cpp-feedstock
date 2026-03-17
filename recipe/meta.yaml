@@ -1,5 +1,5 @@
 {% set name = "drjit-cpp" %}
-{% set version = "1.2.0" %}
+{% set version = "1.3.1" %}
 
 package:
   name: {{ name|lower }}
@@ -8,7 +8,7 @@ package:
 source:
   # drjit
   - url: https://github.com/mitsuba-renderer/drjit/archive/v{{ version }}.tar.gz
-    sha256: 8f7ae4fd6ffc826c3430c2cfc4243bd610fe86537b22a7608cf5481d7286b86d
+    sha256: 3d69db50cc66c69823fa6a7edc307012ceadf848ac52e2f2bd11e2c4f4b5903d
     patches:
       - patches/drjit/0001-Use-system-libraries.patch
       - patches/drjit/0002-Fix-install-destination-paths.patch
@@ -42,7 +42,7 @@ source:
     folder: ext/nanobind/ext/robin_map
 
 build:
-  number: 2
+  number: 0
   skip: true  # [cuda_compiler_version != "None" and (ppc64le or aarch64)]
   skip: true  # [cuda_compiler_version != "None" and win]
 
