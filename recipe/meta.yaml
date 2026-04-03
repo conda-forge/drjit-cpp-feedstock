@@ -10,10 +10,7 @@ source:
   - url: https://github.com/mitsuba-renderer/drjit/archive/v{{ version }}.tar.gz
     sha256: 8f7ae4fd6ffc826c3430c2cfc4243bd610fe86537b22a7608cf5481d7286b86d
     patches:
-      - patches/drjit/0001-Use-system-libraries.patch
-      - patches/drjit/0002-Fix-install-destination-paths.patch
-      - patches/drjit/0003-Make-directory-before-creating-files.patch
-      - patches/drjit/0004-Fix-scatter-for-raw-pointer-target.patch
+      - patches/drjit/combined.patch
 
   # drjit-core
   - url: https://github.com/mitsuba-renderer/drjit-core/archive/5cf6d3730ebc931863c89071e16979153e802d09.zip
@@ -42,7 +39,7 @@ source:
     folder: ext/nanobind/ext/robin_map
 
 build:
-  number: 2
+  number: 5
   skip: true  # [cuda_compiler_version != "None" and (ppc64le or aarch64)]
   skip: true  # [cuda_compiler_version != "None" and win]
 
@@ -97,7 +94,6 @@ outputs:
     build:
       skip: true  # [build_mode == "cpp"]
       skip: true  # [linux and not x86_64]
-      skip: true  # [osx and not x86_64]
       skip: true  # [win]
       skip: true  # [py<310]
       skip: true  # [py>=314]
