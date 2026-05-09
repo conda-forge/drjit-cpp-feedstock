@@ -14,6 +14,7 @@ source:
       - patches/drjit/0002-Fix-install-destination-paths.patch
       - patches/drjit/0003-Make-directory-before-creating-files.patch
       - patches/drjit/0004-Fix-scatter-for-raw-pointer-target.patch
+      - patches/drjit/0005-Allow-disabling-python-stubs.patch
 
   # drjit-core
   - url: https://github.com/mitsuba-renderer/drjit-core/archive/77b505dbb1622e5d2a458371b3989ec4d09d9975.zip
@@ -97,7 +98,6 @@ outputs:
     build:
       skip: true  # [build_mode == "cpp"]
       skip: true  # [linux and not x86_64]
-      skip: true  # [osx and not x86_64]
       skip: true  # [win]
       skip: true  # [py<310]
       skip: true  # [py>=313 and cuda_compiler_version == "13.0"]
