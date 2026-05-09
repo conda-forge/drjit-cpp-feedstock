@@ -118,7 +118,7 @@ outputs:
         - llvmdev {{ llvm_version }}
         # Python deps
         - hatch-fancy-pypi-readme
-        - nanobind >=2.6.0
+        - nanobind ==2.9.2
         - pip
         - python
         - scikit-build-core
