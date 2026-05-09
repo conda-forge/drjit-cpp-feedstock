@@ -16,26 +16,26 @@ source:
       - patches/drjit/0004-Fix-scatter-for-raw-pointer-target.patch
 
   # drjit-core
-  - url: https://github.com/mitsuba-renderer/drjit-core/archive/5cf6d3730ebc931863c89071e16979153e802d09.zip
-    sha256: 3a98e8cb4bcc9423743e5bd70adbf1e570f1be0a9dc892fbc052127d2f0417e4
+  - url: https://github.com/mitsuba-renderer/drjit-core/archive/77b505dbb1622e5d2a458371b3989ec4d09d9975.zip
+    sha256: f4217ff87b4cb2aa503037b2bbc45b3040d4d42b57ed8a930866c2a117386c6b
     folder: ext/drjit-core
     patches:
       - patches/drjit-core/use-system-robin-map.patch
-  - url: https://github.com/mitsuba-renderer/nanothread/archive/dd8d5f23a13c38d4d2a72f276f862c82b4ad35cc.zip
-    sha256: 5645170c37be593241b43c54d9be411c63b3838f52ae8bb60085cea4267d4ff7
+  - url: https://github.com/mitsuba-renderer/nanothread/archive/5d354917ea574488d133d242eda1a365a70b80e9.zip
+    sha256: 2935578d799f7f87d053a8d3bc4ffbf38ffe6651cd1ca672f9963102a0a203c2
     folder: ext/drjit-core/ext/nanothread
-  - url: https://github.com/mitsuba-renderer/cmake-defaults/archive/df60a87cff5bff303412f7bec9bb246b02e57df3.zip
-    sha256: 303896dcca0a54fa959d4c2315cfd35f160d3c35a38e840cb0394b48032a2bd3
+  - url: https://github.com/mitsuba-renderer/cmake-defaults/archive/182fac32bf1856ffbfcfd03196d1d227e77135d1.zip
+    sha256: 116adc20797e0b901a6e26949d4c74deb08d6b68e87f9120e475d596d3ee33ca
     folder: ext/drjit-core/ext/nanothread/ext/cmake-defaults
     patches:
       - patches/drjit-core/disable-march-flags.patch
-  - url: https://github.com/Tessil/robin-map/archive/188c45569cc2a5dd768077c193830b51d33a5020.zip
-    sha256: 084d7d72f2e669842cc9db1a6a31c15376500a90a3e525f63f569fca963a01b4
+  - url: https://github.com/Tessil/robin-map/archive/4ec1bf19c6a96125ea22062f38c2cf5b958e448e.zip
+    sha256: 78c97483a8993866074f06b25fd288cdb7b8ebd6c61c2f0c43b0e324fd56ce10
     folder: ext/drjit-core/ext/robin_map
 
   # nanobind
-  - url: https://github.com/wjakob/nanobind/archive/babec16ecdc8d49239d1b9e2991db85e2b5deac6.zip
-    sha256: 5a923ff7e018801cb36c288d7cc6028903e2df9371aa54ea80b27c594af367e5
+  - url: https://github.com/wjakob/nanobind/archive/22acf11a2dac212e857f0d06ce80f808cac8fdad.zip
+    sha256: 220ddc0d7bfc85e8076d458e22f67a590b1fda56420084556dbfc9b8a4884671
     folder: ext/nanobind
   - url: https://github.com/Tessil/robin-map/archive/4ec1bf19c6a96125ea22062f38c2cf5b958e448e.zip
     sha256: 78c97483a8993866074f06b25fd288cdb7b8ebd6c61c2f0c43b0e324fd56ce10
