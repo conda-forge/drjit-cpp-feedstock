@@ -16,3 +16,7 @@ if errorlevel 1 exit 1
 
 cmake --build tests/build --parallel --config Release
 if errorlevel 1 exit 1
+
+set PATH=%LIBRARY_BIN%;%PATH%
+ctest --test-dir tests/build --output-on-failure --build-config Release
+if errorlevel 1 exit 1
