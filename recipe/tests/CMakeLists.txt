@@ -7,9 +7,15 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-project(adaptivecpp-example)
+project(drjit-example LANGUAGES CXX)
+
+enable_testing()
 
 find_package(drjit CONFIG REQUIRED)
+
+add_executable(half_smoke half_smoke.cpp)
+target_link_libraries(half_smoke PRIVATE drjit)
+add_test(NAME half_smoke COMMAND half_smoke)
 
 add_executable(half half.cpp)
 target_link_libraries(half PRIVATE drjit)
