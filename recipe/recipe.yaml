@@ -1,0 +1,190 @@
+schema_version: 1
+
+context:
+  name: drjit-cpp
+  version: "1.3.1"
+  build_number: 1
+
+recipe:
+  name: ${{ name|lower }}-split
+  version: ${{ version }}
+
+source:
+  - url: https://github.com/mitsuba-renderer/drjit/archive/v${{ version }}.tar.gz
+    sha256: 3d69db50cc66c69823fa6a7edc307012ceadf848ac52e2f2bd11e2c4f4b5903d
+    patches:
+      - patches/drjit/0001-Use-system-libraries.patch
+      - patches/drjit/0002-Fix-install-destination-paths.patch
+      - patches/drjit/0003-Make-directory-before-creating-files.patch
+      - patches/drjit/0004-Fix-scatter-for-raw-pointer-target.patch
+      - patches/drjit/0005-Allow-disabling-python-stubs.patch
+  - url: https://github.com/mitsuba-renderer/drjit-core/archive/213983e47c99db0c6ab5e3dfce952e68bb9a8bd3.zip
+    sha256: f1d467b137cd905f2b7e66ad97ef8d692a9232ce3276c4574b59186fd7ecd6ae
+    target_directory: ext/drjit-core
+    patches:
+      - patches/drjit-core/use-system-robin-map.patch
+  - url: https://github.com/mitsuba-renderer/nanothread/archive/5d354917ea574488d133d242eda1a365a70b80e9.zip
+    sha256: 2935578d799f7f87d053a8d3bc4ffbf38ffe6651cd1ca672f9963102a0a203c2
+    target_directory: ext/drjit-core/ext/nanothread
+  - url: https://github.com/mitsuba-renderer/cmake-defaults/archive/182fac32bf1856ffbfcfd03196d1d227e77135d1.zip
+    sha256: 116adc20797e0b901a6e26949d4c74deb08d6b68e87f9120e475d596d3ee33ca
+    target_directory: ext/drjit-core/ext/nanothread/ext/cmake-defaults
+    patches:
+      - patches/drjit-core/disable-march-flags.patch
+  - url: https://github.com/Tessil/robin-map/archive/4ec1bf19c6a96125ea22062f38c2cf5b958e448e.zip
+    sha256: 78c97483a8993866074f06b25fd288cdb7b8ebd6c61c2f0c43b0e324fd56ce10
+    target_directory: ext/drjit-core/ext/robin_map
+  - url: https://github.com/wjakob/nanobind/archive/22acf11a2dac212e857f0d06ce80f808cac8fdad.zip
+    sha256: 220ddc0d7bfc85e8076d458e22f67a590b1fda56420084556dbfc9b8a4884671
+    target_directory: ext/nanobind
+  - url: https://github.com/Tessil/robin-map/archive/4ec1bf19c6a96125ea22062f38c2cf5b958e448e.zip
+    sha256: 78c97483a8993866074f06b25fd288cdb7b8ebd6c61c2f0c43b0e324fd56ce10
+    target_directory: ext/nanobind/ext/robin_map
+
+build:
+  number: ${{ build_number }}
+  skip:
+    - cuda_compiler_version != "None" and (ppc64le or aarch64)
+    - cuda_compiler_version != "None" and win
+
+outputs:
+  - package:
+      name: drjit-cpp
+    build:
+      string: ${{ "cuda" ~ (cuda_compiler_version | replace(".", "")) ~ "_llvm" ~ llvm_version ~ "_" ~ build_number if cuda_compiler_version != "None" else "cpu_llvm" ~ llvm_version ~ "_" ~ build_number }}
+      skip:
+        - build_mode == "python"
+      script:
+        file: ${{ "bld_cpp.bat" if win else "build_cpp.sh" }}
+    requirements:
+      build:
+        - ${{ compiler("c") }}
+        - ${{ compiler("cxx") }}
+        - if: cuda_compiler_version != "None"
+          then:
+            - ${{ compiler("cuda") }}
+        - ${{ stdlib("c") }}
+        - cmake
+        - if: unix
+          then: ninja
+      host:
+        - if: cuda_compiler_version != "None"
+          then: cuda-version ==${{ cuda_compiler_version }}
+        - if: cuda_compiler_version != "None"
+          then: cuda-toolkit
+        - llvmdev ${{ llvm_version }}.*
+      run:
+        - if: cuda_compiler_version != "None"
+          then: cuda-cudart
+        - libllvm${{ llvm_version }}
+      run_exports:
+        - ${{ pin_subpackage("drjit-cpp", upper_bound="x.x") }}
+    tests:
+      - files:
+          recipe:
+            - run_test_cpp.bat
+            - run_test_cpp.sh
+            - tests/
+        requirements:
+          run:
+            - ${{ compiler("c") }}
+            - ${{ compiler("cxx") }}
+            - ${{ stdlib("c") }}
+            - cmake
+            - if: unix
+              then: ninja
+        script:
+          - if: unix
+            then:
+              - test -f "${PREFIX}/include/drjit-core/macros.h"
+              - test -f "${PREFIX}/include/drjit/fwd.h"
+              - test -f "${PREFIX}/share/cmake/drjit/drjitConfig.cmake"
+              - bash run_test_cpp.sh
+          - if: win
+            then:
+              - if not exist "%PREFIX%\\Library\\include\\drjit-core\\macros.h" exit 1
+              - if not exist "%PREFIX%\\Library\\include\\drjit\\fwd.h" exit 1
+              - if not exist "%PREFIX%\\Library\\share\\cmake\\drjit\\drjitConfig.cmake" exit 1
+              - call run_test_cpp.bat
+      - downstream: momentum
+
+  - package:
+      name: drjit
+    build:
+      skip:
+        - build_mode == "cpp"
+        - linux and not x86_64
+        - win
+        - match(python, "<3.10")
+        - match(python, ">=3.13") and cuda_compiler_version == "13.0"
+        - match(python, ">=3.14")
+      script:
+        file: ${{ "bld_py.bat" if win else "build_py.sh" }}
+    requirements:
+      build:
+        - ${{ compiler("c") }}
+        - ${{ compiler("cxx") }}
+        - if: cuda_compiler_version != "None"
+          then:
+            - ${{ compiler("cuda") }}
+        - ${{ stdlib("c") }}
+        - cmake
+        - make
+        - if: unix
+          then: ninja
+        - if: build_platform != target_platform
+          then:
+            - cross-python_${{ target_platform }}
+            - python
+      host:
+        - if: cuda_compiler_version != "None"
+          then: cuda-version ==${{ cuda_compiler_version }}
+        - if: cuda_compiler_version != "None"
+          then: cuda-toolkit
+        - llvmdev ${{ llvm_version }}.*
+        - hatch-fancy-pypi-readme
+        - nanobind >=2.6.0
+        - pip
+        - python
+        - scikit-build-core
+        - typing_extensions
+      run:
+        - ${{ pin_compatible("python") }}
+        - if: cuda_compiler_version != "None"
+          then: cuda-cudart
+        - if: osx
+          then: libcxx
+        - if: linux
+          then: libgcc
+        - if: linux
+          then: libstdcxx
+        - libllvm${{ llvm_version }}
+        - python
+        - python_abi * *_cp${{ python | version_to_buildstring }}
+        - typing_extensions
+    tests:
+      - python:
+          imports:
+            - drjit
+      - requirements:
+          run:
+            - pip
+            - python
+        script:
+          - pip check
+
+about:
+  homepage: https://github.com/mitsuba-renderer/drjit
+  repository: https://github.com/mitsuba-renderer/drjit
+  summary: Dr.Jit — A Just-In-Time-Compiler for Differentiable Rendering
+  description: |
+    Dr.Jit is a just-in-time (JIT) compiler for ordinary and differentiable computation. It was
+    originally created as the numerical foundation of Mitsuba 3, a differentiable Monte Carlo
+    renderer. However, Dr.Jit is a general-purpose tool that can also help with various other
+    types of embarrassingly parallel computation.
+  license: BSD-3-Clause
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - jeongseok-meta
