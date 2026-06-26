@@ -1,17 +1,15 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 0e7f027..bcf7a33 100644
+index 47d0f6b..29fe9e5 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -141,13 +141,13 @@ else()
+@@ -137,11 +137,11 @@ else()
    if (SKBUILD)
      if (CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64|arm64|ARM64")
-       # ARM64 architecture - use native or a baseline ARM arch
 -      set(${P}_NATIVE_FLAGS_DEFAULT "-march=armv8-a")
 +      # set(${P}_NATIVE_FLAGS_DEFAULT "-march=armv8-a")
      else()
-       # x86-64 architecture - use Ivy Bridge baseline
--      set(${P}_NATIVE_FLAGS_DEFAULT "-march=ivybridge")
-+      # set(${P}_NATIVE_FLAGS_DEFAULT "-march=ivybridge")
+-      set(${P}_NATIVE_FLAGS_DEFAULT "-march=haswell")
++      # set(${P}_NATIVE_FLAGS_DEFAULT "-march=haswell")
      endif()
    else()
 -    set(${P}_NATIVE_FLAGS_DEFAULT "-march=native")

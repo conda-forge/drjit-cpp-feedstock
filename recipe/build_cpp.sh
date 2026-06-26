@@ -5,6 +5,8 @@ set -exo pipefail
 if [[ "${target_platform}" == osx-* ]]; then
   # See https://conda-forge.org/docs/maintainer/knowledge_base.html#newer-c-features-with-old-sdk
   CXXFLAGS="${CXXFLAGS} -D_LIBCPP_DISABLE_AVAILABILITY"
+  # Dr.Jit 1.4.0's Metal backend requires Metal APIs newer than conda-forge's macOS 11 SDK.
+  export CMAKE_ARGS="${CMAKE_ARGS:-} -DDRJIT_ENABLE_METAL=OFF"
 fi
 
 if [[ "${target_platform}" == *aarch64 || "${target_platform}" == *ppc64le ]]; then
@@ -28,6 +30,7 @@ cmake $SRC_DIR \
   -DDRJIT_DYNAMIC_LLVM=OFF \
   -DDRJIT_ENABLE_CUDA=$ENABLE_CUDA \
   -DDRJIT_ENABLE_LLVM=$ENABLE_LLVM \
+  -DDRJIT_ENABLE_OPTIX=$ENABLE_CUDA \
   -DDRJIT_ENABLE_PYTHON=OFF \
   -DDRJIT_ENABLE_TESTS=OFF \
   -DDRJIT_USE_SYSTEM_NANOBIND=OFF \

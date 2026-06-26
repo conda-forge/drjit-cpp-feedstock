@@ -1,8 +1,8 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index a0f0986b..2c7638d0 100644
+index 02285d1..9ea06af 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -25,6 +25,7 @@ option(DRJIT_ENABLE_AUTODIFF      "Build Dr.Jit automatic differentation library
+@@ -28,6 +28,7 @@ option(DRJIT_ENABLE_AUTODIFF      "Build Dr.Jit automatic differentation library
  option(DRJIT_ENABLE_PYTHON        "Build Python extension library?" ON)
  option(DRJIT_ENABLE_TESTS         "Build Dr.Jit test suite? (Warning, this takes *very* long to compile)" OFF)
  option(DRJIT_ENABLE_LEAK_WARNINGS "Emit DrJit and nanobind leak warnings? By default, leak warnings are disabled automatically when building PyPi wheels." ${DRJIT_ENABLE_LEAK_WARNINGS_DEFAULT})
@@ -10,8 +10,7 @@ index a0f0986b..2c7638d0 100644
  
  option(DRJIT_STABLE_ABI       "Build Python extension using the CPython stable ABI? (Only relevant when using scikit-build)" OFF)
  mark_as_advanced(DRJIT_STABLE_ABI)
-@@ -237,57 +238,82 @@ if (DRJIT_MASTER_PROJECT)
-   if (DRJIT_ENABLE_PYTHON)
+@@ -247,66 +248,96 @@ if (DRJIT_MASTER_PROJECT)
      install(TARGETS drjit-python DESTINATION drjit)
      install(FILES
        ${CMAKE_CURRENT_BINARY_DIR}/drjit/config.py
@@ -92,6 +91,24 @@ index a0f0986b..2c7638d0 100644
 +        )
 +      endif()
      endif()
+     if (DRJIT_ENABLE_METAL)
+       install(FILES
+-        ${CMAKE_CURRENT_BINARY_DIR}/drjit/metal/py.typed
+-        ${CMAKE_CURRENT_BINARY_DIR}/drjit/metal/__init__.pyi
+         ${CMAKE_CURRENT_BINARY_DIR}/drjit/metal/__init__.py
+-        ${CMAKE_CURRENT_BINARY_DIR}/drjit/metal/ad.pyi
+         ${CMAKE_CURRENT_BINARY_DIR}/drjit/metal/ad.py
+         DESTINATION drjit/metal
+       )
++      if (DRJIT_ENABLE_STUBS)
++        install(FILES
++          ${CMAKE_CURRENT_BINARY_DIR}/drjit/metal/py.typed
++          ${CMAKE_CURRENT_BINARY_DIR}/drjit/metal/__init__.pyi
++          ${CMAKE_CURRENT_BINARY_DIR}/drjit/metal/ad.pyi
++          DESTINATION drjit/metal
++        )
++      endif()
+     endif()
      install(FILES
 -      ${CMAKE_CURRENT_BINARY_DIR}/drjit/auto/py.typed
 -      ${CMAKE_CURRENT_BINARY_DIR}/drjit/auto/__init__.pyi
@@ -112,10 +129,10 @@ index a0f0986b..2c7638d0 100644
  
    if (DRJIT_ENABLE_JIT)
 diff --git a/src/python/CMakeLists.txt b/src/python/CMakeLists.txt
-index eb7240e4..1b85d6b5 100644
+index 32dc1da..df50ab0 100644
 --- a/src/python/CMakeLists.txt
 +++ b/src/python/CMakeLists.txt
-@@ -179,6 +179,7 @@ endif()
+@@ -196,6 +196,7 @@ endif()
  
  # ------------------- Stub generation -------------------
  
@@ -123,8 +140,7 @@ index eb7240e4..1b85d6b5 100644
  set(STUB_ARGS
    PYTHON_PATH ${DRJIT_PYTHON_DST_DIR}/..
    PATTERN_FILE ${DRJIT_PYTHON_SRC_DIR}/stubs.pat
-@@ -271,4 +272,19 @@ if (NOT (DRJIT_SANITIZE_ASAN OR DRJIT_SANITIZE_UBSAN))
-     ${DRJIT_PYTHON_DST_DIR}/auto/ad.py
+@@ -296,3 +297,18 @@ if (NOT (DRJIT_SANITIZE_ASAN OR DRJIT_SANITIZE_UBSAN))
      ${DRJIT_PYTHON_DST_DIR}/auto/py.typed
    )
  endif()

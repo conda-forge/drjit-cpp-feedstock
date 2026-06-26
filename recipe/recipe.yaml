@@ -2,8 +2,8 @@ schema_version: 1
 
 context:
   name: drjit-cpp
-  version: "1.3.1"
-  build_number: 1
+  version: "1.4.0"
+  build_number: 0
 
 recipe:
   name: ${{ name|lower }}-split
@@ -11,31 +11,31 @@ recipe:
 
 source:
   - url: https://github.com/mitsuba-renderer/drjit/archive/v${{ version }}.tar.gz
-    sha256: 3d69db50cc66c69823fa6a7edc307012ceadf848ac52e2f2bd11e2c4f4b5903d
+    sha256: aed2315f139f2313264638b77eb571649c28e659f1c636c834af4d0345adcdfb
     patches:
       - patches/drjit/0001-Use-system-libraries.patch
       - patches/drjit/0002-Fix-install-destination-paths.patch
       - patches/drjit/0003-Make-directory-before-creating-files.patch
       - patches/drjit/0004-Fix-scatter-for-raw-pointer-target.patch
       - patches/drjit/0005-Allow-disabling-python-stubs.patch
-  - url: https://github.com/mitsuba-renderer/drjit-core/archive/213983e47c99db0c6ab5e3dfce952e68bb9a8bd3.zip
-    sha256: f1d467b137cd905f2b7e66ad97ef8d692a9232ce3276c4574b59186fd7ecd6ae
+  - url: https://github.com/mitsuba-renderer/drjit-core/archive/c9c054928c55da09c1756366d62e60c23ceceefd.zip
+    sha256: 13d9b6e2247b90f193392ef961838c0d2894eb5414b5ba3640050715fef675bf
     target_directory: ext/drjit-core
     patches:
       - patches/drjit-core/use-system-robin-map.patch
-  - url: https://github.com/mitsuba-renderer/nanothread/archive/5d354917ea574488d133d242eda1a365a70b80e9.zip
-    sha256: 2935578d799f7f87d053a8d3bc4ffbf38ffe6651cd1ca672f9963102a0a203c2
+  - url: https://github.com/mitsuba-renderer/nanothread/archive/a2097209e10852962c485ee46d84d28e7a63a1a1.zip
+    sha256: 5bd988bc713e516083f6e2e1c8414d5b8087c32ab5aa99a78c662acb327494b1
     target_directory: ext/drjit-core/ext/nanothread
-  - url: https://github.com/mitsuba-renderer/cmake-defaults/archive/182fac32bf1856ffbfcfd03196d1d227e77135d1.zip
-    sha256: 116adc20797e0b901a6e26949d4c74deb08d6b68e87f9120e475d596d3ee33ca
+  - url: https://github.com/mitsuba-renderer/cmake-defaults/archive/d65442956cd78772ba26ba25dc552de22566b717.zip
+    sha256: 76fc76bc458bf51bd1f7d29f9088b224d93e8fbc8edf4d10767bf962fee48356
     target_directory: ext/drjit-core/ext/nanothread/ext/cmake-defaults
     patches:
       - patches/drjit-core/disable-march-flags.patch
-  - url: https://github.com/Tessil/robin-map/archive/4ec1bf19c6a96125ea22062f38c2cf5b958e448e.zip
-    sha256: 78c97483a8993866074f06b25fd288cdb7b8ebd6c61c2f0c43b0e324fd56ce10
+  - url: https://github.com/Tessil/robin-map/archive/f70fd39a960385ef0a963aef00b750e4740228c0.zip
+    sha256: eba811574adf28446422a4847053960eb86b06730f4e32db3d6da5d5332f38b9
     target_directory: ext/drjit-core/ext/robin_map
-  - url: https://github.com/wjakob/nanobind/archive/22acf11a2dac212e857f0d06ce80f808cac8fdad.zip
-    sha256: 220ddc0d7bfc85e8076d458e22f67a590b1fda56420084556dbfc9b8a4884671
+  - url: https://github.com/wjakob/nanobind/archive/cee9cfdc3b357699111d6d3f3fd2b022ad7f31c2.zip
+    sha256: 91af61d846cbb77564190f0882994f00abf06e2b6563eb2059f63ccceb90b72d
     target_directory: ext/nanobind
   - url: https://github.com/Tessil/robin-map/archive/4ec1bf19c6a96125ea22062f38c2cf5b958e448e.zip
     sha256: 78c97483a8993866074f06b25fd288cdb7b8ebd6c61c2f0c43b0e324fd56ce10
@@ -69,9 +69,9 @@ outputs:
           then: ninja
       host:
         - if: cuda_compiler_version != "None"
-          then: cuda-version ==${{ cuda_compiler_version }}
-        - if: cuda_compiler_version != "None"
-          then: cuda-toolkit
+          then:
+            - cuda-version ==${{ cuda_compiler_version }}
+            - cuda-toolkit
         - llvmdev ${{ llvm_version }}.*
       run:
         - if: cuda_compiler_version != "None"
@@ -138,9 +138,9 @@ outputs:
             - python
       host:
         - if: cuda_compiler_version != "None"
-          then: cuda-version ==${{ cuda_compiler_version }}
-        - if: cuda_compiler_version != "None"
-          then: cuda-toolkit
+          then:
+            - cuda-version ==${{ cuda_compiler_version }}
+            - cuda-toolkit
         - llvmdev ${{ llvm_version }}.*
         - hatch-fancy-pypi-readme
         - nanobind >=2.6.0
@@ -155,9 +155,9 @@ outputs:
         - if: osx
           then: libcxx
         - if: linux
-          then: libgcc
-        - if: linux
-          then: libstdcxx
+          then:
+            - libgcc
+            - libstdcxx
         - libllvm${{ llvm_version }}
         - python
         - python_abi * *_cp${{ python | version_to_buildstring }}
