@@ -23,6 +23,7 @@ target_link_libraries(half PRIVATE drjit)
 if(ENABLE_LLVM)
   add_executable(jit_llvm jit_llvm.cpp)
   target_link_libraries(jit_llvm PRIVATE drjit-core drjit)
+  add_test(NAME jit_llvm COMMAND jit_llvm)
 endif()
 
 if(ENABLE_CUDA)
