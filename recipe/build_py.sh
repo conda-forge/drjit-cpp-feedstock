@@ -5,8 +5,13 @@ set -euxo pipefail
 if [[ "${target_platform}" == osx-* ]]; then
   # See https://conda-forge.org/docs/maintainer/knowledge_base.html#newer-c-features-with-old-sdk
   CXXFLAGS="${CXXFLAGS} -D_LIBCPP_DISABLE_AVAILABILITY"
-  # Dr.Jit 1.4.0's Metal backend requires Metal APIs newer than conda-forge's macOS 11 SDK.
-  export CMAKE_ARGS="${CMAKE_ARGS:-} -DDRJIT_ENABLE_METAL=OFF"
+  # Dr.Jit 1.4.0's Metal backend needs macOS 15 APIs. Enable it only on osx-arm64,
+  # where the recipe raises the SDK and deployment target for Apple Silicon GPUs.
+  if [[ "${target_platform}" == "osx-arm64" ]]; then
+    export CMAKE_ARGS="${CMAKE_ARGS:-} -DDRJIT_ENABLE_METAL=ON"
+  else
+    export CMAKE_ARGS="${CMAKE_ARGS:-} -DDRJIT_ENABLE_METAL=OFF"
+  fi
 fi
 
 if [[ "${cuda_compiler_version:-None}" != "None" ]]; then
