@@ -52,7 +52,7 @@ outputs:
   - package:
       name: drjit-cpp
     build:
-      string: ${{ "cuda" ~ (cuda_compiler_version | replace(".", "")) ~ "_llvm" ~ llvm_version ~ "_" ~ build_number if cuda_compiler_version != "None" else ("cpu_nollvm_" ~ build_number if target_platform == "linux-aarch64" or target_platform == "linux-ppc64le" or target_platform == "win-64" else "cpu_llvm" ~ llvm_version ~ "_" ~ build_number) }}
+      string: ${{ "cuda" ~ (cuda_compiler_version | replace(".", "")) ~ "_llvm" ~ llvm_version ~ "_" ~ build_number if cuda_compiler_version != "None" else ("cpu_nollvm_" ~ build_number if target_platform == "linux-aarch64" or target_platform == "linux-ppc64le" else "cpu_llvm" ~ llvm_version ~ "_" ~ build_number) }}
       skip:
         - build_mode == "python"
       script:
@@ -73,13 +73,14 @@ outputs:
           then:
             - cuda-version ==${{ cuda_compiler_version }}
             - cuda-toolkit
-        # Windows llvmdev does not provide the LLVM.lib import library expected
-        # by upstream's linked LLVM mode, and libllvmXX has no LLVM-C.dll runtime.
-        - if: not (win or ppc64le or aarch64)
+        - if: not (ppc64le or aarch64)
           then: llvmdev ${{ llvm_version }}.*
       run:
         - if: cuda_compiler_version != "None"
           then: cuda-cudart
+        # Dr.Jit's Windows LLVM backend loads LLVM-C.dll at runtime.
+        - if: win
+          then: libllvm-c${{ llvm_version }}
         - if: not (win or ppc64le or aarch64)
           then: libllvm${{ llvm_version }}
       run_exports:
