@@ -24,6 +24,7 @@ source:
     target_directory: ext/drjit-core
     patches:
       - patches/drjit-core/use-system-robin-map.patch
+      - patches/drjit-core/set-coff-object-layer-flags-on-windows.patch
   - url: https://github.com/mitsuba-renderer/nanothread/archive/a2097209e10852962c485ee46d84d28e7a63a1a1.zip
     sha256: 5bd988bc713e516083f6e2e1c8414d5b8087c32ab5aa99a78c662acb327494b1
     target_directory: ext/drjit-core/ext/nanothread

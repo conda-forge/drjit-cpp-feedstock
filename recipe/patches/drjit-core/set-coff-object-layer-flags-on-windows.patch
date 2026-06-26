@@ -1,0 +1,81 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index fd4a174..1650a59 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -252,6 +252,10 @@ add_library(
+ target_include_directories(drjit-core PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+ target_include_directories(drjit-core PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
+ 
++if (WIN32)
++  target_sources(drjit-core PRIVATE src/llvm_coff.cpp)
++endif()
++
+ target_compile_features(drjit-core PUBLIC cxx_std_17)
+ 
+ target_include_directories(drjit-core PRIVATE
+@@ -325,6 +329,10 @@ endif()
+ 
+ if (DRJIT_DYNAMIC_LLVM)
+   target_compile_definitions(drjit-core PRIVATE -DDRJIT_DYNAMIC_LLVM=1)
++  if (WIN32)
++    find_package(LLVM REQUIRED)
++    target_include_directories(drjit-core PRIVATE ${LLVM_INCLUDE_DIRS})
++  endif()
+ else()
+   find_package(LLVM REQUIRED)
+   target_include_directories(drjit-core PRIVATE ${LLVM_INCLUDE_DIRS})
+diff --git a/src/llvm_coff.cpp b/src/llvm_coff.cpp
+new file mode 100644
+index 0000000..a4aa779
+--- /dev/null
++++ b/src/llvm_coff.cpp
+@@ -0,0 +1,14 @@
++#include <llvm/ExecutionEngine/Orc/RTDyldObjectLinkingLayer.h>
++
++extern "C" void jitc_llvm_set_coff_object_layer_flags(void *layer) {
++    /* COFF generated constants such as __real@... and __ymm@... are not
++       covered by the MaterializationResponsibility symbols that Dr.Jit passes
++       to ORCv2. LLJIT's default layer enables these flags on COFF, but the
++       C API helper used by Dr.Jit does not expose setters for them. Keep
++       Dr.Jit's custom memory manager and set the flags on the C++ layer. */
++    auto *rt_dyld_layer =
++        static_cast<llvm::orc::RTDyldObjectLinkingLayer *>(
++            reinterpret_cast<llvm::orc::ObjectLayer *>(layer));
++    rt_dyld_layer->setOverrideObjectFlagsWithResponsibilityFlags(true);
++    rt_dyld_layer->setAutoClaimResponsibilityForObjectSymbols(true);
++}
+diff --git a/src/llvm_orcv2.cpp b/src/llvm_orcv2.cpp
+index 485cc68..3276635 100644
+--- a/src/llvm_orcv2.cpp
++++ b/src/llvm_orcv2.cpp
+@@ -8,12 +8,16 @@ static LLVMOrcLLJITRef jitc_llvm_lljit = nullptr;
+ static LLVMOrcJITDylibRef jitc_llvm_lljit_dylib = nullptr;
+ extern LLVMTargetMachineRef jitc_llvm_tm;
+ 
++#if defined(_WIN32)
++extern "C" void jitc_llvm_set_coff_object_layer_flags(void *layer);
++#endif
++
+ LLVMOrcObjectLayerRef oll_creator(void *, LLVMOrcExecutionSessionRef es, const char *) {
+ #if defined(LLVM_VERSION_MAJOR) && LLVM_VERSION_MAJOR < 16
+     (void) es;
+     jitc_fail("OrcV2 interface is not usable in LLVM versions < 16");
+ #else
+-    return LLVMOrcCreateRTDyldObjectLinkingLayerWithMCJITMemoryManagerLikeCallbacks(
++    LLVMOrcObjectLayerRef layer = LLVMOrcCreateRTDyldObjectLinkingLayerWithMCJITMemoryManagerLikeCallbacks(
+         es, nullptr,
+         jitc_llvm_memmgr_create_context,
+         jitc_llvm_memmgr_notify_terminating,
+@@ -22,6 +26,12 @@ LLVMOrcObjectLayerRef oll_creator(void *, LLVMOrcExecutionSessionRef es, const c
+         jitc_llvm_memmgr_finalize,
+         jitc_llvm_memmgr_destroy
+     );
++
++#if defined(_WIN32)
++    jitc_llvm_set_coff_object_layer_flags(layer);
++#endif
++
++    return layer;
+ #endif
+ }
+ 
