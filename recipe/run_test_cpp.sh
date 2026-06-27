@@ -18,9 +18,9 @@ else
   ENABLE_CUDA=OFF
 fi
 
-EXTRA_CMAKE_ARGS=()
+EXTRA_CMAKE_ARGS=""
 if [[ "${target_platform}" == "linux-64" && "${cuda_compiler_version}" == "None" ]]; then
-  EXTRA_CMAKE_ARGS+=("-DEXPECT_CONSUMER_LLVM_MAJOR=20")
+  EXTRA_CMAKE_ARGS="-DEXPECT_CONSUMER_LLVM_MAJOR=20"
 fi
 
 cmake tests \
@@ -31,7 +31,7 @@ cmake tests \
   -DCMAKE_BUILD_TYPE=Release \
   -DENABLE_LLVM=$ENABLE_LLVM \
   -DENABLE_CUDA=$ENABLE_CUDA \
-  "${EXTRA_CMAKE_ARGS[@]}"
+  ${EXTRA_CMAKE_ARGS}
 
 cmake --build tests/build --parallel
 
