@@ -8,8 +8,8 @@ jobs:
     vmImage: $(VMIMAGE)
   strategy:
     matrix:
-      osx_64_build_modecppllvm_version18:
-        CONFIG: osx_64_build_modecppllvm_version18
+      osx_64_build_modecpp:
+        CONFIG: osx_64_build_modecpp
         UPLOAD_PACKAGES: 'True'
         VMIMAGE: macOS-15
         build_workspace_dir: ~/miniforge3/conda-bld
@@ -18,8 +18,8 @@ jobs:
         resize_partitions: false
         store_build_artifacts: false
         tools_install_dir: ~/miniforge3
-      osx_64_build_modecppllvm_version19:
-        CONFIG: osx_64_build_modecppllvm_version19
+      osx_64_build_modepython:
+        CONFIG: osx_64_build_modepython
         UPLOAD_PACKAGES: 'True'
         VMIMAGE: macOS-15
         build_workspace_dir: ~/miniforge3/conda-bld
@@ -28,8 +28,8 @@ jobs:
         resize_partitions: false
         store_build_artifacts: false
         tools_install_dir: ~/miniforge3
-      osx_64_build_modecppllvm_version20:
-        CONFIG: osx_64_build_modecppllvm_version20
+      osx_arm64_build_modecpp:
+        CONFIG: osx_arm64_build_modecpp
         UPLOAD_PACKAGES: 'True'
         VMIMAGE: macOS-15
         build_workspace_dir: ~/miniforge3/conda-bld
@@ -38,128 +38,8 @@ jobs:
         resize_partitions: false
         store_build_artifacts: false
         tools_install_dir: ~/miniforge3
-      osx_64_build_modecppllvm_version21:
-        CONFIG: osx_64_build_modecppllvm_version21
-        UPLOAD_PACKAGES: 'True'
-        VMIMAGE: macOS-15
-        build_workspace_dir: ~/miniforge3/conda-bld
-        free_disk_space: skip
-        pagefile_size: 0
-        resize_partitions: false
-        store_build_artifacts: false
-        tools_install_dir: ~/miniforge3
-      osx_64_build_modepythonllvm_version18:
-        CONFIG: osx_64_build_modepythonllvm_version18
-        UPLOAD_PACKAGES: 'True'
-        VMIMAGE: macOS-15
-        build_workspace_dir: ~/miniforge3/conda-bld
-        free_disk_space: skip
-        pagefile_size: 0
-        resize_partitions: false
-        store_build_artifacts: false
-        tools_install_dir: ~/miniforge3
-      osx_64_build_modepythonllvm_version19:
-        CONFIG: osx_64_build_modepythonllvm_version19
-        UPLOAD_PACKAGES: 'True'
-        VMIMAGE: macOS-15
-        build_workspace_dir: ~/miniforge3/conda-bld
-        free_disk_space: skip
-        pagefile_size: 0
-        resize_partitions: false
-        store_build_artifacts: false
-        tools_install_dir: ~/miniforge3
-      osx_64_build_modepythonllvm_version20:
-        CONFIG: osx_64_build_modepythonllvm_version20
-        UPLOAD_PACKAGES: 'True'
-        VMIMAGE: macOS-15
-        build_workspace_dir: ~/miniforge3/conda-bld
-        free_disk_space: skip
-        pagefile_size: 0
-        resize_partitions: false
-        store_build_artifacts: false
-        tools_install_dir: ~/miniforge3
-      osx_64_build_modepythonllvm_version21:
-        CONFIG: osx_64_build_modepythonllvm_version21
-        UPLOAD_PACKAGES: 'True'
-        VMIMAGE: macOS-15
-        build_workspace_dir: ~/miniforge3/conda-bld
-        free_disk_space: skip
-        pagefile_size: 0
-        resize_partitions: false
-        store_build_artifacts: false
-        tools_install_dir: ~/miniforge3
-      osx_arm64_build_modecppllvm_version18:
-        CONFIG: osx_arm64_build_modecppllvm_version18
-        UPLOAD_PACKAGES: 'True'
-        VMIMAGE: macOS-15
-        build_workspace_dir: ~/miniforge3/conda-bld
-        free_disk_space: skip
-        pagefile_size: 0
-        resize_partitions: false
-        store_build_artifacts: false
-        tools_install_dir: ~/miniforge3
-      osx_arm64_build_modecppllvm_version19:
-        CONFIG: osx_arm64_build_modecppllvm_version19
-        UPLOAD_PACKAGES: 'True'
-        VMIMAGE: macOS-15
-        build_workspace_dir: ~/miniforge3/conda-bld
-        free_disk_space: skip
-        pagefile_size: 0
-        resize_partitions: false
-        store_build_artifacts: false
-        tools_install_dir: ~/miniforge3
-      osx_arm64_build_modecppllvm_version20:
-        CONFIG: osx_arm64_build_modecppllvm_version20
-        UPLOAD_PACKAGES: 'True'
-        VMIMAGE: macOS-15
-        build_workspace_dir: ~/miniforge3/conda-bld
-        free_disk_space: skip
-        pagefile_size: 0
-        resize_partitions: false
-        store_build_artifacts: false
-        tools_install_dir: ~/miniforge3
-      osx_arm64_build_modecppllvm_version21:
-        CONFIG: osx_arm64_build_modecppllvm_version21
-        UPLOAD_PACKAGES: 'True'
-        VMIMAGE: macOS-15
-        build_workspace_dir: ~/miniforge3/conda-bld
-        free_disk_space: skip
-        pagefile_size: 0
-        resize_partitions: false
-        store_build_artifacts: false
-        tools_install_dir: ~/miniforge3
-      osx_arm64_build_modepythonllvm_version18:
-        CONFIG: osx_arm64_build_modepythonllvm_version18
-        UPLOAD_PACKAGES: 'True'
-        VMIMAGE: macOS-15
-        build_workspace_dir: ~/miniforge3/conda-bld
-        free_disk_space: skip
-        pagefile_size: 0
-        resize_partitions: false
-        store_build_artifacts: false
-        tools_install_dir: ~/miniforge3
-      osx_arm64_build_modepythonllvm_version19:
-        CONFIG: osx_arm64_build_modepythonllvm_version19
-        UPLOAD_PACKAGES: 'True'
-        VMIMAGE: macOS-15
-        build_workspace_dir: ~/miniforge3/conda-bld
-        free_disk_space: skip
-        pagefile_size: 0
-        resize_partitions: false
-        store_build_artifacts: false
-        tools_install_dir: ~/miniforge3
-      osx_arm64_build_modepythonllvm_version20:
-        CONFIG: osx_arm64_build_modepythonllvm_version20
-        UPLOAD_PACKAGES: 'True'
-        VMIMAGE: macOS-15
-        build_workspace_dir: ~/miniforge3/conda-bld
-        free_disk_space: skip
-        pagefile_size: 0
-        resize_partitions: false
-        store_build_artifacts: false
-        tools_install_dir: ~/miniforge3
-      osx_arm64_build_modepythonllvm_version21:
-        CONFIG: osx_arm64_build_modepythonllvm_version21
+      osx_arm64_build_modepython:
+        CONFIG: osx_arm64_build_modepython
         UPLOAD_PACKAGES: 'True'
         VMIMAGE: macOS-15
         build_workspace_dir: ~/miniforge3/conda-bld

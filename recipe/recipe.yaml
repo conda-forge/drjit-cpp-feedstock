@@ -3,7 +3,8 @@ schema_version: 1
 context:
   name: drjit-cpp
   version: "1.4.0"
-  build_number: 1
+  build_number: 2
+  llvm_version: "21"
 
 recipe:
   name: ${{ name|lower }}-split
@@ -23,6 +24,7 @@ source:
     target_directory: ext/drjit-core
     patches:
       - patches/drjit-core/use-system-robin-map.patch
+      - patches/drjit-core/set-coff-object-layer-flags-on-windows.patch
   - url: https://github.com/mitsuba-renderer/nanothread/archive/a2097209e10852962c485ee46d84d28e7a63a1a1.zip
     sha256: 5bd988bc713e516083f6e2e1c8414d5b8087c32ab5aa99a78c662acb327494b1
     target_directory: ext/drjit-core/ext/nanothread
@@ -51,7 +53,7 @@ outputs:
   - package:
       name: drjit-cpp
     build:
-      string: ${{ "cuda" ~ (cuda_compiler_version | replace(".", "")) ~ "_llvm" ~ llvm_version ~ "_" ~ build_number if cuda_compiler_version != "None" else "cpu_llvm" ~ llvm_version ~ "_" ~ build_number }}
+      string: ${{ "cuda" ~ (cuda_compiler_version | replace(".", "")) ~ "_llvm" ~ llvm_version ~ "_" ~ build_number if cuda_compiler_version != "None" else ("cpu_nollvm_" ~ build_number if target_platform == "linux-aarch64" or target_platform == "linux-ppc64le" else "cpu_llvm" ~ llvm_version ~ "_" ~ build_number) }}
       skip:
         - build_mode == "python"
       script:
@@ -72,11 +74,16 @@ outputs:
           then:
             - cuda-version ==${{ cuda_compiler_version }}
             - cuda-toolkit
-        - llvmdev ${{ llvm_version }}.*
+        - if: not (ppc64le or aarch64)
+          then: llvmdev ${{ llvm_version }}.*
       run:
         - if: cuda_compiler_version != "None"
           then: cuda-cudart
-        - libllvm${{ llvm_version }}
+        # Dr.Jit's Windows LLVM backend loads LLVM-C.dll at runtime.
+        - if: win
+          then: libllvm-c${{ llvm_version }}
+        - if: not (win or ppc64le or aarch64)
+          then: libllvm${{ llvm_version }}
       run_exports:
         - ${{ pin_subpackage("drjit-cpp", upper_bound="x.x") }}
     tests:
@@ -93,6 +100,9 @@ outputs:
             - cmake
             - if: unix
               then: ninja
+            # Simulate a downstream project that brings its own LLVM dev package.
+            - if: linux and x86_64 and cuda_compiler_version == "None"
+              then: llvmdev 20.*
         script:
           - if: unix
             then:
@@ -172,6 +182,11 @@ outputs:
             - python
         script:
           - pip check
+      - requirements:
+          run:
+            - python
+        script:
+          - python -c "import drjit as dr, drjit.llvm as llvm; x = llvm.Float([1, 2, 3]); y = x + 1; dr.eval(y); assert dr.all(y == [2, 3, 4])"
 
 about:
   homepage: https://github.com/mitsuba-renderer/drjit

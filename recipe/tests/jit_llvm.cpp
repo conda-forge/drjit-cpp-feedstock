@@ -1,6 +1,7 @@
 #include <drjit/dynamic.h>
 #include <drjit/jit.h>
 #include <drjit/random.h>
+#include <drjit-core/jit.h>
 #include <iostream>
 
 int main() {
@@ -10,6 +11,31 @@ int main() {
   using MaskC = drjit::mask_t<FloatC>;
 
   jit_init();
+
+  int llvm_major = -1, llvm_minor = -1, llvm_patch = -1;
+  jit_llvm_version(&llvm_major, &llvm_minor, &llvm_patch);
+  if (llvm_major < 0) {
+    std::cerr << "Dr.Jit LLVM backend did not report a loaded LLVM version"
+              << std::endl;
+    return 1;
+  }
+
+#ifdef EXPECT_DRJIT_LLVM_MAJOR
+  if (llvm_major != EXPECT_DRJIT_LLVM_MAJOR) {
+    std::cerr << "Dr.Jit loaded LLVM " << llvm_major << "." << llvm_minor
+              << "." << llvm_patch << ", expected major "
+              << EXPECT_DRJIT_LLVM_MAJOR << std::endl;
+    return 1;
+  }
+#endif
+
+#ifdef EXPECT_CONSUMER_LLVM_MAJOR
+  if (llvm_major == EXPECT_CONSUMER_LLVM_MAJOR) {
+    std::cerr << "Dr.Jit unexpectedly used consumer LLVM " << llvm_major
+              << "." << llvm_minor << "." << llvm_patch << std::endl;
+    return 1;
+  }
+#endif
 
   PCG32C rng(1'000'000);
 
