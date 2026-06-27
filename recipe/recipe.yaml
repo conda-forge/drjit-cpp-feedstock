@@ -100,6 +100,9 @@ outputs:
             - cmake
             - if: unix
               then: ninja
+            # Simulate a downstream project that brings its own LLVM dev package.
+            - if: linux and x86_64 and cuda_compiler_version == "None"
+              then: llvmdev 20.*
         script:
           - if: unix
             then:

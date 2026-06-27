@@ -11,7 +11,7 @@ cmake tests ^
   -B tests/build ^
   -DBUILD_SHARED_LIBS=ON ^
   -DENABLE_LLVM=ON ^
-  -DENABLE_CUDA=%ENABLE_CUDA% ^
+  -DENABLE_CUDA=%ENABLE_CUDA%
 if errorlevel 1 exit 1
 
 cmake --build tests/build --parallel --config Release
