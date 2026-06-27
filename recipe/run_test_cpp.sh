@@ -31,6 +31,7 @@ cmake tests \
   -DCMAKE_BUILD_TYPE=Release \
   -DENABLE_LLVM=$ENABLE_LLVM \
   -DENABLE_CUDA=$ENABLE_CUDA \
+  -DEXPECT_DRJIT_LLVM_MAJOR=21 \
   ${EXTRA_CMAKE_ARGS}
 
 cmake --build tests/build --parallel

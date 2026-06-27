@@ -20,6 +20,15 @@ int main() {
     return 1;
   }
 
+#ifdef EXPECT_DRJIT_LLVM_MAJOR
+  if (llvm_major != EXPECT_DRJIT_LLVM_MAJOR) {
+    std::cerr << "Dr.Jit loaded LLVM " << llvm_major << "." << llvm_minor
+              << "." << llvm_patch << ", expected major "
+              << EXPECT_DRJIT_LLVM_MAJOR << std::endl;
+    return 1;
+  }
+#endif
+
 #ifdef EXPECT_CONSUMER_LLVM_MAJOR
   if (llvm_major == EXPECT_CONSUMER_LLVM_MAJOR) {
     std::cerr << "Dr.Jit unexpectedly used consumer LLVM " << llvm_major

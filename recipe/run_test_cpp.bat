@@ -11,6 +11,7 @@ cmake tests ^
   -B tests/build ^
   -DBUILD_SHARED_LIBS=ON ^
   -DENABLE_LLVM=ON ^
+  -DEXPECT_DRJIT_LLVM_MAJOR=21 ^
   -DENABLE_CUDA=%ENABLE_CUDA%
 if errorlevel 1 exit 1
 
