@@ -3,7 +3,7 @@ schema_version: 1
 context:
   name: drjit-cpp
   version: "1.4.0"
-  build_number: 2
+  build_number: 3
   llvm_version: "21"
 
 recipe:
@@ -14,7 +14,7 @@ source:
   - url: https://github.com/mitsuba-renderer/drjit/archive/v${{ version }}.tar.gz
     sha256: aed2315f139f2313264638b77eb571649c28e659f1c636c834af4d0345adcdfb
     patches:
-      - patches/drjit/0001-Use-system-libraries.patch
+      - patches/drjit/0001-Install-drjit-core-headers.patch
       - patches/drjit/0002-Fix-install-destination-paths.patch
       - patches/drjit/0003-Make-directory-before-creating-files.patch
       - patches/drjit/0004-Fix-scatter-for-raw-pointer-target.patch
@@ -23,7 +23,6 @@ source:
     sha256: 13d9b6e2247b90f193392ef961838c0d2894eb5414b5ba3640050715fef675bf
     target_directory: ext/drjit-core
     patches:
-      - patches/drjit-core/use-system-robin-map.patch
       - patches/drjit-core/set-coff-object-layer-flags-on-windows.patch
   - url: https://github.com/mitsuba-renderer/nanothread/archive/a2097209e10852962c485ee46d84d28e7a63a1a1.zip
     sha256: 5bd988bc713e516083f6e2e1c8414d5b8087c32ab5aa99a78c662acb327494b1
@@ -31,8 +30,6 @@ source:
   - url: https://github.com/mitsuba-renderer/cmake-defaults/archive/d65442956cd78772ba26ba25dc552de22566b717.zip
     sha256: 76fc76bc458bf51bd1f7d29f9088b224d93e8fbc8edf4d10767bf962fee48356
     target_directory: ext/drjit-core/ext/nanothread/ext/cmake-defaults
-    patches:
-      - patches/drjit-core/disable-march-flags.patch
   - url: https://github.com/Tessil/robin-map/archive/f70fd39a960385ef0a963aef00b750e4740228c0.zip
     sha256: eba811574adf28446422a4847053960eb86b06730f4e32db3d6da5d5332f38b9
     target_directory: ext/drjit-core/ext/robin_map
