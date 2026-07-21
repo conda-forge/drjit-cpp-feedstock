@@ -172,14 +172,12 @@ outputs:
       - python:
           imports:
             - drjit
-      - requirements:
-          run:
-            - python
-        script:
-          - test -f "${SP_DIR}/drjit/__init__.pyi"
-          - test -f "${SP_DIR}/drjit/py.typed"
-          - test -f "${SP_DIR}/drjit/llvm/__init__.pyi"
-          - test -f "${SP_DIR}/drjit/auto/__init__.pyi"
+      - package_contents:
+          site_packages:
+            - drjit/__init__.pyi
+            - drjit/py.typed
+            - drjit/llvm/__init__.pyi
+            - drjit/auto/__init__.pyi
       - requirements:
           run:
             - pip
