@@ -22,10 +22,4 @@ fi
 
 export CMAKE_ARGS="${CMAKE_ARGS:-} -DDRJIT_NATIVE_FLAGS= -DDRJIT_DYNAMIC_LLVM=OFF"
 
-if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" == "1" ]]; then
-  export CMAKE_ARGS="${CMAKE_ARGS:-} -DDRJIT_ENABLE_STUBS=OFF"
-else
-  export CMAKE_ARGS="${CMAKE_ARGS:-} -DDRJIT_ENABLE_STUBS=ON"
-fi
-
 $PYTHON -m pip install . -vv --no-deps --no-build-isolation
