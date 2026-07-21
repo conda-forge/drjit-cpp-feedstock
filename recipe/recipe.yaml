@@ -3,7 +3,7 @@ schema_version: 1
 context:
   name: drjit-cpp
   version: "1.4.0"
-  build_number: 3
+  build_number: 4
   llvm_version: "21"
 
 recipe:
@@ -18,7 +18,6 @@ source:
       - patches/drjit/0002-Fix-install-destination-paths.patch
       - patches/drjit/0003-Make-directory-before-creating-files.patch
       - patches/drjit/0004-Fix-scatter-for-raw-pointer-target.patch
-      - patches/drjit/0005-Allow-disabling-python-stubs.patch
   - url: https://github.com/mitsuba-renderer/drjit-core/archive/c9c054928c55da09c1756366d62e60c23ceceefd.zip
     sha256: 13d9b6e2247b90f193392ef961838c0d2894eb5414b5ba3640050715fef675bf
     target_directory: ext/drjit-core
@@ -173,6 +172,14 @@ outputs:
       - python:
           imports:
             - drjit
+      - requirements:
+          run:
+            - python
+        script:
+          - test -f "${SP_DIR}/drjit/__init__.pyi"
+          - test -f "${SP_DIR}/drjit/py.typed"
+          - test -f "${SP_DIR}/drjit/llvm/__init__.pyi"
+          - test -f "${SP_DIR}/drjit/auto/__init__.pyi"
       - requirements:
           run:
             - pip
