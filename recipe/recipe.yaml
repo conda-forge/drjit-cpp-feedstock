@@ -2,8 +2,8 @@ schema_version: 1
 
 context:
   name: drjit-cpp
-  version: "1.4.0"
-  build_number: 4
+  version: "1.5.0"
+  build_number: 0
   llvm_version: "21"
 
 recipe:
@@ -12,7 +12,7 @@ recipe:
 
 source:
   - url: https://github.com/mitsuba-renderer/drjit/archive/v${{ version }}.tar.gz
-    sha256: aed2315f139f2313264638b77eb571649c28e659f1c636c834af4d0345adcdfb
+    sha256: 83f29297ecb541bc6725ef2b453eaae98f44f12555e451e7396e925d12105d00
     patches:
       - patches/drjit/0001-Install-drjit-core-headers.patch
       - patches/drjit/0002-Fix-install-destination-paths.patch
