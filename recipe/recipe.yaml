@@ -18,8 +18,8 @@ source:
       - patches/drjit/0002-Fix-install-destination-paths.patch
       - patches/drjit/0003-Make-directory-before-creating-files.patch
       - patches/drjit/0004-Fix-scatter-for-raw-pointer-target.patch
-  - url: https://github.com/mitsuba-renderer/drjit-core/archive/c9c054928c55da09c1756366d62e60c23ceceefd.zip
-    sha256: 13d9b6e2247b90f193392ef961838c0d2894eb5414b5ba3640050715fef675bf
+  - url: https://github.com/mitsuba-renderer/drjit-core/archive/3b96411288b9938889045308654ba37d4ef24b71.zip
+    sha256: 66070434bec75c0be64b365acc73dde73fd53819403f7472a652536e3f25c784
     target_directory: ext/drjit-core
     patches:
       - patches/drjit-core/set-coff-object-layer-flags-on-windows.patch
@@ -32,8 +32,8 @@ source:
   - url: https://github.com/Tessil/robin-map/archive/f70fd39a960385ef0a963aef00b750e4740228c0.zip
     sha256: eba811574adf28446422a4847053960eb86b06730f4e32db3d6da5d5332f38b9
     target_directory: ext/drjit-core/ext/robin_map
-  - url: https://github.com/wjakob/nanobind/archive/cee9cfdc3b357699111d6d3f3fd2b022ad7f31c2.zip
-    sha256: 91af61d846cbb77564190f0882994f00abf06e2b6563eb2059f63ccceb90b72d
+  - url: https://github.com/wjakob/nanobind/archive/86e5626728fc282637a6c338597120913dded1bb.zip
+    sha256: 92059b60d06cb7d18245ee58767fb9f899a966eb14bac9bcc5abf6e4674a03a7
     target_directory: ext/nanobind
   - url: https://github.com/Tessil/robin-map/archive/4ec1bf19c6a96125ea22062f38c2cf5b958e448e.zip
     sha256: 78c97483a8993866074f06b25fd288cdb7b8ebd6c61c2f0c43b0e324fd56ce10
