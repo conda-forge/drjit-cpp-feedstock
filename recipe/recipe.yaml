@@ -155,7 +155,8 @@ outputs:
             - cuda-toolkit
         - llvmdev ${{ llvm_version }}.*
         - hatch-fancy-pypi-readme
-        - nanobind >=2.6.0
+        # Match Dr.Jit 1.5.0's exact PEP 517 build requirement.
+        - nanobind ==2.14.0
         - pip
         - python
         - scikit-build-core
