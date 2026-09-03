@@ -196,9 +196,9 @@ outputs:
             - python
         script:
           - if: cuda_compiler_version != "None"
-            then: python -c "import drjit as dr; assert dr.has_backend(dr.JitBackend.CUDA)"
+            then: python -c "import drjit as dr, drjit.cuda; assert hasattr(dr.cuda, 'Float')"
           - if: cuda_compiler_version == "None"
-            then: python -c "import drjit as dr; assert not dr.has_backend(dr.JitBackend.CUDA)"
+            then: python -c "import drjit as dr; assert not hasattr(dr, 'cuda')"
           - python -c "import drjit as dr, drjit.llvm as llvm; x = llvm.Float([1, 2, 3]); y = x + 1; dr.eval(y); assert dr.all(y == [2, 3, 4])"
 
 about:
