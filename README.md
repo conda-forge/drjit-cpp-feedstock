@@ -1,7 +1,7 @@
-About drjit-feedstock
-=====================
+About drjit-cpp-feedstock
+=========================
 
-Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/drjit-cpp-feedstock/blob/main/LICENSE.txt)
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/drjit-semantic-builds-feedstock/blob/main/LICENSE.txt)
 
 Home: https://github.com/mitsuba-renderer/drjit
 
@@ -23,8 +23,8 @@ Current build status
 <table><tr>
     <td>GitHub Actions</td>
     <td>
-      <a href="https://github.com/conda-forge/drjit-cpp-feedstock/actions/workflows/conda-build.yml">
-        <img src="https://github.com/conda-forge/drjit-cpp-feedstock/actions/workflows/conda-build.yml/badge.svg?event=push&branch=main">
+      <a href="https://github.com/conda-forge/drjit-semantic-builds-feedstock/actions/workflows/conda-build.yml">
+        <img src="https://github.com/conda-forge/drjit-semantic-builds-feedstock/actions/workflows/conda-build.yml/badge.svg?event=push&branch=main">
       </a>
     </td>
   </tr>
@@ -34,8 +34,8 @@ Current build status
     <td>
       <details>
         <summary>
-          <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=22668&branchName=main">
-            <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main">
+          <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=None&branchName=main">
+            <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-semantic-builds-feedstock?branchName=main">
           </a>
         </summary>
         <table>
@@ -43,29 +43,29 @@ Current build status
           <tbody><tr>
               <td>osx_64_build_modecpp</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=22668&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_build_modecpp" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=None&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-semantic-builds-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_build_modecpp" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>osx_64_build_modepython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=22668&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_build_modepython" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=None&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-semantic-builds-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_build_modepython" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>osx_arm64_build_modecpp</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=22668&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_build_modecpp" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=None&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-semantic-builds-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_build_modecpp" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>osx_arm64_build_modepython</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=22668&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_build_modepython" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=None&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-semantic-builds-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_build_modepython" alt="variant">
                 </a>
               </td>
             </tr>
@@ -84,10 +84,10 @@ Current release info
 | [![Conda Recipe](https://img.shields.io/badge/recipe-drjit-green.svg)](https://anaconda.org/conda-forge/drjit) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/drjit.svg)](https://anaconda.org/conda-forge/drjit) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/drjit.svg)](https://anaconda.org/conda-forge/drjit) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/drjit.svg)](https://anaconda.org/conda-forge/drjit) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-drjit--cpp-green.svg)](https://anaconda.org/conda-forge/drjit-cpp) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/drjit-cpp.svg)](https://anaconda.org/conda-forge/drjit-cpp) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/drjit-cpp.svg)](https://anaconda.org/conda-forge/drjit-cpp) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/drjit-cpp.svg)](https://anaconda.org/conda-forge/drjit-cpp) |
 
-Installing drjit
-================
+Installing drjit-cpp
+====================
 
-Installing `drjit` from the `conda-forge` channel can be achieved by adding `conda-forge` to your channels with:
+Installing `drjit-cpp` from the `conda-forge` channel can be achieved by adding `conda-forge` to your channels with:
 
 ```
 conda config --add channels conda-forge
@@ -217,17 +217,17 @@ Terminology
                   produce the finished article (built conda distributions)
 
 
-Updating drjit-feedstock
-========================
+Updating drjit-cpp-feedstock
+============================
 
-If you would like to improve the drjit recipe or build a new
+If you would like to improve the drjit-cpp recipe or build a new
 package version, please fork this repository and submit a PR. Upon submission,
 your changes will be run on the appropriate platforms to give the reviewer an
 opportunity to confirm that the changes result in a successful build. Once
 merged, the recipe will be re-built and uploaded automatically to the
 `conda-forge` channel, whereupon the built conda packages will be available for
 everybody to install and use from the `conda-forge` channel.
-Note that all branches in the conda-forge/drjit-feedstock are
+Note that all branches in the conda-forge/drjit-cpp-feedstock are
 immediately built and any created packages are uploaded, so PRs should be based
 on branches in forks, and branches in the main repository should only be used to
 build distinct package versions.

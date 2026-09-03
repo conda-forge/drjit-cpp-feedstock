@@ -3,8 +3,10 @@ schema_version: 1
 context:
   name: drjit-cpp
   version: "1.5.0"
-  build_number: 0
+  build_number: 1
   llvm_version: "21"
+  accelerator_flavor: ${{ "cuda" if cuda_compiler_version != "None" else "cpu" }}
+  accelerator_build_prefix: ${{ accelerator_flavor ~ (cuda_compiler_version | replace(".", "")) if accelerator_flavor == "cuda" else accelerator_flavor }}
 
 recipe:
   name: ${{ name|lower }}-split
@@ -117,6 +119,10 @@ outputs:
   - package:
       name: drjit
     build:
+      string: ${{ accelerator_build_prefix ~ "_py" ~ (python | version_to_buildstring) ~ "h" ~ hash ~ "_" ~ build_number }}
+      variant:
+        # Prefer the broadly compatible CPU build unless a CUDA flavor is requested.
+        down_prioritize_variant: ${{ 1 if accelerator_flavor == "cuda" else 0 }}
       skip:
         - build_mode == "cpp"
         - linux and not x86_64
@@ -149,7 +155,8 @@ outputs:
             - cuda-toolkit
         - llvmdev ${{ llvm_version }}.*
         - hatch-fancy-pypi-readme
-        - nanobind >=2.6.0
+        # Match Dr.Jit 1.5.0's exact PEP 517 build requirement.
+        - nanobind ==2.14.0
         - pip
         - python
         - scikit-build-core
@@ -188,6 +195,10 @@ outputs:
           run:
             - python
         script:
+          - if: cuda_compiler_version != "None"
+            then: python -c "import drjit as dr, drjit.cuda; assert hasattr(dr.cuda, 'Float')"
+          - if: cuda_compiler_version == "None"
+            then: python -c "import drjit as dr; assert not hasattr(dr, 'cuda')"
           - python -c "import drjit as dr, drjit.llvm as llvm; x = llvm.Float([1, 2, 3]); y = x + 1; dr.eval(y); assert dr.all(y == [2, 3, 4])"
 
 about:
@@ -203,5 +214,6 @@ about:
   license_file: LICENSE
 
 extra:
+  feedstock-name: drjit-cpp
   recipe-maintainers:
     - jeongseok-meta
