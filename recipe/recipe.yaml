@@ -3,7 +3,7 @@ schema_version: 1
 context:
   name: drjit-cpp
   version: "1.5.0"
-  build_number: 1
+  build_number: 2
   llvm_version: "21"
   accelerator_flavor: ${{ "cuda" if cuda_compiler_version != "None" else "cpu" }}
   accelerator_build_prefix: ${{ accelerator_flavor ~ (cuda_compiler_version | replace(".", "")) if accelerator_flavor == "cuda" else accelerator_flavor }}
@@ -126,7 +126,6 @@ outputs:
       skip:
         - build_mode == "cpp"
         - linux and not x86_64
-        - win
         - match(python, "<3.10")
         - match(python, ">=3.13") and cuda_compiler_version == "13.0"
         - match(python, ">=3.14")
@@ -171,7 +170,11 @@ outputs:
           then:
             - libgcc
             - libstdcxx
-        - libllvm${{ llvm_version }}
+        # Dr.Jit loads LLVM through the C API DLL on Windows.
+        - if: win
+          then: libllvm-c${{ llvm_version }}
+        - if: not win
+          then: libllvm${{ llvm_version }}
         - python
         - python_abi * *_cp${{ python | version_to_buildstring }}
         - typing_extensions
