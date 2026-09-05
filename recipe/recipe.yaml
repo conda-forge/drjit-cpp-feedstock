@@ -3,7 +3,7 @@ schema_version: 1
 context:
   name: drjit-cpp
   version: "1.5.0"
-  build_number: 1
+  build_number: 2
   llvm_version: "21"
   accelerator_flavor: ${{ "cuda" if cuda_compiler_version != "None" else "cpu" }}
   accelerator_build_prefix: ${{ accelerator_flavor ~ (cuda_compiler_version | replace(".", "")) if accelerator_flavor == "cuda" else accelerator_flavor }}
@@ -125,7 +125,9 @@ outputs:
         down_prioritize_variant: ${{ 1 if accelerator_flavor == "cuda" else 0 }}
       skip:
         - build_mode == "cpp"
-        - linux and not x86_64
+        # Dr.Jit's LLVM backend targets x86-64 and AArch64, not PPC64LE.
+        # https://github.com/mitsuba-renderer/drjit/blob/315af5ccd7a197f9b99a0b75cfdc82c4e10cd42c/docs/what.rst#L263-L291
+        - ppc64le
         - win
         - match(python, "<3.10")
         - match(python, ">=3.13") and cuda_compiler_version == "13.0"
