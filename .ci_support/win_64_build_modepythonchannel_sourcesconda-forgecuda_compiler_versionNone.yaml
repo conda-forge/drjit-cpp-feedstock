@@ -1,25 +1,20 @@
 build_mode:
 - python
 c_compiler:
-- gcc
-c_compiler_version:
-- '14'
+- vs2022
 c_stdlib:
-- sysroot
-c_stdlib_version:
-- '2.17'
+- vs
 channel_sources:
+- conda-forge
+- conda-forge
+- conda-forge
 - conda-forge
 channel_targets:
 - conda-forge main
 cuda_compiler_version:
 - None
 cxx_compiler:
-- gxx
-cxx_compiler_version:
-- '14'
-docker_image:
-- quay.io/condaforge/linux-anvil-aarch64:alma10
+- vs2022
 pin_run_as_build:
   python:
     min_pin: x.x
@@ -28,10 +23,9 @@ python:
 - 3.11.* *_cpython
 - 3.12.* *_cpython
 - 3.13.* *_cp313
+- 3.14.* *_cp314
 target_platform:
-- linux-aarch64
+- win-64
 zip_keys:
-- - c_compiler_version
-  - cxx_compiler_version
-  - c_stdlib_version
-  - cuda_compiler_version
+- - python
+  - channel_sources

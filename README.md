@@ -41,31 +41,31 @@ Current build status
         <table>
           <thead><tr><th>Variant</th><th>Status</th></tr></thead>
           <tbody><tr>
-              <td>osx_64_build_modecpp</td>
+              <td>osx_64_build_modecppchannel_sourcesconda-forge</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=22668&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_build_modecpp" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_build_modecppchannel_sourcesconda-forge" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>osx_64_build_modepython</td>
+              <td>osx_64_build_modepythonchannel_sourcesconda-forge</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=22668&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_build_modepython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_build_modepythonchannel_sourcesconda-forge" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>osx_arm64_build_modecpp</td>
+              <td>osx_arm64_build_modecppchannel_sourcesconda-forge</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=22668&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_build_modecpp" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_build_modecppchannel_sourcesconda-forge" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>osx_arm64_build_modepython</td>
+              <td>osx_arm64_build_modepythonchannel_sourcesconda-forge</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=22668&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_build_modepython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/drjit-cpp-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_build_modepythonchannel_sourcesconda-forge" alt="variant">
                 </a>
               </td>
             </tr>
